@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.lang.NonNull;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 
+@Entity
+@DiscriminatorValue("Cadre")
 public class Cadre extends Impression{
-    @Column
+    @Column(nullable=false)
     private String miseEnPage;
 
     @NonNull

@@ -2,8 +2,12 @@ package fr.uga.l3miage.photonum.data.domain;
 
 import java.util.List;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 
+@Entity
+@DiscriminatorValue("Tirage")
 public class Tirage extends Impression{
 
     @ManyToMany

@@ -5,8 +5,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.*;
 import java.util.*;
 
+@Entity
+@DiscriminatorValue("Album")
 public class Album extends Impression{
-    @Column
+    
+	@Column(nullable=false)
     private String titre;
 
     @NonNull

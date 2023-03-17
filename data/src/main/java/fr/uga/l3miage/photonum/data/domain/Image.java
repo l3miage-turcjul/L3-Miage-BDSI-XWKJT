@@ -2,8 +2,9 @@ package fr.uga.l3miage.photonum.data.domain;
 
 import jakarta.persistence.*;
 
+
 @Entity
-public abstract class Image {
+public class Image {
 
     @Column(nullable=false)
     private String cheminAcces;
@@ -14,8 +15,15 @@ public abstract class Image {
     @Column
     private float resolution;
 
-    @Column
+    @Column(nullable=false)
     private boolean partage;
+
+    public Image(String cheminAcces, String infoPDV, float resolution, boolean partage){
+        this.cheminAcces = cheminAcces;
+        this.infoPDV = infoPDV;
+        this.resolution = resolution;
+        this.partage = partage;
+    }
 
     public String getCheminAcces() {
         return this.cheminAcces;

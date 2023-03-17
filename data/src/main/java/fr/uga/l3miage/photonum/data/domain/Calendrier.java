@@ -1,9 +1,13 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import org.springframework.lang.NonNull;
 import java.util.*;
 
+@Entity
+@DiscriminatorValue("Calendrier")
 public class Calendrier extends Impression {
 
     @NonNull //12 mois ?

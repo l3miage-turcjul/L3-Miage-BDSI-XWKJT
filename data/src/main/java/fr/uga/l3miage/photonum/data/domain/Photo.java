@@ -3,13 +3,22 @@ package fr.uga.l3miage.photonum.data.domain;
 import jakarta.persistence.*;
 
 @Entity
-public class Photo extends Image{
+public class Photo{
 
     @Column
     private String parametresRetouche;
 
     @Column
     private String description;
+
+    @ManyToOne
+    private Image image; 
+
+    public Photo(Image image, String parametresRetouche, String description){
+        this.image = image;
+        this.parametresRetouche = parametresRetouche;
+        this.description = description;
+    }
 
 
     //GETTER ET SETTER DE L'ATTRIBUT PARAMETRESRETOUCHE
