@@ -21,6 +21,7 @@ public class Page {
     public Page(String miseEnPage, String numeroPage){
         this.miseEnPage = miseEnPage;
         this.numeroPage = numeroPage;
+        this.photos = new HashSet<Photo>();
     }
 
     //GETTERS

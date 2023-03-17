@@ -16,6 +16,7 @@ public class Calendrier extends Impression {
 
     Calendrier(Long id, Format format) {
         super(id, format);
+        this.pageCalendrier = new HashSet<Page>();
     }
 
     public Set<Page> getPageCalendrier() {
