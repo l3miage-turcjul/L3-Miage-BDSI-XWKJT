@@ -32,6 +32,9 @@ public class Client {
     @OneToMany
     private Set<Image> images;
 
+    @OneToMany
+    private Set<Impression> impressions;
+
     Client(String nom,String prenom, AdressePostale adresse,String email,String motDePasse){
         setNom(nom);
         setPrenom(prenom);
@@ -69,6 +72,14 @@ public class Client {
         this.images.add(image);
     }
 
+    public void setImpressions(Set<Impression> impressions){
+        this.impressions = impressions;
+    }
+
+    public void addImpression(Impression impression){
+        this.impressions.add(impression);
+    }
+
     //getters
 
     public String getNom(){
@@ -102,5 +113,38 @@ public class Client {
     public String getMotDePasse(){
         return this.motDePasse;
     }
+
+    public Set<Image> getImages(){
+        return this.images;
+    }
+
+    public Image getLastImage(){
+        return this.images.iterator().next();
+    }
+
+    public Image getImage(int num){
+        if (num < this.images.size()){
+            for(int nb=0;nb<num;nb++){
+                this.images.iterator().next();
+                if(nb==num){
+                    return this.images.iterator().next();
+                }
+            }
+        }
+        else {
+            throw new IllegalArgumentException("Le numéro de l'image n'existe pas");
+        }
+        return null;
+    }
+    
+    public Set<Impression> getImpressions(){
+        return this.impressions;
+    }
+    
+    public Impression getLastImpression(){
+        return this.impressions.iterator().next();
+    }
+
+
 
 }
