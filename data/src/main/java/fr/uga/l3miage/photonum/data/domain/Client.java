@@ -27,20 +27,23 @@ public class Client {
 
     @NonNull
     @ManyToMany
-    private AdressePostale adresse;
+    private SortedSet<AdressePostale> adresses;
 
     @OneToMany
-    private Set<Image> images;
+    private SortedSet<Image> images;
 
     @OneToMany
-    private Set<Impression> impressions;
+    private SortedSet<Impression> impressions;
 
     Client(String nom,String prenom, AdressePostale adresse,String email,String motDePasse){
         setNom(nom);
         setPrenom(prenom);
-        setAdresse(adresse);
+        addAdresse(adresse);
         setEmail(email);
         setMotDePasse(motDePasse);
+        this.images=new TreeSet<Image>();
+        this.adresses=new TreeSet<AdressePostale>();
+        this.impressions=new TreeSet<Impression>();
     }
 
     //setters
@@ -56,15 +59,15 @@ public class Client {
         this.email = email;
     }
 
-    public void setAdresse(AdressePostale adresse){
-        this.adresse = adresse;
+    public void addAdresse(AdressePostale adresse){
+        this.adresses.add(adresse);
     }
 
     public void setMotDePasse(String motDePasse){
         this.motDePasse = motDePasse;
     }
 
-    public void setImages(Set<Image> images){
+    public void setImages(TreeSet<Image> images){
         this.images = images;
     }
 
@@ -72,7 +75,7 @@ public class Client {
         this.images.add(image);
     }
 
-    public void setImpressions(Set<Impression> impressions){
+    public void setImpressions(TreeSet<Impression> impressions){
         this.impressions = impressions;
     }
 
@@ -102,8 +105,16 @@ public class Client {
         return prenom;
     }
 
-    public AdressePostale getAdresse(){
-        return this.adresse;
+    public AdressePostale getLastAdresse(){
+        return this.adresses.iterator().next();
+    }
+
+    public AdressePostale getAdresse(int num){
+        if (num < this.adresses.size()){
+            return (AdressePostale) this.adresses.toArray()[num];}
+        else {
+            throw new IllegalArgumentException("Le numéro de l'adresse n'existe pas");
+        }
     }
 
     public String getEmail(){
