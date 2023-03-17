@@ -12,11 +12,16 @@ public class Page {
     @Column
     private String miseEnPage;
 
-    @Column
+    @Column(nullable=false)
     private String numeroPage;
 
     @OneToMany
     private Set<Photo> photos;
+
+    public Page(String miseEnPage, String numeroPage){
+        this.miseEnPage = miseEnPage;
+        this.numeroPage = numeroPage;
+    }
 
     //GETTERS
     public String getMiseEnPage(){return miseEnPage;}

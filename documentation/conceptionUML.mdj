@@ -5872,12 +5872,12 @@
 										"$ref": "AAAAAAGG8JKS4YPXunw="
 									},
 									"font": "Arial;13;0",
-									"left": 64,
-									"top": 951,
+									"left": 56,
+									"top": 959,
 									"width": 19.5126953125,
 									"height": 13,
-									"alpha": 0.4620622080619725,
-									"distance": 55.94640292279746,
+									"alpha": 0.665050129808292,
+									"distance": 53.907327887774215,
 									"hostEdge": {
 										"$ref": "AAAAAAGG8JKS4YPacqg="
 									},

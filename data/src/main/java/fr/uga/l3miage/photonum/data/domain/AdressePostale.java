@@ -2,9 +2,7 @@ package fr.uga.l3miage.photonum.data.domain;
 
 import jakarta.persistence.*;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class AdressePostale{
@@ -22,8 +20,12 @@ public class AdressePostale{
     @Column(nullable=false)
     private String pays;
 
-    @Column(nullable=false)
-    private Set<Client> clients;
+    AdressePostale(String adresse, String codePostale, String ville, String pays){
+        this.adresse = adresse;
+        this.codePostale = codePostale;
+        this.ville = ville;
+        this.pays = pays;
+    }
 
 
     //GETTERS
@@ -35,7 +37,6 @@ public class AdressePostale{
 
     public String getPays(){return pays;}
 
-    public Set<Client> getClients(){return clients;}
 
 
     //SETTERS
@@ -55,16 +56,7 @@ public class AdressePostale{
         this.pays = pays;
     }
 
-    public void setClients(Set<Client> clients){
-        this.clients = clients;
-    }
 
-    public void addClient(Client client) {
-        if (this.clients == null) {
-            this.clients = new HashSet<>();
-        }
-        this.clients.add(client);
-    }
 
     @Override
     public boolean equals(Object o) {

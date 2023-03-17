@@ -23,15 +23,18 @@ public abstract class Impression {
 
     Impression(Long id, Format format){
         setId(id);
+        calculPrix();
         setFormat(format);
     }
 
     //setters
     public void setId(Long id){
+        calculPrix();
         this.id = id;
     }
 
     public void setFormat(Format format){
+        calculPrix();
         this.format = format;
     }
 
@@ -47,6 +50,10 @@ public abstract class Impression {
 
     //Todo : à implémenter 
     public float getPrix(){
-        return 0; 
+        return this.prix; 
+    }
+
+    public void calculPrix(){
+        //TODO : à implémenter
     }
 }
