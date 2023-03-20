@@ -20,8 +20,8 @@ public class Album extends Impression{
     @ManyToOne
     private Photo photoCouverture;
 
-    Album(long id, Format format,String titre){
-        super(id, format);
+    Album(long id,String titre){
+        super(id);
         this.titre = titre;
 		this.pagesAlbum = new HashSet<Page>();
     }
