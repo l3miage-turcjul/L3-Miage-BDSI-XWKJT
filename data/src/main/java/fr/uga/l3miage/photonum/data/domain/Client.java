@@ -96,14 +96,21 @@ public class Client {
 
     //TODO : refaire cette fonction de manière plus propre
     public String getPrenom(int num){
-        String prenom = "";
-        for(int nb=0;nb<num;nb++){
-            this.prenoms.iterator().next();
-            if(nb==num){
-                return this.prenoms.iterator().next();
-            }
+        Iterator<String> iterator = prenoms.iterator();
+
+        // Parcourir le LinkedHashSet jusqu'à la position num
+        int position = 0;
+        while (iterator.hasNext() && position < num) {
+            iterator.next();
+            position++;
         }
-        return prenom;
+
+        // Retourne le prénom à la position nombre s'il existe, sinon retourne null
+        if (position == num && iterator.hasNext()) {
+            return iterator.next();
+        } else {
+            return null;
+        }
     }
 
     public AdressePostale getLastAdresse(){
