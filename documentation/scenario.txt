@@ -1,13 +1,76 @@
 SCENARIO 1 : TIRAGE
 
-- Un client s'appelle Émi. Elle a comme deuxième prénom Bianca. Elle a un mot de passe 1234 et n'a pas d'email. Elle habite à '4 rue SMH' à 'Saint-Martin-d'Hères' 38400 en France.
+    - Un client s'appelle Émi. Elle a comme deuxième prénom Bianca. Elle a un mot de passe 1234 et n'a pas d'email. Elle habite à '4 rue SMH' à 'Saint-Martin-d'Hères' 38400 en France.
 
-- Elle met en ligne une image "CochonDinde.png" avec son superbe iphone. Cette image est faite de 1,4 M de pixels. Elle souhaite pouvoir la partager.
+    - Elle met en ligne une image "CochonDinde.png" avec son superbe iphone. Cette image est faite de 1,4 M de pixels. Elle souhaite pouvoir la partager.
 
--  Elle souhaite en faire un tirage. Elle prend son image et en fait 2 photos à partir : une photo retouchée "zoomée x2", et l'autre "rognée". La première description est "rats", l'autre est "hamsters"
+    -  Elle souhaite en faire un tirage. Elle prend son image et en fait 2 photos à partir : une photo retouchée "zoomée x2", et l'autre "rognée". La première description est "rats", l'autre est "hamsters"
 
-- Elle valide son tirage. Elle souhaite n'en avoir qu'un seul exemplaire. Elle choisit un format et une qualité "10X15MAT" dans le catalogue.
+    - Elle valide son tirage. Elle souhaite n'en avoir qu'un seul exemplaire. Elle choisit un format et une qualité "10X15MAT" dans le catalogue.
 
-- Elle valide son panier : la date du jour est le '20/03/2023'.
+    - Elle valide son panier : la date du jour est le '20/03/2023'.
 
-- Elle choisit l'adresse où elle veut se faire livrer, son adresse de SMH. (Elle paie ?)
+    - Elle choisit l'adresse où elle veut se faire livrer, son adresse de SMH. (Elle paie ?)
+
+Scénario 2 ( Cadre) :
+    - Un client s'appelle Gorges. Son nom est XU. Il a un MDP 5678. Son adresse mail est 'gorgesXU@gmail.com'. Il habite à '1 Rue Clôt Bey' à Grenoble 38000 en France.
+
+    - Il met en ligne une image 'gorges.png' de 1 M pixels avec son PC. Il rajoute la deuxième image 'chat.jpg' de 1.6 M pixels. Et il ne veut as les partager.
+
+    - Pour l'image 'gorges.png', il veut rester avec la taille initial, et la description est 'gorgesTailleInit'. et pour l'image 'chat.jpg', il veut le zoomer 2 fois plus petit, et sa description est 'chatDeuxFoisPetit'.
+
+    - Il veut le faire avec un cadre. L'id de cet impression de '1111'.  Pour le mise en page, il aime bien de placer ces image au milieu. 
+
+    - Elle n'a pas encore le passer au command ni payer.
+
+Scénario 3 (Calendrier) : 
+
+    - Émi revient sur le site pour, cette fois, créer un calendrier. 
+
+    - Elle upload 8 autres photo que "CochonDinde.png" qui se nomme "Capybara.png" "CochonDinde2.png" "Souris.png" "Chinchilla.png" "SourisGrise.png" "RatTaupe.png" "Chinchilla2.png" "Hamsters.png"
+
+    - Elle ne artage pas les 8 photos qu'elle vient d'uploader
+
+    - Elle souhaite donc faire un clendrier. 
+
+    - Dans la page n°1 la mise en page est "centrée", elle choisit pour cette page de mettre une photo issu de "CochonDinde.png" et une photo issu de "CochonDinde2.png"
+
+    - Dans la page n°2 la mise en page est "droite", elle choisit pour cette page la photo issu de l'image qui est zoomée x3 "Souris.png" 
+
+    - Dans la page n°3 la mise en page est "", elle choisit de mettre une photos issus "Chinchilla.png" et une photo "Chinchilla2.png"
+
+    - Dans la page n°4 la mise en page est "", elle met une photo issu "Capybara.png"
+
+    - Dans la page n°5 la mise en page est "", elle met une photo issu "Cabybara.png"
+
+    - Dans la page n°6 la mise en page est "", elle met la même photo que dans la page n°2
+
+    - Dans la page n°7 la mise en page est "", elle ne met aucune photo (normalement ne fonctionne pas donc elle met une photo issu de "Hamsters.png")
+
+    - Dans la page n°8 la mise en page est "", elle met une photo issu de "Chinchilla.png"
+
+    - Page n°9 : photo issu de "Chinchilla2.png"
+
+    - Page n°10 : photo issu de "RatTaupe.png"
+
+    - Page n°12 : photot issu de "SourisGrise.png"
+
+    - Elle essaie de créer une 13eme page avec comme photo une photo issu de l'image "CochonDinde2.png"
+
+
+Scénario 4 : 
+    - Un client a pour prénoms Richard Pierre et pour nom Dupont. Son adresse email est "richard-pierre.dupont@gmail.com" et son mot de passe est 21102001. 
+
+    - Il met en ligne une image "randonnee.png" qu'il avait prise avec son Canon 600D. Cette image a une résolution de 10 Mégapixels. Il ne souhaite pas partager son image.
+
+    - Il voudrait faire un album qui a comme titre 'randoLapin'. Il met 'randonnee.png' et 'CochonDinde.png' en couverture de l'album. 
+
+    -Il rajoute une nouvelle page à l'album 'randoLapin' et également les deux photos précédentes. 
+
+    - Il crée une nouvelle page encore, rajoute la photo 'randonnee.png' puis supprime la page. 
+
+    - Il va faire une nouvelle commande le '21/10/2020' et va rajouter l'album 'randoLapin' à ses articles. Il choisit le format-qualité "CADA3MAT" dans le catalogue et il le veut en deux exemplaires.
+
+    - Le programme va lui demander de renseigner une adresse de livraison car son compte n'en comporte pas. 
+
+    - Il finit en payant sa commande.
