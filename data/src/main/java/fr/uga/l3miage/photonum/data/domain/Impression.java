@@ -14,7 +14,7 @@ public abstract class Impression {
     @GeneratedValue
     private Long id; // remplacer car String si besoincolu
 
-    Impression(Long id){
+    public Impression(Long id){
         setId(id);
     }
 

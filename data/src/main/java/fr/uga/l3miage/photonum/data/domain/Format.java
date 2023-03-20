@@ -8,7 +8,7 @@ public enum Format{
     String nom;
     float prix;
 
-    Format(String nom, float prix){
+    private Format(String nom, float prix){
         this.nom = nom;
         this.prix = prix;
     }

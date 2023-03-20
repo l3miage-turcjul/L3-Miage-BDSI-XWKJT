@@ -3,9 +3,7 @@ package fr.uga.l3miage.photonum.data.domain;
 import java.sql.Date;
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity
 public class Commande {
@@ -19,10 +17,14 @@ public class Commande {
     @OneToMany
     private Set<Article> articles;
 
-    Commande(Date dateCommande, int prixTotal, Set<Article> articles){
+    @ManyToOne
+    private AdressePostale adresseLivraison;
+
+    public Commande(Date dateCommande, int prixTotal, Set<Article> articles, AdressePostale adresseLivraison){
         setDateCommande(dateCommande);
         setPrixTotal(prixTotal);
         setArticles(articles);
+        setAdresseLivraison(adresseLivraison);
     }
 
     //GETTERS
@@ -49,5 +51,17 @@ public class Commande {
 
     public void setArticles(Set<Article> articles){
         this.articles = articles;
+    }
+
+    public int getPrixTotal() {
+        return prixTotal;
+    }
+
+    public AdressePostale getAdresseLivraison() {
+        return adresseLivraison;
+    }
+
+    public void setAdresseLivraison(AdressePostale adresseLivraison) {
+        this.adresseLivraison = adresseLivraison;
     }
 }

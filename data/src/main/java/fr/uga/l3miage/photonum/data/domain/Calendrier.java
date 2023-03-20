@@ -14,7 +14,7 @@ public class Calendrier extends Impression {
     @OneToMany
     private Set<Page> pageCalendrier;
 
-    Calendrier(Long id) {
+    public Calendrier(Long id) {
         super(id);
         this.pageCalendrier = new HashSet<Page>();
     }

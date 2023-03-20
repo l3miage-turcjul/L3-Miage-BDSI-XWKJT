@@ -15,7 +15,7 @@ public class Article {
     @Column
     private int quantité;
 
-    Article(float prix, Format format, int quantité){
+    public Article(float prix, Format format, int quantité){
         calculPrix();
         setFormat(format);
         this.quantité = quantité;

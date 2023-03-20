@@ -20,7 +20,7 @@ public class AdressePostale{
     @Column(nullable=false)
     private String pays;
 
-    AdressePostale(String adresse, String codePostale, String ville, String pays){
+    public AdressePostale(String adresse, String codePostale, String ville, String pays){
         this.adresse = adresse;
         this.codePostale = codePostale;
         this.ville = ville;

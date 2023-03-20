@@ -20,7 +20,7 @@ public class Cadre extends Impression{
     @ManyToMany
     private List<Photo> photosDeCadre;
 
-    Cadre(long id,String miseEnPage){
+    public Cadre(long id,String miseEnPage){
         super(id);
         this.miseEnPage = miseEnPage;
 		this.photosDeCadre = new ArrayList<Photo>();

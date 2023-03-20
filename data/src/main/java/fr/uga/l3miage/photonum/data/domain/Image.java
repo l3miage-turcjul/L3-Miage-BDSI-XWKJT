@@ -16,7 +16,7 @@ public class Image {
     private float resolution;
 
     @Column(nullable=false)
-    private boolean partage;
+    private boolean partage = false;
 
     public Image(String cheminAcces, String infoPDV, float resolution, boolean partage){
         this.cheminAcces = cheminAcces;

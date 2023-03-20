@@ -14,7 +14,7 @@ public class Tirage extends Impression{
     @ManyToMany
     private List<Photo> photosDeTirage;
 
-    Tirage(Long id){
+    public Tirage(Long id){
         super(id);
         this.photosDeTirage = new ArrayList<Photo>();
     }

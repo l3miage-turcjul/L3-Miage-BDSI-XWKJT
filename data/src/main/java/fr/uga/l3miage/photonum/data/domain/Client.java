@@ -35,7 +35,7 @@ public class Client {
     @OneToMany
     private SortedSet<Impression> impressions;
 
-    Client(String nom,String prenom[], AdressePostale adresse,String email,String motDePasse){
+    public Client(String nom,String prenom[], AdressePostale adresse,String email,String motDePasse){
         setNom(nom);
         setPrenom(prenom);
         addAdresse(adresse);

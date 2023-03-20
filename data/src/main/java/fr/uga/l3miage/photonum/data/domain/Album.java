@@ -20,7 +20,7 @@ public class Album extends Impression{
     @ManyToOne
     private Photo photoCouverture;
 
-    Album(long id,String titre){
+    public Album(long id,String titre){
         super(id);
         this.titre = titre;
 		this.pagesAlbum = new HashSet<Page>();
