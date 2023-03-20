@@ -20,7 +20,7 @@ public class Client {
     private String nom;
 
     @ElementCollection
-    private SortedSet<String> prenoms; 
+    private LinkedHashSet<String> prenoms; 
     
     @Column(nullable = false)
     private String motDePasse;
@@ -35,7 +35,7 @@ public class Client {
     @OneToMany
     private SortedSet<Impression> impressions;
 
-    Client(String nom,String prenom, AdressePostale adresse,String email,String motDePasse){
+    Client(String nom,String prenom[], AdressePostale adresse,String email,String motDePasse){
         setNom(nom);
         setPrenom(prenom);
         addAdresse(adresse);
@@ -51,8 +51,9 @@ public class Client {
         this.nom = nom;
     }
 
-    public void setPrenom(String prenom){
-        this.prenoms.add(prenom);
+    public void setPrenom(String prenom[]){
+        this.prenoms = new LinkedHashSet<String>();
+        this.prenoms.addAll(prenoms);
     }
 
     public void setEmail(String email){
