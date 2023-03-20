@@ -9,10 +9,10 @@ public class Fixtures {
 
     private static final Faker FAKER = Faker.instance(new Random(42));
 
-    public static Impression newImpression() {
-        Impression impression = new Impression();
+    //public static Impression newImpression() {
+        //Impression impression = new Impression();
         // ...
-        return impression;
-    }
+        //return impression;
+    //}
 
 }
