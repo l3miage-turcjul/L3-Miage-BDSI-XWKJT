@@ -1,0 +1,13 @@
+SCENARIO 1 : TIRAGE
+
+- Un client s'appelle Émi. Elle a comme deuxième prénom Bianca. Elle a un mot de passe 1234 et n'a pas d'email. Elle habite à '4 rue SMH' à 'Saint-Martin-d'Hères' 38400 en France.
+
+- Elle met en ligne une image "CochonDinde.png" avec son superbe iphone. Cette image est faite de 1,4 M de pixels. Elle souhaite pouvoir la partager.
+
+-  Elle souhaite en faire un tirage. Elle prend son image et en fait 2 photos à partir : une photo retouchée "zoomée x2", et l'autre "rognée". La première description est "rats", l'autre est "hamsters"
+
+- Elle valide son tirage. Elle souhaite n'en avoir qu'un seul exemplaire. Elle choisit un format et une qualité "10X15MAT" dans le catalogue.
+
+- Elle valide son panier : la date du jour est le '20/03/2023'.
+
+- Elle choisit l'adresse où elle veut se faire livrer, son adresse de SMH. (Elle paie ?)
