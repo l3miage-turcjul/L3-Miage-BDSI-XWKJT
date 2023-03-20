@@ -23,6 +23,7 @@ public class Album extends Impression{
     Album(long id, Format format,String titre){
         super(id, format);
         this.titre = titre;
+		this.pagesAlbum = new HashSet<Page>();
     }
 
 	public String getTitre() {

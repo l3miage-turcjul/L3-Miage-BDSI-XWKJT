@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.DiscriminatorValue;
@@ -15,6 +16,7 @@ public class Tirage extends Impression{
 
     Tirage(Long id, Format format){
         super(id, format);
+        this.photosDeTirage = new ArrayList<Photo>();
     }
     
     public void setPhotosDeTirage(List<Photo> photosDeTirage) {

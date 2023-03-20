@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.lang.NonNull;
@@ -22,6 +23,7 @@ public class Cadre extends Impression{
     Cadre(long id, Format format,String miseEnPage){
         super(id, format);
         this.miseEnPage = miseEnPage;
+		this.photosDeCadre = new ArrayList<Photo>();
     }
 
 	public String getMiseEnPage() {
