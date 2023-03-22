@@ -58,10 +58,10 @@ public class Commande {
     }
 
     public AdressePostale getAdresseLivraison() {
-        return adresseLivraison;
+        return commandeLivreeA;
     }
 
     public void setAdresseLivraison(AdressePostale adresseLivraison) {
-        this.adresseLivraison = adresseLivraison;
+        this.commandeLivreeA = adresseLivraison;
     }
 }
