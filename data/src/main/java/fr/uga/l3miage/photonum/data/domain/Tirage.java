@@ -12,10 +12,6 @@ import jakarta.persistence.ManyToMany;
 @Entity
 @DiscriminatorValue("Tirage")
 public class Tirage extends Impression{
-
-    @Id
-    @GeneratedValue
-    private Long id;
     
     @ManyToMany
     private List<Photo> photosDeTirage;
