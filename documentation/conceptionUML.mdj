@@ -7502,17 +7502,17 @@
 										"$ref": "AAAAAAGG/6p3yDOZDSU="
 									},
 									"font": "Arial;13;0",
-									"left": 764,
-									"top": 340,
+									"left": 736,
+									"top": 207,
 									"width": 115.97802734375,
 									"height": 13,
-									"alpha": 0.5235987755982988,
-									"distance": 30,
+									"alpha": -4.712118885186236,
+									"distance": 148.03040228277433,
 									"hostEdge": {
 										"$ref": "AAAAAAGG/6p3yTOcf0s="
 									},
 									"edgePosition": 2,
-									"text": "commandeLivreeÀ"
+									"text": "adresseLivraison"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -7567,16 +7567,16 @@
 										"$ref": "AAAAAAGG/6p3yDOadMQ="
 									},
 									"font": "Arial;13;0",
-									"left": 747,
-									"top": 209,
-									"width": 107.30712890625,
+									"left": 791,
+									"top": 343,
+									"width": 108.38623046875,
 									"height": 13,
-									"alpha": -1.9823994021650444,
-									"distance": 43.08131845707603,
+									"alpha": -0.7847621522838774,
+									"distance": 152.08221460775746,
 									"hostEdge": {
 										"$ref": "AAAAAAGG/6p3yTOcf0s="
 									},
-									"text": "AdresseLivraison"
+									"text": "commandeLivreeÀ"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -8552,7 +8552,7 @@
 								"_parent": {
 									"$ref": "AAAAAAGG/6p3yDOYjHo="
 								},
-								"name": "commandeLivreeÀ",
+								"name": "adresseLivraison",
 								"reference": {
 									"$ref": "AAAAAAGG/uyi+T6NEPU="
 								},
@@ -8564,7 +8564,7 @@
 								"_parent": {
 									"$ref": "AAAAAAGG/6p3yDOYjHo="
 								},
-								"name": "AdresseLivraison",
+								"name": "commandeLivreeÀ",
 								"reference": {
 									"$ref": "AAAAAAGG20tNx47lVts="
 								},
