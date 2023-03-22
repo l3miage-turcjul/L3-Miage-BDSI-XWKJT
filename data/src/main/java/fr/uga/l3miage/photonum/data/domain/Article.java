@@ -13,12 +13,12 @@ public class Article {
     private Format format;
 
     @Column
-    private int quantité;
+    private int quantite;
 
-    public Article(float prix, Format format, int quantité){
+    public Article(float prix, Format format, int quantite){
         calculPrix();
         setFormat(format);
-        this.quantité = quantité;
+        this.quantite = quantite;
     }
     
     public void setFormat(Format format){
@@ -35,8 +35,12 @@ public class Article {
         return this.prix; 
     }
 
-    public int getQuantité(){
-        return this.quantité;
+    public int getQuantite(){
+        return this.quantite;
+    }
+
+    public void setQuantite(int quantite){
+        this.quantite = quantite;
     }
 
     public void calculPrix(){

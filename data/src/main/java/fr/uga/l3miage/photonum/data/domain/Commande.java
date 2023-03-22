@@ -1,6 +1,7 @@
 package fr.uga.l3miage.photonum.data.domain;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import jakarta.persistence.*;
@@ -63,5 +64,12 @@ public class Commande {
 
     public void setAdresseLivraison(AdressePostale adresseLivraison) {
         this.commandeLivreeA = adresseLivraison;
+    }
+
+    public void addArticle(Article article){
+        if(articles == null){
+            this.articles = new HashSet<>();
+        }
+        this.articles.add(article);
     }
 }
