@@ -3,6 +3,8 @@ package fr.uga.l3miage.photonum.data.repo;
 import fr.uga.l3miage.photonum.data.domain.AdressePostale;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,6 +14,11 @@ public class AdressePostaleRepository implements CRUDRepository<Long,AdressePost
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    public AdressePostaleRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public AdressePostale save(AdressePostale adressePostale) {

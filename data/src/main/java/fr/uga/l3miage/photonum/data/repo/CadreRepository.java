@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 
@@ -14,6 +15,11 @@ public class CadreRepository implements CRUDRepository<Long,Cadre>{
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    public CadreRepository(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public Cadre save(Cadre cadre) {
