@@ -1,5 +1,8 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 
@@ -18,11 +21,15 @@ public class Image {
     @Column(nullable=false)
     private boolean partage = false;
 
-    public Image(String cheminAcces, String infoPDV, float resolution, boolean partage){
+    @ElementCollection
+    private Set<Photo> photos;
+
+    public Image(String cheminAcces, String infoPDV, float resolution, boolean partage, Set<Photo> photos){
         this.cheminAcces = cheminAcces;
         this.infoPDV = infoPDV;
         this.resolution = resolution;
         this.partage = partage;
+        this.photos = photos;
     }
 
     public String getCheminAcces() {
@@ -53,4 +60,22 @@ public class Image {
         return this.partage;
     }
 
+    public void setPartage(boolean partage){
+        this.partage = partage;
+    }
+
+    public Set<Photo> getPhotos(){
+        return this.photos;
+    }
+
+    public void setPhotos(Set<Photo> photos){
+        this.photos=photos;
+    }
+
+    public void addPhoto(Photo photo) {
+        if (this.photos == null) {
+            this.photos = new HashSet<>();
+        }
+        this.photos.add(photo);
+    }
 }
