@@ -7,6 +7,9 @@ import java.util.Objects;
 @Entity
 public class AdressePostale{
 
+    @Id
+    @GeneratedValue
+    private long id;
     //ATTRIBUTS
     @Column(nullable=false)
     private String adresse;

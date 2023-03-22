@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 @Entity
 public class Photo{
 
+    @Id
+    @GeneratedValue
+    private Long id;
+
     @Column
     private String parametresRetouche;
 
