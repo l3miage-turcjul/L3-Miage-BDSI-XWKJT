@@ -13,7 +13,7 @@ SCENARIO 1 : TIRAGE
     - Elle choisit l'adresse où elle veut se faire livrer, son adresse de SMH. (Elle paie ?)
 
 Scénario 2 ( Cadre) :
-    - Un client s'appelle Gorges. Son nom est XU. Il a un MDP 5678. Son adresse mail est 'gorgesXU@gmail.com'. Il habite à '1 Rue Clôt Bey' à Grenoble 38000 en France.
+    - Un client s'appelle Georges. Son nom est XU. Il a un MDP 5678. Son adresse mail est 'gorgesXU@gmail.com'. Il habite à '1 Rue Clôt Bey' à Grenoble 38000 en France.
 
     - Il met en ligne une image 'gorges.png' de 1 M pixels avec son PC. Il rajoute la deuxième image 'chat.jpg' de 1.6 M pixels. Et il ne veut as les partager.
 

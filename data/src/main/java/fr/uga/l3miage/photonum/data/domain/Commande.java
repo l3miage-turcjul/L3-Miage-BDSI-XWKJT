@@ -18,7 +18,7 @@ public class Commande {
     private Set<Article> articles;
 
     @ManyToOne
-    private AdressePostale adresseLivraison;
+    private AdressePostale commandeLivreeA;
 
     public Commande(Date dateCommande, int prixTotal, Set<Article> articles, AdressePostale adresseLivraison){
         setDateCommande(dateCommande);
@@ -58,10 +58,10 @@ public class Commande {
     }
 
     public AdressePostale getAdresseLivraison() {
-        return adresseLivraison;
+        return commandeLivreeA;
     }
 
     public void setAdresseLivraison(AdressePostale adresseLivraison) {
-        this.adresseLivraison = adresseLivraison;
+        this.commandeLivreeA = adresseLivraison;
     }
 }
