@@ -49,4 +49,8 @@ public class Album extends Impression{
 	public void setPhotoCouverture(Photo photoCouverture) {
 		this.photoCouverture = photoCouverture;
 	}
+
+	public void addPage(Page page){
+		this.pagesAlbum.add(page);
+	}
 }

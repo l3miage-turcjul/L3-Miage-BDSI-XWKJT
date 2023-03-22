@@ -41,4 +41,8 @@ public class Cadre extends Impression{
 	public void setPhotosDeCadre(List<Photo> photosDeCadre) {
 		this.photosDeCadre = photosDeCadre;
 	}
+
+	public void addPhoto(Photo photo) {
+        this.photosDeCadre.add(photo);
+    }
 }
