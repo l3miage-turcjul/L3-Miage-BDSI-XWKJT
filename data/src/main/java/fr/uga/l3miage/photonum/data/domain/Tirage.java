@@ -27,5 +27,11 @@ public class Tirage extends Impression{
         return photosDeTirage;
     }
     
+    public void addPhoto(Photo photo) {
+        if (this.photosDeTirage == null) {
+            this.photosDeTirage = new ArrayList<>();
+        }
+        this.photosDeTirage.add(photo);
+    }
 
 }
