@@ -9,6 +9,10 @@ import java.util.Set;
 @Entity
 public class Page {
     
+    @Id
+    @GeneratedValue
+    private Long id;
+    
     @Column
     private String miseEnPage;
 

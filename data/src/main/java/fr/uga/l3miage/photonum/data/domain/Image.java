@@ -9,6 +9,10 @@ import jakarta.persistence.*;
 @Entity
 public class Image {
 
+    @Id
+    @GeneratedValue
+    private Long id;
+    
     @Column(nullable=false)
     private String cheminAcces;
 

@@ -9,6 +9,10 @@ import jakarta.persistence.*;
 @Entity
 public class Commande {
     
+    @Id
+    @GeneratedValue
+    private Long id;
+    
     @Column
     private Date dateCommande;
 
