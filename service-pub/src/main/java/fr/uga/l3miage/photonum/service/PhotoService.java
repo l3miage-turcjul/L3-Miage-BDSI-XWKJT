@@ -1,5 +1,16 @@
 package fr.uga.l3miage.photonum.service;
 
-public class PhotoService {
-    
+import java.util.Collection;
+
+import fr.uga.l3miage.photonum.data.domain.Photo;
+import fr.uga.l3miage.photonum.service.base.BaseService;
+
+public interface PhotoService extends BaseService<Photo, Long> {
+
+    Photo save(Photo cli) throws EntityNotFoundException;
+    Photo get(Long id) throws EntityNotFoundException;
+    Photo update(Photo cli) throws EntityNotFoundException;
+    void delete(Long id) throws EntityNotFoundException;
+    public Collection<Photo> list();
+
 }
