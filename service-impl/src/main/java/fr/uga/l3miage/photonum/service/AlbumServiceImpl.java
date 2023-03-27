@@ -7,6 +7,7 @@ import fr.uga.l3miage.photonum.data.repo.AlbumRepository;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
+import java.util.Collection;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,12 +49,12 @@ public class AlbumServiceImpl implements AlbumService {
             throw new EntityNotFoundException("album with id=%d not found".formatted(id));
         }
         Set<Page> pages = album.getPagesAlbum();
-        Photo pageCouverture = album.getPhotoCouverture();
+        Photo pageCouverture = album.getPhotoCouverture();s
         for (Page page : pages) {
             pageService.delete(page.getId());
         }
         photoService.delete(pageCouverture);
-        albumRepository.delete(album);
+        albumRepository.delete(album.getId());
     }
 
     public Album addPage(Long albumId, long pageId) {
@@ -63,5 +64,9 @@ public class AlbumServiceImpl implements AlbumService {
         pages.add(page);
         update(album);
         return album;
+    }
+
+    public Collection<Album> list() {
+        return albumRepository.all();
     }
 }

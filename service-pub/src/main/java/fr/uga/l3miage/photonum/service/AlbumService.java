@@ -1,9 +1,11 @@
 package fr.uga.l3miage.photonum.service;
 
+import java.util.Collection;
+
 import fr.uga.l3miage.photonum.data.domain.Album;
 import fr.uga.l3miage.photonum.service.base.BaseService;
 
-public interface AlbumService extends BaseService<Album,Long>{
+public interface AlbumService extends BaseService<Album, Long> {
 
     public Album save(Album album);
 
@@ -14,5 +16,7 @@ public interface AlbumService extends BaseService<Album,Long>{
     public void delete(Long id) throws EntityNotFoundException;
 
     public Album addPage(Album album, long pageId);
-  
+
+    public Collection<Album> list();
+
 }

@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class Commande {
-    
+
     @Column
     private Date dateCommande;
 
@@ -21,36 +21,36 @@ public class Commande {
     @ManyToOne
     private AdressePostale commandeLivreeA;
 
-    public Commande(Date dateCommande, int prixTotal, Set<Article> articles, AdressePostale adresseLivraison){
+    public Commande(Date dateCommande, int prixTotal, Set<Article> articles, AdressePostale adresseLivraison) {
         setDateCommande(dateCommande);
         setPrixTotal(prixTotal);
         setArticles(articles);
         setAdresseLivraison(adresseLivraison);
     }
 
-    //GETTERS
-    public Date getDateCommande(){
+    // GETTERS
+    public Date getDateCommande() {
         return this.dateCommande;
     }
 
-    public int getPrixtotal(){
+    public int getPrixtotal() {
         return this.prixTotal;
     }
 
-    public Set<Article> getArticles(){
+    public Set<Article> getArticles() {
         return this.articles;
     }
 
-    //SETTERS
-    public void setDateCommande(Date dateCommande){
+    // SETTERS
+    public void setDateCommande(Date dateCommande) {
         this.dateCommande = dateCommande;
     }
 
-    public void setPrixTotal(int prixTotal){
+    public void setPrixTotal(int prixTotal) {
         this.prixTotal = prixTotal;
     }
 
-    public void setArticles(Set<Article> articles){
+    public void setArticles(Set<Article> articles) {
         this.articles = articles;
     }
 
@@ -66,8 +66,8 @@ public class Commande {
         this.commandeLivreeA = adresseLivraison;
     }
 
-    public void addArticle(Article article){
-        if(articles == null){
+    public void addArticle(Article article) {
+        if (articles == null) {
             this.articles = new HashSet<>();
         }
         this.articles.add(article);

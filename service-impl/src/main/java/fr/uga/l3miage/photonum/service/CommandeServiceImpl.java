@@ -37,9 +37,9 @@ public class CommandeServiceImpl implements CommandeService {
         }
         Set<Article> articles = commande.getArticles();
         for (Article article : articles) {
-            articleService.delete(article);
+            articleService.delete(article.getid());
         }
-        commandeRepository.delete(commande);
+        commandeRepository.delete(commande.getId());
     }
 
     public Commande addArticle(Long commandeId, Long articleId) {
@@ -49,5 +49,10 @@ public class CommandeServiceImpl implements CommandeService {
         articles.add(article);
         update(commande);
         return commande;
+    }
+
+    @Override
+    public Collection<Commande> list() {
+        return commandeRepository.all();
     }
 }
