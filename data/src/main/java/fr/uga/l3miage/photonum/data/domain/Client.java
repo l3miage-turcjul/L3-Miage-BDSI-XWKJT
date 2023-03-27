@@ -35,6 +35,10 @@ public class Client {
     @OneToMany
     private SortedSet<Impression> impressions;
 
+    @OneToMany
+    private SortedSet<Commande> commandes;
+
+
     public Client(String nom,String prenom[], AdressePostale adresse,String email,String motDePasse){
         setNom(nom);
         setPrenom(prenom);
@@ -44,6 +48,7 @@ public class Client {
         this.images=new TreeSet<Image>();
         this.adresses=new TreeSet<AdressePostale>();
         this.impressions=new TreeSet<Impression>();
+        this.commandes = new TreeSet<Commande>();
     }
 
     //setters
@@ -93,6 +98,7 @@ public class Client {
     public String getFirstPrenom(){
         return this.prenoms.iterator().next();
     }
+
 
     //TODO : refaire cette fonction de manière plus propre
     public String getPrenom(int num){
@@ -162,6 +168,46 @@ public class Client {
     
     public Impression getLastImpression(){
         return this.impressions.iterator().next();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LinkedHashSet<String> getPrenoms() {
+        return prenoms;
+    }
+
+    public void setPrenoms(LinkedHashSet<String> prenoms) {
+        this.prenoms = prenoms;
+    }
+
+    public SortedSet<AdressePostale> getAdresses() {
+        return adresses;
+    }
+
+    public void setAdresses(SortedSet<AdressePostale> adresses) {
+        this.adresses = adresses;
+    }
+
+    public void setImages(SortedSet<Image> images) {
+        this.images = images;
+    }
+
+    public void setImpressions(SortedSet<Impression> impressions) {
+        this.impressions = impressions;
+    }
+
+    public SortedSet<Commande> getCommandes() {
+        return commandes;
+    }
+
+    public void setCommandes(SortedSet<Commande> commandes) {
+        this.commandes = commandes;
     }
 
 

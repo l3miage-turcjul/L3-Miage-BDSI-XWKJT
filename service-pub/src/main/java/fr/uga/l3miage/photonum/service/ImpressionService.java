@@ -8,6 +8,8 @@ import java.util.Collection;
 public interface ImpressionService extends BaseService<Impression, Long> {
 
     Impression save(Impression impression);
-
-
+    Impression get(Long id) throws EntityNotFoundException;
+    Collection<Impression> list();
+    Impression update(Impression impression) throws EntityNotFoundException;
+    void delete(Long id) throws EntityNotFoundException;
 }
