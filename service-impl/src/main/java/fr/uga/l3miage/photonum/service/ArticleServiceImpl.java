@@ -4,6 +4,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.uga.l3miage.photonum.data.domain.Article;
+import fr.uga.l3miage.photonum.data.repo.ArticleRepository;
 
 public class ArticleServiceImpl implements ArticleService{
 
@@ -12,12 +13,12 @@ public class ArticleServiceImpl implements ArticleService{
 
 
     @Autowired
-    public ArticleServiceImpl(ArticleRepository articleRepository) {
+    public ArticleServiceImpl(ArticleRepository articleRepository) throws EntityNotFoundException{
         this.articleRepository = articleRepository;
     }
 
     @Override
-    public Article save(Article article) throws EntityNotFoundException {
+    public Article save(Article article){
         return articleRepository.save(article);
     }
 
