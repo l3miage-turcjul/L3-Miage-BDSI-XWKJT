@@ -17,6 +17,6 @@ public interface CommandeService extends BaseService<Commande, Long> {
 
     public Commande addArticle(Long commandeId, Long articleId);
 
-    public Collection<Commande> list()
+    public Collection<Commande> list();
 
 }
