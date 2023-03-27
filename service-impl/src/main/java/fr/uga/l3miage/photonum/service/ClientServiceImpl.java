@@ -1,12 +1,15 @@
 package fr.uga.l3miage.photonum.service;
 
 import fr.uga.l3miage.photonum.data.domain.AdressePostale;
+import fr.uga.l3miage.photonum.data.repo.ClientRepository;
 import fr.uga.l3miage.photonum.data.domain.Client;
+import fr.uga.l3miage.photonum.data.domain.Commande;
+import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.domain.Impression;
 import fr.uga.l3miage.photonum.service.base.BaseService;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 
-import java.util.Collection;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,8 +44,20 @@ public class ClientServiceImpl implements ClientService{
         if (cli == null) {
             throw new EntityNotFoundException("le client avec id=%d n'a pas été trouvé".formatted(id));
         }
-
+        SortedSet<Commande> commandes = cli.getCommandes();
+        for (Commande commande : commandes) {
+            commandeService.delete(commande.getId());
+        }
+        Set<Image> images = cli.getImages();
+        for (Image image : images) {
+            imageService.delete(image.getId());
+        }
+        Set<Impression> Impressions = cli.getImpressions();
+        for (Impression impression : Impressions) {
+            impressionService.delete(impression.getId());
+        }
         clientRepository.delete(cli);
+
 
     }
 
