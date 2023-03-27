@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.repo.ArticleRepository;
 
+
+
 public class ArticleServiceImpl implements ArticleService{
 
     private final ArticleRepository articleRepository;
-
-
 
     @Autowired
     public ArticleServiceImpl(ArticleRepository articleRepository) throws EntityNotFoundException{
@@ -38,10 +38,9 @@ public class ArticleServiceImpl implements ArticleService{
     }
 
 	@Override
-	public void delete(Long id) throws EntityNotFoundException {
-		Article article = get(id);
+	public void delete(Article article) throws EntityNotFoundException {
         if (article == null) {
-            throw new EntityNotFoundException("l'article avec id=%d n'a pas été trouvée".formatted(id));
+            throw new EntityNotFoundException("l'article n'a pas été trouvée");
         }
 
         articleRepository.delete(article);

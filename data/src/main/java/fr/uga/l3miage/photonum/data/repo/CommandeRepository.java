@@ -1,5 +1,4 @@
 package fr.uga.l3miage.photonum.data.repo;
-import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.domain.Commande;
 import jakarta.persistence.EntityManager;
 
