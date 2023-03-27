@@ -8,48 +8,57 @@ import java.util.Set;
 
 @Entity
 public class Page {
-    
+
     @Id
     @GeneratedValue
     private Long id;
-    
+
     @Column
     private String miseEnPage;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String numeroPage;
 
     @OneToMany
     private Set<Photo> photos;
 
-    public Page(String miseEnPage, String numeroPage){
+    public Page(String miseEnPage, String numeroPage) {
         this.miseEnPage = miseEnPage;
         this.numeroPage = numeroPage;
         this.photos = new HashSet<Photo>();
     }
 
-    //GETTERS
-    public String getMiseEnPage(){return miseEnPage;}
+    // GETTERS
+    public String getMiseEnPage() {
+        return miseEnPage;
+    }
 
-    public String getNumeroPage(){return numeroPage;}
+    public String getNumeroPage() {
+        return numeroPage;
+    }
 
-    public Set<Photo> getPhotos(){return photos;}
+    public Set<Photo> getPhotos() {
+        return photos;
+    }
 
-    //SETTERS
-    public void setMiseEnPage(String miseEnPage){
+    public Long getId() {
+        return this.id;
+    }
+
+    // SETTERS
+    public void setMiseEnPage(String miseEnPage) {
         this.miseEnPage = miseEnPage;
     }
 
-    public void setNumeroPage(String numeroPage){
+    public void setNumeroPage(String numeroPage) {
         this.numeroPage = numeroPage;
     }
 
-    public void setPhotos(Set<Photo> photos){
+    public void setPhotos(Set<Photo> photos) {
         this.photos = photos;
     }
-    
 
-     public void addPhoto(Photo photo) {
+    public void addPhoto(Photo photo) {
         if (this.photos == null) {
             this.photos = new HashSet<>();
         }
@@ -58,8 +67,10 @@ public class Page {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         Page page = (Page) o;
         return (Objects.equals(miseEnPage, page.miseEnPage) && Objects.equals(numeroPage, page.numeroPage));
     }

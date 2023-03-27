@@ -13,9 +13,9 @@ public interface AlbumService extends BaseService<Album, Long> {
 
     public Album update(Album album) throws EntityNotFoundException;
 
-    public void delete(Long id) throws EntityNotFoundException;
+    public void delete(Album album) throws EntityNotFoundException;
 
-    public Album addPage(Album album, long pageId);
+    public Album addPage(Long albumId, Long pageId) throws EntityNotFoundException;
 
     public Collection<Album> list();
 

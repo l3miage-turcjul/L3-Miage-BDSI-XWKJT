@@ -43,21 +43,20 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException {
-        Album album = get(id);
+    public void delete(Album album) throws EntityNotFoundException {
         if (album == null) {
-            throw new EntityNotFoundException("album with id=%d not found".formatted(id));
+            throw new EntityNotFoundException("album not found");
         }
         Set<Page> pages = album.getPagesAlbum();
-        Photo pageCouverture = album.getPhotoCouverture();s
+        Photo photoCouverture = album.getPhotoCouverture();
         for (Page page : pages) {
             pageService.delete(page.getId());
         }
-        photoService.delete(pageCouverture);
-        albumRepository.delete(album.getId());
+        photoService.delete(photoCouverture);
+        albumRepository.delete(album);
     }
 
-    public Album addPage(Long albumId, long pageId) {
+    public Album addPage(Long albumId, Long pageId) throws EntityNotFoundException {
         Album album = get(albumId);
         Page page = pageService.get(pageId);
         Set<Page> pages = album.getPagesAlbum();
