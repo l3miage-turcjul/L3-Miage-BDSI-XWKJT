@@ -1,4 +1,5 @@
 package fr.uga.l3miage.photonum.service;
+
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.repo.PhotoRepository;
 
@@ -6,7 +7,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PhotoServiceImpl implements PhotoService{
+public class PhotoServiceImpl implements PhotoService {
 
     private final PhotoRepository photoRepository;
 
@@ -14,7 +15,6 @@ public class PhotoServiceImpl implements PhotoService{
     public PhotoServiceImpl(PhotoRepository photoRepository) {
         this.photoRepository = photoRepository;
     }
-
 
     @Override
     public Photo save(Photo cli) throws EntityNotFoundException {
@@ -32,12 +32,11 @@ public class PhotoServiceImpl implements PhotoService{
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException{
-        Photo pho = get(id);
-        if (pho == null) {
-            throw new EntityNotFoundException("la photo avec id=%d n'a pas été trouvé".formatted(id));
+    public void delete(Photo photo) throws EntityNotFoundException {
+        if (photo == null) {
+            throw new EntityNotFoundException("la photo n'a pas été trouvé");
         }
-        photoRepository.delete(pho);
+        photoRepository.delete(photo);
 
     }
 
@@ -47,4 +46,3 @@ public class PhotoServiceImpl implements PhotoService{
     }
 
 }
-
