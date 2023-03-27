@@ -21,6 +21,9 @@ public class Article {
     @Column
     private int quantite;
 
+    @Column
+    private Impression Impression;
+
     public Article(float prix, Format format, int quantite){
         calculPrix();
         setFormat(format);
@@ -51,5 +54,13 @@ public class Article {
 
     public void calculPrix(){
         //TODO : à implémenter
+    }
+
+    public void setImpression(Impression impression){
+        this.Impression = impression;
+    }
+
+    public Impression getImpression(){
+        return this.Impression;
     }
 }
