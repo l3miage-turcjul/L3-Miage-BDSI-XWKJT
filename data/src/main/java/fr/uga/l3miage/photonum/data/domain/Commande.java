@@ -76,4 +76,8 @@ public class Commande {
         }
         this.articles.add(article);
     }
+
+    public Long getId() {
+        return id;
+    }
 }

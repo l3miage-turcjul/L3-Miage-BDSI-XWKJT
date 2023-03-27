@@ -13,9 +13,9 @@ public interface CommandeService extends BaseService<Commande, Long> {
 
     public Commande update(Commande commande) throws EntityNotFoundException;
 
-    public void delete(Long id) throws EntityNotFoundException;
+    public void delete(Commande commande) throws EntityNotFoundException;
 
-    public Commande addArticle(Long commandeId, Long articleId);
+    public Commande addArticle(Long commandeId, Long articleId) throws EntityNotFoundException;
 
     public Collection<Commande> list();
 

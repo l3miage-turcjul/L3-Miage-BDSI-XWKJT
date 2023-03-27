@@ -1,17 +1,26 @@
 package fr.uga.l3miage.photonum.service;
 
+import java.util.Collection;
 import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.domain.Commande;
+import fr.uga.l3miage.photonum.data.repo.CommandeRepository;
+import jakarta.transaction.Transactional;
 
+
+@Transactional
 public class CommandeServiceImpl implements CommandeService {
 
     private final CommandeRepository commandeRepository;
     private final ArticleService articleService;
 
-    public CommandeServiceImpl(CommandeRepository commandeRepository) {
+    @Autowired
+    public CommandeServiceImpl(CommandeRepository commandeRepository, ArticleService articleService) {
         this.commandeRepository = commandeRepository;
+        this.articleService = articleService;
     }
 
     @Override
@@ -30,19 +39,18 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException {
-        Commande commande = get(id);
+    public void delete(Commande commande) throws EntityNotFoundException {
         if (commande == null) {
-            throw new EntityNotFoundException("album with id=%d not found".formatted(id));
+            throw new EntityNotFoundException("album not found");
         }
         Set<Article> articles = commande.getArticles();
         for (Article article : articles) {
-            articleService.delete(article.getid());
+            articleService.delete(article);
         }
-        commandeRepository.delete(commande.getId());
+        commandeRepository.delete(commande);
     }
 
-    public Commande addArticle(Long commandeId, Long articleId) {
+    public Commande addArticle(Long commandeId, Long articleId) throws EntityNotFoundException {
         Commande commande = get(commandeId);
         Set<Article> articles = commande.getArticles();
         Article article = articleService.get(articleId);
@@ -55,4 +63,5 @@ public class CommandeServiceImpl implements CommandeService {
     public Collection<Commande> list() {
         return commandeRepository.all();
     }
+
 }
