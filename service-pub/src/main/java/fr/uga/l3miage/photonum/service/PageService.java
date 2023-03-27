@@ -13,9 +13,9 @@ public interface PageService extends BaseService<Page, Long> {
 
     public Page update(Page page) throws EntityNotFoundException;
 
-    public void delete(Long id) throws EntityNotFoundException;
+    public void delete(Page page) throws EntityNotFoundException;
 
-    public Page addPhoto(Long pageId, Long photoId);
+    public Page addPhoto(Long pageId, Long photoId) throws EntityNotFoundException;
 
     public Collection<Page> list();
 

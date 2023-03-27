@@ -5,14 +5,16 @@ import java.util.Set;
 
 import fr.uga.l3miage.photonum.data.domain.Page;
 import fr.uga.l3miage.photonum.data.domain.Photo;
+import fr.uga.l3miage.photonum.data.repo.PageRepository;
 
 public class PageServiceImpl implements PageService {
 
     private final PageRepository pageRepository;
     private final PhotoService photoService;
 
-    public PageServiceImpl(PageRepository pageRepository) {
+    public PageServiceImpl(PageRepository pageRepository, PhotoService photoService) {
         this.pageRepository = pageRepository;
+        this.photoService = photoService;
     }
 
     @Override
@@ -21,7 +23,7 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public Page save(Page Page) {
+    public Page save(Page page) {
         return pageRepository.save(page);
     }
 
@@ -31,15 +33,14 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException {
-        Page page = get(id);
+    public void delete(Page page) throws EntityNotFoundException {
         if (page == null) {
-            throw new EntityNotFoundException("album with id=%d not found".formatted(id));
+            throw new EntityNotFoundException("album not found");
         }
-        pageRepository.delete(page.getId());
+        pageRepository.delete(page);
     }
 
-    public Page addPhoto(Long pageId, Long photoId) {
+    public Page addPhoto(Long pageId, Long photoId) throws EntityNotFoundException {
         Page page = get(pageId);
         Set<Photo> photos = page.getPhotos();
         Photo photo = photoService.get(photoId);

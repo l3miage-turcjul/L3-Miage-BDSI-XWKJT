@@ -50,7 +50,7 @@ public class ClientServiceImpl implements ClientService{
         }
         SortedSet<Commande> commandes = cli.getCommandes();
         for (Commande commande : commandes) {
-            commandeService.delete(commande.getId());
+            commandeService.delete(commande);
         }
         Set<Image> images = cli.getImages();
         for (Image image : images) {
