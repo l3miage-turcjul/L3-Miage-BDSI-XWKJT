@@ -1,7 +1,7 @@
 package fr.uga.l3miage.photonum.service;
 
 import fr.uga.l3miage.photonum.data.domain.Tirage;
-// import fr.uga.l3miage.photonum.data.repo.TirageRepository;
+import fr.uga.l3miage.photonum.data.repo.TirageRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
