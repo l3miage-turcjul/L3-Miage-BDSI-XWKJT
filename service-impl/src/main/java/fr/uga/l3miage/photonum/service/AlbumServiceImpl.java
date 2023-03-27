@@ -4,7 +4,6 @@ import fr.uga.l3miage.photonum.data.domain.Album;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.repo.AlbumRepository;
-import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 import java.util.Collection;
@@ -50,7 +49,7 @@ public class AlbumServiceImpl implements AlbumService {
         Set<Page> pages = album.getPagesAlbum();
         Photo photoCouverture = album.getPhotoCouverture();
         for (Page page : pages) {
-            pageService.delete(page.getId());
+            pageService.delete(page);
         }
         photoService.delete(photoCouverture);
         albumRepository.delete(album);
