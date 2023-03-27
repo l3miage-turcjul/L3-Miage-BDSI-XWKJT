@@ -2,8 +2,6 @@ package fr.uga.l3miage.photonum.service;
 import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.repo.ImageRepository;
 import fr.uga.l3miage.photonum.data.domain.Photo;
-import fr.uga.l3miage.photonum.service.base.BaseService;
-import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 
 import java.util.Collection;
 import java.util.Set;
@@ -16,7 +14,7 @@ public class ImageServiceImpl implements ImageService{
 
     @Autowired
     public ImageServiceImpl(ImageRepository imageRepository) {
-        this.ImageRepository = imageRepository;
+        this.imageRepository = imageRepository;
     }
 
 
@@ -36,7 +34,7 @@ public class ImageServiceImpl implements ImageService{
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException{
+    public void delete(Long id) throws Exception{
         Image im = get(id);
         if (im == null) {
             throw new EntityNotFoundException("l'image avec id=%d n'a pas été trouvée".formatted(id));

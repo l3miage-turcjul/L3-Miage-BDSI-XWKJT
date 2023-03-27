@@ -1,13 +1,10 @@
 package fr.uga.l3miage.photonum.service;
 
-import fr.uga.l3miage.photonum.data.domain.AdressePostale;
 import fr.uga.l3miage.photonum.data.repo.ClientRepository;
 import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.domain.Impression;
-import fr.uga.l3miage.photonum.service.base.BaseService;
-import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 
 import java.util.*;
 
@@ -16,10 +13,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ClientServiceImpl implements ClientService{
 
     private final ClientRepository clientRepository;
+    private final ImageService imageService;
+    private final ImpressionService impressionService;
+    private final CommandeService commandeService;
+
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository, ImageService imageService, ImpressionService impressionService, CommandeService commandeService) {
         this.clientRepository = clientRepository;
+        this.imageService = imageService;
+        this.impressionService = impressionService;
+        this.commandeService = commandeService;
     }
 
 
@@ -39,7 +43,7 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException{
+    public void delete(Long id) throws Exception{
         Client cli = get(id);
         if (cli == null) {
             throw new EntityNotFoundException("le client avec id=%d n'a pas été trouvé".formatted(id));
@@ -52,8 +56,8 @@ public class ClientServiceImpl implements ClientService{
         for (Image image : images) {
             imageService.delete(image.getId());
         }
-        Set<Impression> Impressions = cli.getImpressions();
-        for (Impression impression : Impressions) {
+        Set<Impression> impressions = cli.getImpressions();
+        for (Impression impression : impressions) {
             impressionService.delete(impression.getId());
         }
         clientRepository.delete(cli);

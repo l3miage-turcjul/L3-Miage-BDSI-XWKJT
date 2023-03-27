@@ -80,4 +80,8 @@ public class Commande {
     public Long getId() {
         return id;
     }
+
+    public AdressePostale getCommandeLivreeA() {
+        return commandeLivreeA;
+    }
 }

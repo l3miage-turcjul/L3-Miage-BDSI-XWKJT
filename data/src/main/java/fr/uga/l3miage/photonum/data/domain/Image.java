@@ -82,4 +82,8 @@ public class Image {
         }
         this.photos.add(photo);
     }
+
+    public Long getId() {
+        return id;
+    }
 }
