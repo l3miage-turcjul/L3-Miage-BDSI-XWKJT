@@ -11,7 +11,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-public interface CalendrierService extends BaseService<Long,Calendrier>{
+public interface CalendrierService extends BaseService<Calendrier,Long>{
 
 
 

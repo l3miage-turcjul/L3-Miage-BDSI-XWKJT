@@ -3,20 +3,18 @@ package fr.uga.l3miage.photonum.service;
 
 
 import fr.uga.l3miage.photonum.data.domain.Calendrier;
-import fr.uga.l3miage.photonum.service.CalendrierService;
+//import fr.uga.l3miage.photonum.service.CalendrierService;
 import fr.uga.l3miage.photonum.data.repo.CalendrierRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 import java.util.Collection;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
-Service
+
+
 @Transactional
-public class CalendrierServiceImpl implements Calendrier {
+public class CalendrierServiceImpl implements CalendrierService {
 
     private final CalendrierRepository calendrierRepository;
    
@@ -44,7 +42,8 @@ public class CalendrierServiceImpl implements Calendrier {
         return calendrierRepository.all();
     }
 
-    public Calendrier getCalendarById(Long id){
+    
+    public Calendrier getCalendarById(Long id) throws EntityNotFoundException{
         Calendrier calendrier = get(id);
         if(calendrier == null){
             throw new EntityNotFoundException("le calendrier d'id=%d est introuvable".formatted(id));
@@ -66,5 +65,11 @@ public class CalendrierServiceImpl implements Calendrier {
 
         calendrierRepository.delete(calendrier);
     }
+
+
+
+    
+
+
 
 }
