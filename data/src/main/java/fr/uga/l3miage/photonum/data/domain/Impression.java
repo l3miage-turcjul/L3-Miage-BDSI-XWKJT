@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="typeImpression")
 //@DiscriminatorValue("Impression")
-public abstract class Impression {
+public class Impression {
 
     @Id
     @GeneratedValue

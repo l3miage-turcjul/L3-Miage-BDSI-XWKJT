@@ -1,5 +1,8 @@
 package fr.uga.l3miage.photonum.Commande;
 
-public class CommandeMapper {
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel = "spring")
+public interface CommandeMapper {
     
 }

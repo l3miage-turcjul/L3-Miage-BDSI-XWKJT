@@ -9,7 +9,7 @@ public class AdressePostale{
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     //ATTRIBUTS
     @Column(nullable=false)
     private String adresse;
