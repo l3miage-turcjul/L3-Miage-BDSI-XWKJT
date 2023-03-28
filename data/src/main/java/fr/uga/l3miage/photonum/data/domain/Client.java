@@ -1,9 +1,8 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import java.util.*;
-
-import org.springframework.lang.NonNull;
 
 
 @Entity
@@ -25,16 +24,19 @@ public class Client {
     @Column(nullable = false)
     private String motDePasse;
 
-    @NonNull
+    @Nullable
     @ManyToMany
     private SortedSet<AdressePostale> adresses;
 
+    @Nullable
     @OneToMany
     private SortedSet<Image> images;
 
+    @Nullable
     @OneToMany
     private SortedSet<Impression> impressions;
 
+    @Nullable
     @OneToMany
     private SortedSet<Commande> commandes;
 

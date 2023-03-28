@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,9 +20,11 @@ public class Commande {
     @Column
     private int prixTotal;
 
+    @Nullable
     @OneToMany
     private Set<Article> articles;
 
+    @Nullable
     @ManyToOne
     private AdressePostale commandeLivreeA;
 

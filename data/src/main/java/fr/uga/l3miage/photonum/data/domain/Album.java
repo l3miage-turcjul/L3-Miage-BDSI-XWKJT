@@ -2,6 +2,7 @@ package fr.uga.l3miage.photonum.data.domain;
 
 import org.springframework.lang.NonNull;
 import jakarta.persistence.Column;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import java.util.*;
 
@@ -12,11 +13,11 @@ public class Album extends Impression{
 	@Column(nullable=false)
     private String titre;
 
-    @NonNull
+	@Nullable
     @OneToMany
     private Set<Page> pagesAlbum;
 
-    @NonNull
+	@Nullable
     @ManyToOne
     private Photo photoCouverture;
 

@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,7 @@ public class Photo{
     @Column
     private String description;
 
+    @Nullable
     @ManyToOne
     private Image image; 
 

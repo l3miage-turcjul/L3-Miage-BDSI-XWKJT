@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.lang.NonNull;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -16,7 +17,7 @@ public class Cadre extends Impression{
     @Column(nullable=false)
     private String miseEnPage;
 
-    @NonNull
+	@Nullable
     @ManyToMany
     private List<Photo> photosDeCadre;
 

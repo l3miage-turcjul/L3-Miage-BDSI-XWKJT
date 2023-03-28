@@ -3,6 +3,7 @@ package fr.uga.l3miage.photonum.data.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 
@@ -25,6 +26,7 @@ public class Image {
     @Column(nullable=false)
     private boolean partage = false;
 
+    @Nullable
     @ElementCollection
     private Set<Photo> photos;
 

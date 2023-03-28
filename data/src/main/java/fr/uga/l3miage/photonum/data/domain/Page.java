@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -19,6 +20,7 @@ public class Page {
     @Column(nullable = false)
     private String numeroPage;
 
+    @Nullable
     @OneToMany
     private Set<Photo> photos;
 
