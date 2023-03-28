@@ -13,24 +13,24 @@ public class Calendrier extends Impression {
      //12 mois ?
     @Nullable
     @OneToMany
-    private Set<Page> pageCalendrier;
+    private Set<Page> pagesCalendrier;
 
     public Calendrier(Long id) {
         super(id);
-        this.pageCalendrier = new HashSet<Page>();
+        this.pagesCalendrier = new HashSet<Page>();
     }
 
-    public Set<Page> getPageCalendrier() {
-        return pageCalendrier;
+    public Set<Page> getPagesCalendrier() {
+        return pagesCalendrier;
     }
 
-    public void setPageCalendrier(Set<Page> pageCalendrier) {
-        this.pageCalendrier = pageCalendrier;
+    public void setPagesCalendrier(Set<Page> pagesCalendrier) {
+        this.pagesCalendrier = pagesCalendrier;
     }
 
     public void addPage(Page page) {
-        if(this.pageCalendrier.size()<12){
-            this.pageCalendrier.add(page);
+        if(this.pagesCalendrier.size()<12){
+            this.pagesCalendrier.add(page);
         }
         else throw new IllegalArgumentException("Le calendrier ne peut contenir que 12 pages");
     }

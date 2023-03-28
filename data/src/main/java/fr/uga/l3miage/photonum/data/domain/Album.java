@@ -1,6 +1,5 @@
 package fr.uga.l3miage.photonum.data.domain;
 
-import org.springframework.lang.NonNull;
 import jakarta.persistence.Column;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;

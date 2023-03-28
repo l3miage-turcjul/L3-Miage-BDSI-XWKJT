@@ -15,7 +15,7 @@ public class AdressePostale{
     private String adresse;
 
     @Column(nullable=false)
-    private String codePostale;
+    private String codePostal;
 
     @Column(nullable=false)
     private String ville;
@@ -23,9 +23,9 @@ public class AdressePostale{
     @Column(nullable=false)
     private String pays;
 
-    public AdressePostale(String adresse, String codePostale, String ville, String pays){
+    public AdressePostale(String adresse, String codePostal, String ville, String pays){
         this.adresse = adresse;
-        this.codePostale = codePostale;
+        this.codePostal = codePostal;
         this.ville = ville;
         this.pays = pays;
     }
@@ -34,7 +34,7 @@ public class AdressePostale{
     //GETTERS
     public String getAdresse(){return adresse;}
 
-    public String getCodePostale(){return codePostale;}
+    public String getCodePostale(){return codePostal;}
 
     public String getVille(){return ville;}
 
@@ -47,8 +47,8 @@ public class AdressePostale{
         this.adresse = adresse;
     }
 
-    public void setCodePostale(String codePostale){
-        this.codePostale = codePostale;
+    public void setCodePostale(String codePostal){
+        this.codePostal = codePostal;
     }
 
     public void setVille(String ville){
@@ -66,12 +66,12 @@ public class AdressePostale{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AdressePostale adressePostale = (AdressePostale) o;
-        return (Objects.equals(adresse, adressePostale.adresse) && Objects.equals(codePostale, adressePostale.codePostale) && Objects.equals(ville, adressePostale.ville) && Objects.equals(pays, adressePostale.pays));
+        return (Objects.equals(adresse, adressePostale.adresse) && Objects.equals(codePostal, adressePostale.codePostal) && Objects.equals(ville, adressePostale.ville) && Objects.equals(pays, adressePostale.pays));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(adresse, codePostale, ville, pays);
+        return Objects.hash(adresse, codePostal, ville, pays);
     }
 }
 

@@ -12,7 +12,7 @@ public class Client {
     @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String email;
     
     @Column(nullable = false)

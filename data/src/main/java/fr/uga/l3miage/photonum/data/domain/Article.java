@@ -22,12 +22,13 @@ public class Article {
     private int quantite;
 
     @Column
-    private Impression Impression;
+    private Impression impression;
 
-    public Article(float prix, Format format, int quantite){
+    public Article(float prix, Format format, int quantite, Impression impression){
         calculPrix();
         setFormat(format);
         this.quantite = quantite;
+        setImpression(impression);
     }
     
     public void setFormat(Format format){
@@ -57,10 +58,10 @@ public class Article {
     }
 
     public void setImpression(Impression impression){
-        this.Impression = impression;
+        this.impression = impression;
     }
 
     public Impression getImpression(){
-        return this.Impression;
+        return this.impression;
     }
 }
