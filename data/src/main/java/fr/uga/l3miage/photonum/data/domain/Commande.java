@@ -3,6 +3,7 @@ package fr.uga.l3miage.photonum.data.domain;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
@@ -28,11 +29,12 @@ public class Commande {
     @ManyToOne
     private AdressePostale commandeLivreeA;
 
-    public Commande(Date dateCommande, int prixTotal, Set<Article> articles, AdressePostale adresseLivraison) {
+    public Commande(Date dateCommande, int prixTotal, Set<Article> articles, AdressePostale adressePostale) {
         setDateCommande(dateCommande);
         setPrixTotal(prixTotal);
         setArticles(articles);
-        setAdresseLivraison(adresseLivraison);
+        setAdressePostale(adressePostale);
+        this.articles = new TreeSet<Article>();
     }
 
     // GETTERS
@@ -65,12 +67,12 @@ public class Commande {
         return prixTotal;
     }
 
-    public AdressePostale getAdresseLivraison() {
+    public AdressePostale getAdressePostale() {
         return commandeLivreeA;
     }
 
-    public void setAdresseLivraison(AdressePostale adresseLivraison) {
-        this.commandeLivreeA = adresseLivraison;
+    public void setAdressePostale(AdressePostale adressePostale) {
+        this.commandeLivreeA = adressePostale;
     }
 
     public void addArticle(Article article) {
