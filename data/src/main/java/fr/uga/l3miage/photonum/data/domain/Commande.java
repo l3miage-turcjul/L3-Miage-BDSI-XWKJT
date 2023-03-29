@@ -29,10 +29,9 @@ public class Commande {
     @ManyToOne
     private AdressePostale commandeLivreeA;
 
-    public Commande(Date dateCommande, int prixTotal, Set<Article> articles, AdressePostale adressePostale) {
+    public Commande(Date dateCommande, int prixTotal, AdressePostale adressePostale) {
         setDateCommande(dateCommande);
         setPrixTotal(prixTotal);
-        setArticles(articles);
         setAdressePostale(adressePostale);
         this.articles = new TreeSet<Article>();
     }
