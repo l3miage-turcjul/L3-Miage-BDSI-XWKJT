@@ -4,7 +4,8 @@ import java.util.Collection;
 
 import org.mapstruct.Mapper;
 
-import ch.qos.logback.core.net.server.Client;
+import fr.uga.l3miage.photonum.data.domain.Client;
+
 
 @Mapper(componentModel = "spring")
 public interface ClientMapper {
