@@ -8,9 +8,9 @@ import fr.uga.l3miage.photonum.data.domain.Photo;
 
 @Mapper(componentModel = "spring")
 public interface PhotoMapper {
-    Photo entityToDTO (Photo photo);
-    Collection<Photo> entityToDTO(Iterable<Photo> photos);
+    PhotoDTO entityToDTO (Photo photo);
+    Collection<PhotoDTO> entityToDTO(Iterable<Photo> photos);
 
-    Photo dtoToEntity(Photo photo);
-    Collection<Photo> dtoToEntity(Iterable<Photo> photos);
+    Photo dtoToEntity(PhotoDTO photo);
+    Collection<Photo> dtoToEntity(Iterable<PhotoDTO> photos);
 }
