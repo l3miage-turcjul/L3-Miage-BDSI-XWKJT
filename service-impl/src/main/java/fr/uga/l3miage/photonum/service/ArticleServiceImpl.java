@@ -5,9 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.repo.ArticleRepository;
+import org.springframework.stereotype.Service;
 
 
-
+@Service
 public class ArticleServiceImpl implements ArticleService{
 
     private final ArticleRepository articleRepository;

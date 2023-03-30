@@ -6,7 +6,9 @@ import fr.uga.l3miage.photonum.data.repo.AdressePostaleRepository;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdressePostaleServiceImpl implements AdressePostaleService{
 
     private final AdressePostaleRepository adressePostaleRepository;

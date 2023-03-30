@@ -53,6 +53,10 @@ public class Client {
         this.commandes = new TreeSet<Commande>();
     }
 
+    public Client() {
+
+    }
+
     //setters
     public void setNom(String nom){
         this.nom = nom;

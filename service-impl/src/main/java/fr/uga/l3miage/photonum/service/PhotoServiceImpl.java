@@ -6,7 +6,9 @@ import fr.uga.l3miage.photonum.data.repo.PhotoRepository;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PhotoServiceImpl implements PhotoService {
 
     private final PhotoRepository photoRepository;

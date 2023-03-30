@@ -9,9 +9,11 @@ import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.repo.CommandeRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 
 @Transactional
+@Service
 public class CommandeServiceImpl implements CommandeService {
 
     private final CommandeRepository commandeRepository;

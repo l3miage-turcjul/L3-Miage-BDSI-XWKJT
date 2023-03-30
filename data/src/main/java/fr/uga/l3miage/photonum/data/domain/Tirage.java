@@ -19,7 +19,11 @@ public class Tirage extends Impression{
         super(id);
         this.photosDeTirage = new ArrayList<Photo>();
     }
-    
+
+    public Tirage() {
+
+    }
+
     public void setPhotosDeTirage(List<Photo> photosDeTirage) {
         this.photosDeTirage = photosDeTirage;
     }

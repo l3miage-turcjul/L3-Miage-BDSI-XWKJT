@@ -26,6 +26,10 @@ public class Photo{
         this.description = description;
     }
 
+    public Photo() {
+
+    }
+
 
     //GETTER ET SETTER DE L'ATTRIBUT PARAMETRESRETOUCHE
     public String getParametresRetouche(){

@@ -30,6 +30,10 @@ public class Page {
         this.photos = new HashSet<Photo>();
     }
 
+    public Page() {
+
+    }
+
     // GETTERS
     public String getMiseEnPage() {
         return miseEnPage;
