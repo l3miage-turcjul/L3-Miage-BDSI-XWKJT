@@ -23,6 +23,9 @@ public class Image {
     @Column
     private float resolution;
 
+    @Column
+    private Client proprietaire;
+
     @Column(nullable=false)
     private boolean partage = false;
 
@@ -89,7 +92,19 @@ public class Image {
         this.photos.add(photo);
     }
 
+    public void setId(Long id){
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public void setProprietaire(Client client){
+        this.proprietaire = client;
+    }
+
+    public Client getProprietaire(){
+        return proprietaire;
     }
 }
