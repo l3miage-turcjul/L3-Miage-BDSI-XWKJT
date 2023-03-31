@@ -7,24 +7,24 @@ import java.util.*;
 
 @Entity
 @DiscriminatorValue("Album")
-public class Album extends Impression{
-    
-	@Column(nullable=false)
-    private String titre;
+public class Album extends Impression {
+
+	@Column(nullable = false)
+	private String titre;
 
 	@Nullable
-    @OneToMany
-    private Set<Page> pagesAlbum;
+	@OneToMany
+	private Set<Page> pagesAlbum;
 
 	@Nullable
-    @ManyToOne
-    private Photo photoCouverture;
+	@ManyToOne
+	private Photo photoCouverture;
 
-    public Album(long id,String titre){
-        super(id);
-        this.titre = titre;
+	public Album(long id, String titre) {
+		super(id);
+		this.titre = titre;
 		this.pagesAlbum = new HashSet<Page>();
-    }
+	}
 
 	public String getTitre() {
 		return titre;
@@ -50,7 +50,7 @@ public class Album extends Impression{
 		this.photoCouverture = photoCouverture;
 	}
 
-	public void addPage(Page page){
+	public void addPage(Page page) {
 		this.pagesAlbum.add(page);
 	}
 }

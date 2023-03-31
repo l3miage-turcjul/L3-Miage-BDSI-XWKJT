@@ -7,7 +7,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class AdressePostaleServiceImpl implements AdressePostaleService{
+public class AdressePostaleServiceImpl implements AdressePostaleService {
 
     private final AdressePostaleRepository adressePostaleRepository;
 
@@ -15,7 +15,6 @@ public class AdressePostaleServiceImpl implements AdressePostaleService{
     public AdressePostaleServiceImpl(AdressePostaleRepository adressePostaleRepository) {
         this.adressePostaleRepository = adressePostaleRepository;
     }
-
 
     @Override
     public AdressePostale save(AdressePostale adr) {
@@ -33,7 +32,7 @@ public class AdressePostaleServiceImpl implements AdressePostaleService{
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException{
+    public void delete(Long id) throws EntityNotFoundException {
         AdressePostale adressePostale = get(id);
         if (adressePostale == null) {
             throw new EntityNotFoundException("l'adresse avec id=%d n'a pas été trouvée".formatted(id));
@@ -43,11 +42,9 @@ public class AdressePostaleServiceImpl implements AdressePostaleService{
 
     }
 
-
     @Override
     public Collection<AdressePostale> list() {
         return adressePostaleRepository.all();
     }
 
 }
-
