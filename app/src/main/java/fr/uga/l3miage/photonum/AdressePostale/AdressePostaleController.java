@@ -56,9 +56,10 @@ public class AdressePostaleController {
 
     @PostMapping("/Client/{id}/AdressePostale")
     @ResponseStatus(HttpStatus.CREATED)
-    public AdressePostaleDTO newAdressePostale(@RequestBody @Valid AdressePostaleDTO adressePostale) {
+    public AdressePostaleDTO newAdressePostale(@PathVariable("id") @NotNull Long clientId,
+            @RequestBody @Valid AdressePostaleDTO adressePostale) {
         try {
-            final var entity = adressePostaleService.save(adressePostaleMapper.dtoToEntity(adressePostale));
+            final var entity = adressePostaleService.save(clientId, adressePostaleMapper.dtoToEntity(adressePostale));
             return adressePostaleMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);

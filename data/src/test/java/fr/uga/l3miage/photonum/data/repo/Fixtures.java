@@ -4,17 +4,23 @@ import com.github.javafaker.Faker;
 
 import fr.uga.l3miage.photonum.data.domain.AdressePostale;
 import fr.uga.l3miage.photonum.data.domain.Album;
+import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.domain.Cadre;
 import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.data.domain.Client;
+import fr.uga.l3miage.photonum.data.domain.Commande;
+import fr.uga.l3miage.photonum.data.domain.Format;
 import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.domain.Impression;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.domain.Tirage;
 
+import java.sql.*;
 import java.util.LinkedHashSet;
 import java.util.Random;
+
+import javax.xml.crypto.Data;
 
 public class Fixtures {
 
@@ -110,5 +116,24 @@ public class Fixtures {
         String miseEnPage = String.join("\n\n", FAKER.lorem().paragraphs(FAKER.number().numberBetween(1, 3)));
         cadre.setMiseEnPage(miseEnPage);
         return cadre;
+    }
+    public static Format randomFormat() {
+        return Format.values()[FAKER.number().numberBetween(0, Format.values().length)];
+    }
+    
+    public static Article newArticle(){
+        Article article = new Article();
+        Format randomFormat = randomFormat();
+        article.setFormat(randomFormat);
+        article.setQuantite(FAKER.number().numberBetween(1, 100));
+        return article; 
+    }
+
+    public static Commande newCommande(){
+        Commande commande = new Commande();
+        commande.setDateCommande((Date) FAKER.date().birthday());
+        commande.setAdressePostale(newAdressePostale());
+        commande.setPrixTotal(FAKER.number().randomDigitNotZero());
+        return commande;
     }
 }

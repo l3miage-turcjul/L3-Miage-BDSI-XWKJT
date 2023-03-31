@@ -49,11 +49,11 @@ public class AlbumController {
         }
     }
 
-    @PostMapping("/Album/{id}")
+    @PostMapping("/Article/{id}/Album")
     @ResponseStatus(HttpStatus.CREATED)
-    public AlbumDTO newAlbum(@RequestBody AlbumDTO album) {
+    public AlbumDTO newAlbum(@RequestBody AlbumDTO album, @PathVariable("id") @NotNull Long articleId) {
         try {
-            final var entity = albumService.save(albumMapper.dtoToEntity(album));
+            Album entity = albumService.save(articleId, albumMapper.dtoToEntity(album));
             return albumMapper.entityToDTO(entity);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
