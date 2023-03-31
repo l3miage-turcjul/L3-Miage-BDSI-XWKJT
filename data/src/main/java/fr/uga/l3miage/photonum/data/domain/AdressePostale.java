@@ -5,25 +5,26 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class AdressePostale{
+@NamedQuery(name = "find-adresse-by-country", query = "select a from AdressePostale where lower(a.pays) = :Pays")
+public class AdressePostale {
 
     @Id
     @GeneratedValue
     private Long id;
-    //ATTRIBUTS
-    @Column(nullable=false)
+    // ATTRIBUTS
+    @Column(nullable = false)
     private String adresse;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String codePostal;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String ville;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String pays;
 
-    public AdressePostale(String adresse, String codePostal, String ville, String pays){
+    public AdressePostale(String adresse, String codePostal, String ville, String pays) {
         this.adresse = adresse;
         this.codePostal = codePostal;
         this.ville = ville;
@@ -34,46 +35,57 @@ public class AdressePostale{
 
     }
 
+    // GETTERS
+    public String getAdresse() {
+        return adresse;
+    }
 
-    //GETTERS
-    public String getAdresse(){return adresse;}
+    public String getCodePostale() {
+        return codePostal;
+    }
 
-    public String getCodePostale(){return codePostal;}
+    public String getVille() {
+        return ville;
+    }
 
-    public String getVille(){return ville;}
+    public String getPays() {
+        return pays;
+    }
 
-    public String getPays(){return pays;}
+    public Long getId() {
+        return id;
+    }
 
-    public Long getId(){return id;}
-
-    //SETTERS
-    public void setAdresse(String adresse){
+    // SETTERS
+    public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
 
-    public void setCodePostale(String codePostal){
+    public void setCodePostale(String codePostal) {
         this.codePostal = codePostal;
     }
 
-    public void setVille(String ville){
+    public void setVille(String ville) {
         this.ville = ville;
     }
 
-    public void setPays(String pays){
+    public void setPays(String pays) {
         this.pays = pays;
     }
 
-    public void setId(Long id){
+    public void setId(Long id) {
         this.id = id;
     }
 
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         AdressePostale adressePostale = (AdressePostale) o;
-        return (Objects.equals(adresse, adressePostale.adresse) && Objects.equals(codePostal, adressePostale.codePostal) && Objects.equals(ville, adressePostale.ville) && Objects.equals(pays, adressePostale.pays));
+        return (Objects.equals(adresse, adressePostale.adresse) && Objects.equals(codePostal, adressePostale.codePostal)
+                && Objects.equals(ville, adressePostale.ville) && Objects.equals(pays, adressePostale.pays));
     }
 
     @Override
@@ -81,4 +93,3 @@ public class AdressePostale{
         return Objects.hash(adresse, codePostal, ville, pays);
     }
 }
-

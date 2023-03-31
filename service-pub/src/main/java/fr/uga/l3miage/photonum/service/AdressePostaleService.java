@@ -19,4 +19,6 @@ public interface AdressePostaleService extends BaseService<AdressePostale, Long>
 
     public Collection<AdressePostale> list();
 
+    public Collection<AdressePostale> findByCountry(String pays);
+
 }

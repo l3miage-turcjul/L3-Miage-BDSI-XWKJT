@@ -32,18 +32,18 @@ public class AdressePostaleController {
 
     @Autowired
     public AdressePostaleController(AdressePostaleService adressePostaleService,
-                                    AdressePostaleMapper adressePostaleMapper) {
+            AdressePostaleMapper adressePostaleMapper) {
         this.adressePostaleService = adressePostaleService;
         this.adressePostaleMapper = adressePostaleMapper;
     }
 
-    /*@GetMapping("/AdressePostale")
+    @GetMapping("/AdressePostale")
     public Collection<AdressePostaleDTO> adressePostales(@RequestParam(value = "p", required = false) String pays) {
         if (Strings.isBlank(pays)) {
             return adressePostaleMapper.entityToDTO(adressePostaleService.list());
         }
-        return adressePostaleMapper.entityToDTO(adressePostaleService.findByCoundry(pays));
-    }*/
+        return adressePostaleMapper.entityToDTO(adressePostaleService.findByCountry(pays));
+    }
 
     @GetMapping("/AdressePostale/{id}")
     public AdressePostaleDTO adressePostale(@PathVariable("id") @NotNull Long id) {
@@ -70,7 +70,7 @@ public class AdressePostaleController {
 
     @PutMapping("/AdressePostale/{id}")
     public AdressePostaleDTO updateAdressePostale(@PathVariable("id") @NotNull Long id,
-                                                  @RequestBody @Valid AdressePostaleDTO adressePostale) {
+            @RequestBody @Valid AdressePostaleDTO adressePostale) {
         try {
             if (adressePostale.id().equals(id)) {
                 AdressePostale adressePostaleEntity = adressePostaleMapper.dtoToEntity(adressePostale);
