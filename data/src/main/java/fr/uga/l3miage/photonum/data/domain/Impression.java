@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name="typeImpression")
-//@DiscriminatorValue("Impression")
+@DiscriminatorColumn(name="typeImpression")
+@DiscriminatorValue("Impression")
 public class Impression {
 
     @Id
