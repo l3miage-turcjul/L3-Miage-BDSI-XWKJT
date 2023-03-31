@@ -49,5 +49,13 @@ public class Photo{
         this.description = description;
     }
 
+    //GETTER ET SETTER DE L4ATTRIBUT ID
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(Long id){
+        this.id = id;
+    }
     
 }
