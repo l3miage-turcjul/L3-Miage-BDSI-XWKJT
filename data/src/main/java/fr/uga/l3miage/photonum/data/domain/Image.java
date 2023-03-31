@@ -23,7 +23,7 @@ public class Image {
     @Column
     private float resolution;
 
-    @Column
+    @ManyToOne
     private Client proprietaire;
 
     @Column(nullable=false)

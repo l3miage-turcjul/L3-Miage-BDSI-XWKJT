@@ -1,11 +1,17 @@
 package fr.uga.l3miage.photonum.data.domain;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.util.Objects;
-
+import java.util.SortedSet;
+import java.util.TreeSet;
+@NamedQuery(
+    name = "toutes-les-adresses",
+    query = "SELECT ad FROM AdressePostale ad"
+    )
+    
 @Entity
-@NamedQuery(name = "find-adresse-by-country", query = "select a from AdressePostale where lower(a.pays) = :Pays")
 public class AdressePostale {
 
     @Id
@@ -24,11 +30,16 @@ public class AdressePostale {
     @Column(nullable = false)
     private String pays;
 
+    @Nullable
+    @ManyToMany(mappedBy="adresses")
+    private SortedSet<Client> clients;
+
     public AdressePostale(String adresse, String codePostal, String ville, String pays) {
         this.adresse = adresse;
         this.codePostal = codePostal;
         this.ville = ville;
         this.pays = pays;
+        this.clients = new TreeSet<Client>();
     }
 
     public AdressePostale() {

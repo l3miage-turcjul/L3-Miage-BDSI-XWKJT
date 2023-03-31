@@ -38,8 +38,7 @@ public class AdressePostaleRepository implements CRUDRepository<Long, AdressePos
 
     @Override
     public List<AdressePostale> all() {
-        String query = "SELECT ad FROM AdressePostale ad";
-        return entityManager.createNamedQuery(query, AdressePostale.class).getResultList();
+        return entityManager.createNamedQuery("toutes-les-adresses", AdressePostale.class).getResultList();
     }
 
     public List<AdressePostale> findByContainingCountry(String pays) {
