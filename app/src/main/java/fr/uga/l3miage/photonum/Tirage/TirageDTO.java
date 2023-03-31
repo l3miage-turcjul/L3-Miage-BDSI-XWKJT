@@ -9,4 +9,8 @@ public record TirageDTO (
     @Null
     Collection<PhotoDTO> photosDeTirage
 )
-{}
+{
+
+    public Object id() {
+        return null;
+    }}

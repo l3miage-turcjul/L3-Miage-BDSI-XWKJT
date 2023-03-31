@@ -59,7 +59,7 @@ public class PageController {
     public PageDTO newPageAlbum(@PathVariable("id") @NotNull Long clientId,
             @RequestBody @Valid PageDTO page) {
         try {
-            final var entity = PageService.save(clientId, pageMapper.dtoToEntity(page));
+            final var entity = PageService.save(clientId, PageMapper.dtoToEntity(page));
             return pageMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
@@ -73,7 +73,7 @@ public class PageController {
     public PageDTO newPageCalendrier(@PathVariable("id") @NotNull Long clientId,
             @RequestBody @Valid PageDTO page) {
         try {
-            final var entity = PageService.save(clientId, pageMapper.dtoToEntity(page));
+            Page entity = PageService.save(clientId, PageMapper.dtoToEntity(page));
             return pageMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
@@ -87,7 +87,7 @@ public class PageController {
             @RequestBody @Valid PageDTO page) {
         try {
             if (page.id().equals(id)) {
-                Page pageEntity = pageMapper.dtoToEntity(page);
+                Page pageEntity = PageMapper.dtoToEntity(page);
                 var updated = pageService.update(pageEntity);
                 return pageMapper.entityToDTO(updated);
             }
@@ -103,7 +103,8 @@ public class PageController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePage(@PathVariable("id") @NotNull Long id) throws Exception {
         try {
-            pageService.delete(id);
+            PageDTO pageDTO = this.page(id);
+            pageService.delete(PageMapper.dtoToEntity(pageDTO));
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
         }

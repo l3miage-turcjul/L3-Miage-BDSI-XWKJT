@@ -51,7 +51,7 @@ public class TirageController {
     public TirageDTO newTirage(@PathVariable("id") @NotNull Long ImpressionId,
             @RequestBody @Valid TirageDTO tirage) {
         try {
-            final var entity = TirageService.save(ImpressionId, tirageMapper.dtoToEntity(tirage));
+            Tirage entity = TirageService.save(ImpressionId, tirageMapper.dtoToEntity(tirage));
             return tirageMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);

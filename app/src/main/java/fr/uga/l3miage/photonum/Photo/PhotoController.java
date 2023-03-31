@@ -37,7 +37,7 @@ public class PhotoController {
     }
 
     @GetMapping("/Photo")
-    public Collection<PhotoDTO> Photos(@RequestParam(value = "p", required = false) String pays) {
+    public Collection<PhotoDTO> Photos() {
             return photoMapper.entityToDTO(photoService.list()); 
     }
 

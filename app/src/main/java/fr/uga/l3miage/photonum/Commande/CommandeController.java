@@ -59,7 +59,7 @@ public class CommandeController{
     public CommandeDTO newCommande(@PathVariable("id") @NotNull Long clientId,
             @RequestBody @Valid ClientDTO commande) {
         try {
-            final var entity = clientService.save(clientId, commandeMapper.dtoToEntity(commande));
+            Commande entity = commandeService.save(clientId, commandeMapper.dtoToEntity(commande));
             return commandeMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
@@ -89,7 +89,8 @@ public class CommandeController{
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCommande(@PathVariable("id") @NotNull Long id) {
         try {
-            commandeService.delete(id);
+            CommandeDTO commandeDTO = this.commande(id);
+            commandeService.delete(commandeMapper.dtoToEntity(commandeDTO));
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
         }

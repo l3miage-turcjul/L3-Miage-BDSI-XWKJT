@@ -9,4 +9,8 @@ public record ImageDTO (
     @Null
     Collection<PageDTO> pagesCalendrier
 )
-{}
+{
+
+    public Object id() {
+        return null;
+    }}
