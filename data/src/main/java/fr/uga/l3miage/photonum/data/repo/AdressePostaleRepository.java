@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AdressePostaleRepository implements CRUDRepository<Long,AdressePostale> {
+public class AdressePostaleRepository implements CRUDRepository<Long, AdressePostale> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -31,7 +31,6 @@ public class AdressePostaleRepository implements CRUDRepository<Long,AdressePost
         return entityManager.find(AdressePostale.class, id);
     }
 
-
     @Override
     public void delete(AdressePostale adressePostale) {
         entityManager.remove(adressePostale);
@@ -39,11 +38,13 @@ public class AdressePostaleRepository implements CRUDRepository<Long,AdressePost
 
     @Override
     public List<AdressePostale> all() {
-       String query = "SELECT ad FROM AdressePostale ad";
-       return entityManager.createNamedQuery(query, AdressePostale.class).getResultList();
+        String query = "SELECT ad FROM AdressePostale ad";
+        return entityManager.createNamedQuery(query, AdressePostale.class).getResultList();
     }
 
-    
-
+    public List<AdressePostale> findByContainingCountry(String pays) {
+        return entityManager.createNamedQuery("find-adresse-by-country", AdressePostale.class)
+                .setParameter("Pays", "%" + pays + "%").getResultList();
+    }
 
 }

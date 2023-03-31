@@ -64,4 +64,9 @@ public class AdressePostaleServiceImpl implements AdressePostaleService {
         client.addAdresse(adr);
     }
 
+    @Override
+    public Collection<AdressePostale> findByCountry(String pays) {
+        return adressePostaleRepository.findByContainingCountry(pays);
+    }
+
 }
