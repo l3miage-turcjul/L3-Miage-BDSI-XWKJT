@@ -1,4 +1,6 @@
 package fr.uga.l3miage.photonum.service;
+
+import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.repo.ImageRepository;
 import fr.uga.l3miage.photonum.data.domain.Photo;
@@ -10,19 +12,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ImageServiceImpl implements ImageService{
+public class ImageServiceImpl implements ImageService {
 
     private final ImageRepository imageRepository;
+    private final ClientService clientService;
 
     @Autowired
-    public ImageServiceImpl(ImageRepository imageRepository) {
+    public ImageServiceImpl(ImageRepository imageRepository, ClientService clientService) {
         this.imageRepository = imageRepository;
+        this.clientService = clientService;
     }
-
 
     @Override
     public Image save(Image im) throws EntityNotFoundException {
         return imageRepository.save(im);
+    }
+
+    @Override
+    public Image save(Long id, Image im) throws EntityNotFoundException {
+        imageRepository.save(im);
+        bind(id, im);
+        return im;
     }
 
     @Override
@@ -36,13 +46,13 @@ public class ImageServiceImpl implements ImageService{
     }
 
     @Override
-    public void delete(Long id) throws Exception{
+    public void delete(Long id) throws Exception {
         Image im = get(id);
         if (im == null) {
             throw new EntityNotFoundException("l'image avec id=%d n'a pas été trouvée".formatted(id));
         }
         Set<Photo> photos = im.getPhotos();
-        if (photos.size() > 0){
+        if (photos.size() > 0) {
             throw new Exception("Il existe des photos de cette image, elle ne peut pas être supprimée");
         }
         imageRepository.delete(im);
@@ -54,5 +64,9 @@ public class ImageServiceImpl implements ImageService{
         return imageRepository.all();
     }
 
-}
+    private void bind(Long id, Image image) throws EntityNotFoundException {
+        Client client = clientService.get(id);
+        client.addImage(image);
+    }
 
+}

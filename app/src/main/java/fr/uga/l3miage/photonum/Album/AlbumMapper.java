@@ -8,7 +8,7 @@ import fr.uga.l3miage.photonum.data.domain.Album;
 
 @Mapper(componentModel = "spring")
 public interface AlbumMapper {
-    AlbumDTO entityToDTO(Object entity);
+    AlbumDTO entityToDTO(Album album);
 
     Collection<AlbumDTO> entityToDTO(Iterable<Album> album);
 

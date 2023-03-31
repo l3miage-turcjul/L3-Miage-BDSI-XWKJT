@@ -9,6 +9,8 @@ public interface CommandeService extends BaseService<Commande, Long> {
 
     public Commande save(Commande commande);
 
+    public Commande save(Long id, Commande commande) throws EntityNotFoundException;
+
     public Commande get(Long id) throws EntityNotFoundException;
 
     public Commande update(Commande commande) throws EntityNotFoundException;
