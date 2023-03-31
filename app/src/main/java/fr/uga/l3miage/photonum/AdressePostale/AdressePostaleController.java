@@ -26,10 +26,6 @@ import jakarta.validation.constraints.NotNull;
 @RestController
 @RequestMapping(value = "/api/v1", produces = "application/json")
 public class AdressePostaleController {
-<<<<<<< HEAD
-    
-    
-=======
 
     private final AdressePostaleService adressePostaleService;
     private final AdressePostaleMapper adressePostaleMapper;
@@ -99,5 +95,4 @@ public class AdressePostaleController {
         }
     }
 
->>>>>>> refs/remotes/origin/main
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import fr.uga.l3miage.photonum.Page.PageMapper;
+import fr.uga.l3miage.photonum.Photo.PhotoDTO;
 import fr.uga.l3miage.photonum.service.CadreService;
 import fr.uga.l3miage.photonum.service.CalendrierService;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
@@ -35,7 +36,7 @@ public class CalendrierController {
     }
 
     @GetMapping("/Calendrier")
-    public Collection<CalendrierDTO> calndrier() {
+    public Collection<CalendrierDTO> calendrier() {
         return calendrierMapper.entityToDTO(calendrierService.list());
     }
 
