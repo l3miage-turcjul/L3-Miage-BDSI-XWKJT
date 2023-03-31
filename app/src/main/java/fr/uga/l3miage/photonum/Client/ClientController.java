@@ -1,6 +1,5 @@
 package fr.uga.l3miage.photonum.Client;
 
-
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-
 import fr.uga.l3miage.photonum.Page.PageMapper;
 import fr.uga.l3miage.photonum.Photo.PhotoDTO;
 import fr.uga.l3miage.photonum.data.domain.Client;
@@ -28,35 +26,33 @@ import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
-
 @RestController
 @RequestMapping(value = "/api/v1", produces = "application/json")
 public class ClientController {
-    
+
     private final ClientService clientService;
     private final ClientMapper clientMapper;
 
     @Autowired
-    public ClientController(ClientService clientService, ClientMapper clientMapper){
+    public ClientController(ClientService clientService, ClientMapper clientMapper) {
         this.clientService = clientService;
         this.clientMapper = clientMapper;
     }
 
     @PostMapping("/Client/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDTO newClient(@RequestBody ClientDTO client, @PathVariable("id") @NotNull Long clientId) throws EntityNotFoundException {
+    public ClientDTO newClient(@RequestBody ClientDTO client, @PathVariable("id") @NotNull Long clientId)
+            throws EntityNotFoundException {
         try {
-            Client entity = clientService.save(clientId, clientMapper.dtoToEntity(client));
+            Client entity = clientService.save(clientMapper.dtoToEntity(client));
             return clientMapper.entityToDTO(entity);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
         }
     }
 
-
-
     @GetMapping("/Client/{id}")
-    public ClientDTO client(@PathVariable("id") @NotNull Long id){
+    public ClientDTO client(@PathVariable("id") @NotNull Long id) {
         try {
             return clientMapper.entityToDTO(clientService.get(id));
         } catch (EntityNotFoundException e) {
@@ -79,7 +75,6 @@ public class ClientController {
         }
     }
 
-    
     @PutMapping("/Client/{id}")
     public ClientDTO updateClient(@PathVariable("id") @NotNull Long id,
             @RequestBody @Valid ClientDTO client) {
@@ -96,7 +91,5 @@ public class ClientController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
         }
     }
-    
-    
 
 }
