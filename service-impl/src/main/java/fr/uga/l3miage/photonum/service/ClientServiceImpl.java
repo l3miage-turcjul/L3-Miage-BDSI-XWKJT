@@ -12,22 +12,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ClientServiceImpl implements ClientService{
+public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
     private final ImageService imageService;
     private final ImpressionService impressionService;
     private final CommandeService commandeService;
 
-
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository, ImageService imageService, ImpressionService impressionService, CommandeService commandeService) {
+    public ClientServiceImpl(ClientRepository clientRepository, ImageService imageService,
+            ImpressionService impressionService, CommandeService commandeService) {
         this.clientRepository = clientRepository;
         this.imageService = imageService;
         this.impressionService = impressionService;
         this.commandeService = commandeService;
     }
-
 
     @Override
     public Client save(Client cli) throws EntityNotFoundException {
@@ -45,7 +44,7 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public void delete(Long id) throws Exception{
+    public void delete(Long id) throws Exception {
         Client cli = get(id);
         if (cli == null) {
             throw new EntityNotFoundException("le client avec id=%d n'a pas été trouvé".formatted(id));
@@ -64,7 +63,6 @@ public class ClientServiceImpl implements ClientService{
         }
         clientRepository.delete(cli);
 
-
     }
 
     @Override
@@ -73,4 +71,3 @@ public class ClientServiceImpl implements ClientService{
     }
 
 }
-
