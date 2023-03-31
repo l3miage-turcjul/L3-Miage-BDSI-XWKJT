@@ -37,13 +37,13 @@ public class AdressePostaleController {
         this.adressePostaleMapper = adressePostaleMapper;
     }
 
-    @GetMapping("/AdressePostale")
+    /*@GetMapping("/AdressePostale")
     public Collection<AdressePostaleDTO> adressePostales(@RequestParam(value = "p", required = false) String pays) {
         if (Strings.isBlank(pays)) {
             return adressePostaleMapper.entityToDTO(adressePostaleService.list());
         }
         return adressePostaleMapper.entityToDTO(adressePostaleService.findByCoundry(pays));
-    }
+    }*/
 
     @GetMapping("/AdressePostale/{id}")
     public AdressePostaleDTO adressePostale(@PathVariable("id") @NotNull Long id) {
