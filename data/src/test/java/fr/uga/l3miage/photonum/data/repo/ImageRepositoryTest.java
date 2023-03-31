@@ -18,11 +18,11 @@ class ImageRepositoryTest extends Base {
     @Test
     void all() {
         Image i1 = Fixtures.newImage();
-        i1.setCheminAcces("c");
+        i1.setId((long) 40001);
         Image i2 = Fixtures.newImage();
-        i2.setCheminAcces("b");
+        i2.setId((long) 40002);
         Image i3 = Fixtures.newImage();
-        i3.setCheminAcces("a");
+        i3.setId((long) 40003);
         entityManager.persist(i1);
         entityManager.persist(i2);
         entityManager.persist(i3);
@@ -35,7 +35,7 @@ class ImageRepositoryTest extends Base {
         List<Image> images = imageRepository.all();
         assertThat(images)
                 .hasSize(3)
-                .extracting("cheminAcces")
-                .containsExactly("a", "b", "c");
+                .extracting("id")
+                .containsExactly(40001,40002,40003);
     }
 }

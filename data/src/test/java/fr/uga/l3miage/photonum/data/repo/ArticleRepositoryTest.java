@@ -18,11 +18,11 @@ class ArticleRepositoryTest extends Base {
     @Test
     void all() {
         Article a1 = Fixtures.newArticle();
-        //a1.setId();
+        a1.setId((long) 30001);
         Article a2 = Fixtures.newArticle();
-        //a2.setId();
+        a2.setId((long) 30002);
         Article a3 = Fixtures.newArticle();
-        //a3.setId();
+        a3.setId((long) 300013);
         entityManager.persist(a1);
         entityManager.persist(a2);
         entityManager.persist(a3);
@@ -36,6 +36,6 @@ class ArticleRepositoryTest extends Base {
         assertThat(articles)
                 .hasSize(3)
                 .extracting("id")
-                .containsExactly("a", "b", "c");
+                .containsExactly(30001, 30002, 30003);
     }
 }
