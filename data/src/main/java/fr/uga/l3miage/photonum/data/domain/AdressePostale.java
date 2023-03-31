@@ -44,7 +44,7 @@ public class AdressePostale{
 
     public String getPays(){return pays;}
 
-
+    public Long getId(){return id;}
 
     //SETTERS
     public void setAdresse(String adresse){
@@ -63,6 +63,9 @@ public class AdressePostale{
         this.pays = pays;
     }
 
+    public void setId(Long id){
+        this.id = id;
+    }
 
 
     @Override
