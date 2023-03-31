@@ -71,6 +71,10 @@ public class Page {
         this.photos.add(photo);
     }
 
+    public void setId(Long id){
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
