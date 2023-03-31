@@ -3,6 +3,8 @@ package fr.uga.l3miage.photonum.service;
 import java.util.Collection;
 import java.util.Set;
 
+import fr.uga.l3miage.photonum.data.domain.Album;
+import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.repo.PageRepository;
@@ -13,10 +15,16 @@ public class PageServiceImpl implements PageService {
 
     private final PageRepository pageRepository;
     private final PhotoService photoService;
+    private final AlbumService albumService;
+    private final CalendrierService calendrierService;
 
-    public PageServiceImpl(PageRepository pageRepository, PhotoService photoService) {
+    public PageServiceImpl(PageRepository pageRepository, PhotoService photoService,
+            CalendrierService calendrierService, AlbumService albumService) {
         this.pageRepository = pageRepository;
         this.photoService = photoService;
+        this.calendrierService = calendrierService;
+        this.albumService = albumService;
+
     }
 
     @Override
@@ -27,6 +35,13 @@ public class PageServiceImpl implements PageService {
     @Override
     public Page save(Page page) {
         return pageRepository.save(page);
+    }
+
+    @Override
+    public Page save(Long id, Page page) throws EntityNotFoundException {
+        pageRepository.save(page);
+        bind(id, page);
+        return page;
     }
 
     @Override
@@ -54,6 +69,16 @@ public class PageServiceImpl implements PageService {
     @Override
     public Collection<Page> list() {
         return pageRepository.all();
+    }
+
+    public void bind(Long id, Page page) throws EntityNotFoundException {
+        if (calendrierService.get(id) == null) {
+            Album album = albumService.get(id);
+            album.addPage(page);
+        } else {
+            Calendrier calendrier = calendrierService.get(id);
+            calendrier.addPage(page);
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package fr.uga.l3miage.photonum.service;
 
+import fr.uga.l3miage.photonum.data.domain.Image;
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.repo.PhotoRepository;
 
@@ -12,15 +13,24 @@ import org.springframework.stereotype.Service;
 public class PhotoServiceImpl implements PhotoService {
 
     private final PhotoRepository photoRepository;
+    private final ImageService imageService;
 
     @Autowired
-    public PhotoServiceImpl(PhotoRepository photoRepository) {
+    public PhotoServiceImpl(PhotoRepository photoRepository, ImageService imageService) {
         this.photoRepository = photoRepository;
+        this.imageService = imageService;
     }
 
     @Override
     public Photo save(Photo cli) throws EntityNotFoundException {
         return photoRepository.save(cli);
+    }
+
+    @Override
+    public Photo save(Long id, Photo cli) throws EntityNotFoundException {
+        photoRepository.save(cli);
+        bind(id,cli);
+        return cli;
     }
 
     @Override
@@ -47,4 +57,8 @@ public class PhotoServiceImpl implements PhotoService {
         return photoRepository.all();
     }
 
+    public void bind(Long id, Photo photo) throws EntityNotFoundException{
+        Image image = imageService.get(id);
+        image.addPhoto(photo);
+    }
 }

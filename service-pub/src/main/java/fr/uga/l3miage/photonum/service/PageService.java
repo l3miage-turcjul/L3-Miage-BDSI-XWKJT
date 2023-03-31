@@ -9,6 +9,8 @@ public interface PageService extends BaseService<Page, Long> {
 
     public Page save(Page page);
 
+    public Page save(Long id, Page page) throws EntityNotFoundException;
+
     public Page get(Long id) throws EntityNotFoundException;
 
     public Page update(Page page) throws EntityNotFoundException;
