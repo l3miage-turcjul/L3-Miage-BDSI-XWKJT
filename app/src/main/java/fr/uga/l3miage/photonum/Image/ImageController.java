@@ -58,7 +58,7 @@ public class ImageController {
     public ImageDTO newImage(@PathVariable("id") @NotNull Long clientId,
             @RequestBody @Valid ImageDTO image) {
         try {
-            Image entity = ImageService.save(clientId, imageMapper.dtoToEntity(image));
+            Image entity = imageService.save(clientId, imageMapper.dtoToEntity(image));
             return imageMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);

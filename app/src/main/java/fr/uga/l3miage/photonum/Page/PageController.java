@@ -59,7 +59,7 @@ public class PageController {
     public PageDTO newPageAlbum(@PathVariable("id") @NotNull Long clientId,
             @RequestBody @Valid PageDTO page) {
         try {
-            final var entity = PageService.save(clientId, PageMapper.dtoToEntity(page));
+            final var entity = pageService.save(clientId, PageMapper.dtoToEntity(page));
             return pageMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
@@ -73,7 +73,7 @@ public class PageController {
     public PageDTO newPageCalendrier(@PathVariable("id") @NotNull Long clientId,
             @RequestBody @Valid PageDTO page) {
         try {
-            Page entity = PageService.save(clientId, PageMapper.dtoToEntity(page));
+            Page entity = pageService.save(clientId, PageMapper.dtoToEntity(page));
             return pageMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
