@@ -9,7 +9,9 @@ import fr.uga.l3miage.photonum.data.domain.Impression;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ClientServiceImpl implements ClientService{
 
     private final ClientRepository clientRepository;

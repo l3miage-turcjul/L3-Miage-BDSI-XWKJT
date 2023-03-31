@@ -36,6 +36,10 @@ public class Commande {
         this.articles = new TreeSet<Article>();
     }
 
+    public Commande() {
+
+    }
+
     // GETTERS
     public Date getDateCommande() {
         return this.dateCommande;

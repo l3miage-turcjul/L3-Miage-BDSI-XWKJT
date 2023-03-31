@@ -26,6 +26,10 @@ public class Album extends Impression {
 		this.pagesAlbum = new HashSet<Page>();
 	}
 
+	public Album() {
+		super();
+	}
+
 	public String getTitre() {
 		return titre;
 	}

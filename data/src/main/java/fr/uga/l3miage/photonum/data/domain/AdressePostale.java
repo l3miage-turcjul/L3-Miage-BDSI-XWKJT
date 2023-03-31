@@ -30,6 +30,10 @@ public class AdressePostale{
         this.pays = pays;
     }
 
+    public AdressePostale() {
+
+    }
+
 
     //GETTERS
     public String getAdresse(){return adresse;}

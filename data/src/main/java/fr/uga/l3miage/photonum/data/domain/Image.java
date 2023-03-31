@@ -27,7 +27,7 @@ public class Image {
     private boolean partage = false;
 
     @Nullable
-    @ElementCollection
+    @OneToMany
     private Set<Photo> photos;
 
     public Image(String cheminAcces, String infoPDV, float resolution, boolean partage, Set<Photo> photos){
@@ -36,6 +36,10 @@ public class Image {
         this.resolution = resolution;
         this.partage = partage;
         this.photos = photos;
+    }
+
+    public Image() {
+
     }
 
     public String getCheminAcces() {
