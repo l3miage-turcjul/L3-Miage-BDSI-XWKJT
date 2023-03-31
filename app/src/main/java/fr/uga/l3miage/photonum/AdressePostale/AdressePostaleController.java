@@ -32,7 +32,7 @@ public class AdressePostaleController {
 
     @Autowired
     public AdressePostaleController(AdressePostaleService adressePostaleService,
-            AdressePostaleMapper adressePostaleMapper) {
+                                    AdressePostaleMapper adressePostaleMapper) {
         this.adressePostaleService = adressePostaleService;
         this.adressePostaleMapper = adressePostaleMapper;
     }
@@ -70,7 +70,7 @@ public class AdressePostaleController {
 
     @PutMapping("/AdressePostale/{id}")
     public AdressePostaleDTO updateAdressePostale(@PathVariable("id") @NotNull Long id,
-            @RequestBody @Valid AdressePostaleDTO adressePostale) {
+                                                  @RequestBody @Valid AdressePostaleDTO adressePostale) {
         try {
             if (adressePostale.id().equals(id)) {
                 AdressePostale adressePostaleEntity = adressePostaleMapper.dtoToEntity(adressePostale);

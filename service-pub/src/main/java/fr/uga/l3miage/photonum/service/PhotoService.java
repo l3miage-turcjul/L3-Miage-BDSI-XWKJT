@@ -7,7 +7,7 @@ import fr.uga.l3miage.photonum.service.base.BaseService;
 
 public interface PhotoService extends BaseService<Photo, Long> {
 
-    Photo save(Photo cli) throws EntityNotFoundException;
+    Photo save(Long id, Photo cli) throws EntityNotFoundException;
 
     Photo get(Long id) throws EntityNotFoundException;
 

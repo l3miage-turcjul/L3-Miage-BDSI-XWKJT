@@ -67,7 +67,7 @@ public class AlbumController {
 
     @PutMapping("/Album/{id}")
     public AlbumDTO updateAlbum(@PathVariable("id") @NotNull Long id,
-            @RequestBody @Valid AlbumDTO album) {
+                                @RequestBody @Valid AlbumDTO album) {
         try {
             if (album.id().equals(id)) {
                 Album albumEntity = albumMapper.dtoToEntity(album);
