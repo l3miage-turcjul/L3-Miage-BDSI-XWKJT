@@ -24,20 +24,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @RestController
 @RequestMapping(value = "/api/v1", produces = "application/json")
-public class CommandeController{
+public class CommandeController {
 
     private final CommandeService commandeService;
     private final CommandeMapper commandeMapper;
 
     @Autowired
-    public CommandeController(CommandeService commandeService, CommandeMapper commandeMapper){
+    public CommandeController(CommandeService commandeService, CommandeMapper commandeMapper) {
         this.commandeService = commandeService;
         this.commandeMapper = commandeMapper;
     }
-
 
     @GetMapping("/Commande/{id}")
     public CommandeDTO commande(@PathVariable("id") @NotNull Long id) {
@@ -57,7 +55,7 @@ public class CommandeController{
     @PostMapping("/Client/{id}/Commande")
     @ResponseStatus(HttpStatus.CREATED)
     public CommandeDTO newCommande(@PathVariable("id") @NotNull Long clientId,
-            @RequestBody @Valid ClientDTO commande) {
+            @RequestBody @Valid CommandeDTO commande) {
         try {
             Commande entity = commandeService.save(clientId, commandeMapper.dtoToEntity(commande));
             return commandeMapper.entityToDTO(entity);
@@ -96,8 +94,4 @@ public class CommandeController{
         }
     }
 
-
-
 }
-    
-
