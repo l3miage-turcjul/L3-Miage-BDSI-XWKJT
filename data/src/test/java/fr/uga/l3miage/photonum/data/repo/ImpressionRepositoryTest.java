@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 class ImpressionRepositoryTest extends Base {
 
     @Autowired
-    ImpressionRepository authorRepository;
+    ImpressionRepository impressionRepository;
 
     @Test
     void todo() {
