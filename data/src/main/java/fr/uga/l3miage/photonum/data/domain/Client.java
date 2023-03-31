@@ -4,7 +4,6 @@ import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import java.util.*;
 
-
 @Entity
 public class Client {
 
@@ -14,13 +13,13 @@ public class Client {
 
     @Column(nullable = false)
     private String email;
-    
+
     @Column(nullable = false)
     private String nom;
 
     @ElementCollection
-    private LinkedHashSet<String> prenoms; 
-    
+    private LinkedHashSet<String> prenoms;
+
     @Column(nullable = false)
     private String motDePasse;
 
@@ -40,16 +39,15 @@ public class Client {
     @OneToMany
     private SortedSet<Commande> commandes;
 
-
-    public Client(String nom,String prenom[], AdressePostale adresse,String email,String motDePasse){
+    public Client(String nom, String prenom[], AdressePostale adresse, String email, String motDePasse) {
         setNom(nom);
         setPrenom(prenom);
         addAdresse(adresse);
         setEmail(email);
         setMotDePasse(motDePasse);
-        this.images=new TreeSet<Image>();
-        this.adresses=new TreeSet<AdressePostale>();
-        this.impressions=new TreeSet<Impression>();
+        this.images = new TreeSet<Image>();
+        this.adresses = new TreeSet<AdressePostale>();
+        this.impressions = new TreeSet<Impression>();
         this.commandes = new TreeSet<Commande>();
     }
 
@@ -57,57 +55,56 @@ public class Client {
 
     }
 
-    //setters
-    public void setNom(String nom){
+    // setters
+    public void setNom(String nom) {
         this.nom = nom;
     }
 
-    public void setPrenom(String prenom[]){
+    public void setPrenom(String prenom[]) {
         this.prenoms = new LinkedHashSet<String>();
         this.prenoms.addAll(prenoms);
     }
 
-    public void setEmail(String email){
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public void addAdresse(AdressePostale adresse){
+    public void addAdresse(AdressePostale adresse) {
         this.adresses.add(adresse);
     }
 
-    public void setMotDePasse(String motDePasse){
+    public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
 
-    public void setImages(TreeSet<Image> images){
+    public void setImages(TreeSet<Image> images) {
         this.images = images;
     }
 
-    public void addImage(Image image){
+    public void addImage(Image image) {
         this.images.add(image);
     }
 
-    public void setImpressions(TreeSet<Impression> impressions){
+    public void setImpressions(TreeSet<Impression> impressions) {
         this.impressions = impressions;
     }
 
-    public void addImpression(Impression impression){
+    public void addImpression(Impression impression) {
         this.impressions.add(impression);
     }
 
-    //getters
+    // getters
 
-    public String getNom(){
+    public String getNom() {
         return this.nom;
     }
 
-    public String getFirstPrenom(){
+    public String getFirstPrenom() {
         return this.prenoms.iterator().next();
     }
 
-
-    //TODO : refaire cette fonction de manière plus propre
-    public String getPrenom(int num){
+    // TODO : refaire cette fonction de manière plus propre
+    public String getPrenom(int num) {
         Iterator<String> iterator = prenoms.iterator();
 
         // Parcourir le LinkedHashSet jusqu'à la position num
@@ -125,54 +122,53 @@ public class Client {
         }
     }
 
-    public AdressePostale getLastAdresse(){
+    public AdressePostale getLastAdresse() {
         return this.adresses.iterator().next();
     }
 
-    public AdressePostale getAdresse(int num){
-        if (num < this.adresses.size()){
-            return (AdressePostale) this.adresses.toArray()[num];}
-        else {
+    public AdressePostale getAdresse(int num) {
+        if (num < this.adresses.size()) {
+            return (AdressePostale) this.adresses.toArray()[num];
+        } else {
             throw new IllegalArgumentException("Le numéro de l'adresse n'existe pas");
         }
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return this.email;
     }
 
-    public String getMotDePasse(){
+    public String getMotDePasse() {
         return this.motDePasse;
     }
 
-    public Set<Image> getImages(){
+    public Set<Image> getImages() {
         return this.images;
     }
 
-    public Image getLastImage(){
+    public Image getLastImage() {
         return this.images.iterator().next();
     }
 
-    public Image getImage(int num){
-        if (num < this.images.size()){
-            for(int nb=0;nb<num;nb++){
+    public Image getImage(int num) {
+        if (num < this.images.size()) {
+            for (int nb = 0; nb < num; nb++) {
                 this.images.iterator().next();
-                if(nb==num){
+                if (nb == num) {
                     return this.images.iterator().next();
                 }
             }
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Le numéro de l'image n'existe pas");
         }
         return null;
     }
-    
-    public Set<Impression> getImpressions(){
+
+    public Set<Impression> getImpressions() {
         return this.impressions;
     }
-    
-    public Impression getLastImpression(){
+
+    public Impression getLastImpression() {
         return this.impressions.iterator().next();
     }
 
@@ -216,6 +212,8 @@ public class Client {
         this.commandes = commandes;
     }
 
-
+    public void addCommande(Commande commande) {
+        this.commandes.add(commande);
+    }
 
 }

@@ -6,11 +6,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.uga.l3miage.photonum.data.domain.Article;
+import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.data.domain.Commande;
 import fr.uga.l3miage.photonum.data.repo.CommandeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
 
 @Transactional
 @Service
@@ -18,11 +18,14 @@ public class CommandeServiceImpl implements CommandeService {
 
     private final CommandeRepository commandeRepository;
     private final ArticleService articleService;
+    private final ClientService clientService;
 
     @Autowired
-    public CommandeServiceImpl(CommandeRepository commandeRepository, ArticleService articleService) {
+    public CommandeServiceImpl(CommandeRepository commandeRepository, ArticleService articleService,
+            ClientService clientService) {
         this.commandeRepository = commandeRepository;
         this.articleService = articleService;
+        this.clientService = clientService;
     }
 
     @Override
@@ -33,6 +36,13 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public Commande save(Commande commande) {
         return commandeRepository.save(commande);
+    }
+
+    @Override
+    public Commande save(Long id, Commande commande) throws EntityNotFoundException {
+        commandeRepository.save(commande);
+        bind(id, commande);
+        return commande;
     }
 
     @Override
@@ -64,6 +74,11 @@ public class CommandeServiceImpl implements CommandeService {
     @Override
     public Collection<Commande> list() {
         return commandeRepository.all();
+    }
+
+    private void bind(Long id, Commande commande) throws EntityNotFoundException {
+        Client client = clientService.get(id);
+        client.addCommande(commande);
     }
 
 }
