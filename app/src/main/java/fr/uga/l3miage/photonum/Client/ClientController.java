@@ -17,9 +17,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import ch.qos.logback.core.net.server.Client;
+
 import fr.uga.l3miage.photonum.Page.PageMapper;
 import fr.uga.l3miage.photonum.Photo.PhotoDTO;
+import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.service.CadreService;
 import fr.uga.l3miage.photonum.service.CalendrierService;
 import fr.uga.l3miage.photonum.service.ClientService;
@@ -43,9 +44,9 @@ public class ClientController {
 
     @PostMapping("/Client/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDTO newClient(@RequestBody ClientDTO album, @PathVariable("id") @NotNull Long articleId) {
+    public ClientDTO newClient(@RequestBody ClientDTO client, @PathVariable("id") @NotNull Long clientId) throws EntityNotFoundException {
         try {
-            Client entity = ClientService.save(articleId, clientMapper.dtoToEntity(album));
+            Client entity = clientService.save(clientId, clientMapper.dtoToEntity(client));
             return clientMapper.entityToDTO(entity);
         } catch (IllegalArgumentException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
