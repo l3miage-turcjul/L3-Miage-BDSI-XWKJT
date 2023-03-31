@@ -1,6 +1,7 @@
 package fr.uga.l3miage.photonum.service;
 
 import fr.uga.l3miage.photonum.data.domain.Album;
+import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.repo.AlbumRepository;
@@ -18,17 +19,26 @@ public class AlbumServiceImpl implements AlbumService {
     private final AlbumRepository albumRepository;
     private final PageService pageService;
     private final PhotoService photoService;
+    private final ArticleService articleService;
 
     @Autowired
-    public AlbumServiceImpl(AlbumRepository albumRepository, PageService pageService, PhotoService photoService) {
+    public AlbumServiceImpl(AlbumRepository albumRepository, PageService pageService, PhotoService photoService,
+            ArticleService articleService) {
         this.albumRepository = albumRepository;
         this.pageService = pageService;
         this.photoService = photoService;
+        this.articleService = articleService;
     }
 
     @Override
     public Album save(Album album) {
         return albumRepository.save(album);
+    }
+
+    public Album save(Long id, Album album) throws EntityNotFoundException {
+        albumRepository.save(album);
+        bind(id, album);
+        return album;
     }
 
     @Override
@@ -66,5 +76,10 @@ public class AlbumServiceImpl implements AlbumService {
 
     public Collection<Album> list() {
         return albumRepository.all();
+    }
+
+    private void bind(Long id, Album album) throws EntityNotFoundException {
+        Article article = articleService.get(id);
+        article.setImpression(album);
     }
 }

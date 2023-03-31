@@ -1,6 +1,7 @@
 package fr.uga.l3miage.photonum.service;
 
 import fr.uga.l3miage.photonum.data.domain.AdressePostale;
+import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.data.repo.AdressePostaleRepository;
 
 import java.util.Collection;
@@ -12,15 +13,24 @@ import org.springframework.stereotype.Service;
 public class AdressePostaleServiceImpl implements AdressePostaleService {
 
     private final AdressePostaleRepository adressePostaleRepository;
+    private final ClientService clientService;
 
     @Autowired
-    public AdressePostaleServiceImpl(AdressePostaleRepository adressePostaleRepository) {
+    public AdressePostaleServiceImpl(AdressePostaleRepository adressePostaleRepository, ClientService clientService) {
         this.adressePostaleRepository = adressePostaleRepository;
+        this.clientService = clientService;
     }
 
     @Override
     public AdressePostale save(AdressePostale adr) {
         return adressePostaleRepository.save(adr);
+    }
+
+    @Override
+    public AdressePostale save(Long clientId, AdressePostale adr) throws EntityNotFoundException {
+        adressePostaleRepository.save(adr);
+        bind(clientId, adr);
+        return adr;
     }
 
     @Override
@@ -47,6 +57,11 @@ public class AdressePostaleServiceImpl implements AdressePostaleService {
     @Override
     public Collection<AdressePostale> list() {
         return adressePostaleRepository.all();
+    }
+
+    private void bind(Long id, AdressePostale adr) throws EntityNotFoundException {
+        Client client = clientService.get(id);
+        client.addAdresse(adr);
     }
 
 }
