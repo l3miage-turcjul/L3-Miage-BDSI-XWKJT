@@ -17,7 +17,8 @@ import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 
 import java.util.Collection;
 import java.util.Set;
-
+@RestController
+@RequestMapping(value = "/api/v1", produces = "application/json")
 public class AlbumController {
 
     private final AlbumService albumService;
@@ -31,13 +32,13 @@ public class AlbumController {
         this.pageMapper = pageMapper;
     }
 
-    @GetMapping("/Album")
+    /*@GetMapping("/Album")
     public Collection<AlbumDTO> albums(@RequestParam(value = "t", required = false) String titre) {
         if (Strings.isBlank(titre)) {
             return albumMapper.entityToDTO(albumService.list());
         }
         return albumMapper.entityToDTO(albumService.findByTitle(titre));
-    }
+    }*/
 
     @GetMapping("/Album/{id}")
     public AlbumDTO album(@PathVariable("id") @NotNull Long id) {
@@ -61,7 +62,7 @@ public class AlbumController {
 
     @PutMapping("/Album/{id}")
     public AlbumDTO updateAlbum(@PathVariable("id") @NotNull Long id,
-            @RequestBody @Valid AlbumDTO album) {
+                                @RequestBody @Valid AlbumDTO album) {
         try {
             if (album.id().equals(id)) {
                 Album albumEntity = albumMapper.dtoToEntity(album);
