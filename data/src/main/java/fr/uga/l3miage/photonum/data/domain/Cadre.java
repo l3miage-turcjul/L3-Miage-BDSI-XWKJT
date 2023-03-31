@@ -27,6 +27,10 @@ public class Cadre extends Impression{
 		this.photosDeCadre = new ArrayList<Photo>();
     }
 
+	public Cadre() {
+		super();
+	}
+
 	public String getMiseEnPage() {
 		return miseEnPage;
 	}

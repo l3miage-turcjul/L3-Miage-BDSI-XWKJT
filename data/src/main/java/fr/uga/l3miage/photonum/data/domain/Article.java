@@ -1,9 +1,6 @@
 package fr.uga.l3miage.photonum.data.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Article {
@@ -21,7 +18,7 @@ public class Article {
     @Column
     private int quantite;
 
-    @Column
+    @ManyToOne
     private Impression impression;
 
     public Article(float prix, Format format, int quantite, Impression impression){
@@ -30,7 +27,11 @@ public class Article {
         this.quantite = quantite;
         setImpression(impression);
     }
-    
+
+    public Article() {
+
+    }
+
     public void setFormat(Format format){
         calculPrix();
         this.format = format;

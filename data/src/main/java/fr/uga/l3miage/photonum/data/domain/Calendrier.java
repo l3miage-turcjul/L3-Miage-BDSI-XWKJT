@@ -20,6 +20,10 @@ public class Calendrier extends Impression {
         this.pagesCalendrier = new HashSet<Page>();
     }
 
+    public Calendrier() {
+        super();
+    }
+
     public Set<Page> getPagesCalendrier() {
         return pagesCalendrier;
     }

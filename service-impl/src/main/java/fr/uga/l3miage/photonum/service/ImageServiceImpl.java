@@ -7,7 +7,9 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ImageServiceImpl implements ImageService{
 
     private final ImageRepository imageRepository;

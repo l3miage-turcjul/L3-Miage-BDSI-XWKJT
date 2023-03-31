@@ -6,7 +6,9 @@ import java.util.Set;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.repo.PageRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PageServiceImpl implements PageService {
 
     private final PageRepository pageRepository;

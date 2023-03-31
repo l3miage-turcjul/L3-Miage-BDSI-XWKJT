@@ -7,14 +7,12 @@ import java.util.Collection;
 import fr.uga.l3miage.photonum.Page.PageDTO;
 import fr.uga.l3miage.photonum.Photo.PhotoDTO;
 
-public record AlbumDTO (
-    @NotBlank
-    String titre,
+public record AlbumDTO(
+                Long id,
 
-    @Null
-    Collection<PageDTO> pagesAlbum,
+                @NotBlank String titre,
 
-    @Null 
-    PhotoDTO photoCouverture
-)
-{}
+                @Null Collection<PageDTO> pagesAlbum,
+
+                @Null PhotoDTO photoCouverture) {
+}

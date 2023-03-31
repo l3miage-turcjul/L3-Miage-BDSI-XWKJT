@@ -12,13 +12,15 @@ import java.util.Collection;
  */
 public interface BaseService<O, I> {
 
-
     /**
      * get a persistent object
      *
      * @param id the object identifier
      * @return the object
-     * @throws fr.uga.l3miage.photonum.service.EntityNotFoundException when the requested entity cannot be loaded
+     * @throws fr.uga.l3miage.photonum.service.EntityNotFoundException when the
+     *                                                                 requested
+     *                                                                 entity cannot
+     *                                                                 be loaded
      */
     O get(I id) throws EntityNotFoundException;
 
@@ -34,7 +36,10 @@ public interface BaseService<O, I> {
      *
      * @param object the object to update
      * @return the updated object
-     * @throws fr.uga.l3miage.photonum.service.EntityNotFoundException when the entity do not already exists
+     * @throws fr.uga.l3miage.photonum.service.EntityNotFoundException when the
+     *                                                                 entity do not
+     *                                                                 already
+     *                                                                 exists
      */
     O update(O object) throws EntityNotFoundException;
 
