@@ -9,6 +9,8 @@ public interface AlbumService extends BaseService<Album, Long> {
 
     public Album save(Album album);
 
+    public Album save(Long id, Album album) throws EntityNotFoundException;
+
     public Album get(Long id) throws EntityNotFoundException;
 
     public Album update(Album album) throws EntityNotFoundException;

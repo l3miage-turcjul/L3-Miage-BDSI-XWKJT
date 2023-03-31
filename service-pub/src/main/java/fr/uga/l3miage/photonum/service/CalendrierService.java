@@ -4,13 +4,9 @@ import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.service.CalendrierService;
 import fr.uga.l3miage.photonum.service.base.BaseService;
 
-
 import java.util.Collection;
 
-
-public interface CalendrierService extends BaseService<Calendrier,Long>{
-
-
+public interface CalendrierService extends BaseService<Calendrier, Long> {
 
     /**
      * Sauvegarde un objet calendrier
@@ -21,22 +17,31 @@ public interface CalendrierService extends BaseService<Calendrier,Long>{
     Calendrier save(Calendrier calendrier);
 
     /**
+     * Sauvegarde un objet calendrier
+     *
+     * @param id
+     * @param le calendrier à sauvegarder
+     * @return le calendrier avec un id
+     */
+    Calendrier save(Long id, Calendrier calendrier) throws EntityNotFoundException;
+
+    /**
      * Trouve tous les calendriers
+     * 
      * @return tous les calendriers existants
      */
     Collection<Calendrier> list();
 
-
     /**
      * Trouve le calendier d'id id
+     * 
      * @param id
-     * @return le calendrier avec l'id id 
+     * @return le calendrier avec l'id id
      * @throws EntityNotFoundException
      */
 
     Calendrier getCalendarById(Long id) throws EntityNotFoundException;
-    
-    
+
     /**
      * Supprime un calendrier
      *
@@ -46,4 +51,3 @@ public interface CalendrierService extends BaseService<Calendrier,Long>{
     void delete(Long id) throws EntityNotFoundException;
 
 }
-
