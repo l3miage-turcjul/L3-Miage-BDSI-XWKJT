@@ -33,7 +33,8 @@ public class ImpressionRepository implements CRUDRepository<Long, Impression> {
 
     @Override
     public List<Impression> all() {
-        return null;
+        String getAll = "SELECT i FROM Impression i";
+        return entityManager.createNamedQuery(getAll, Impression.class).getResultList();
     }
 
 }
