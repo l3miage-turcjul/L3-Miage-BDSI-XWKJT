@@ -13,6 +13,6 @@ public interface CommandeMapper {
     CommandeDTO entityToDTO (Commande commande);
     Collection<CommandeDTO> entityToDTO(Iterable<Commande> commandes);
 
-    Commande dtoToEntity(@Valid @Valid @Valid @Valid CommandeDTO commande);
+    Commande dtoToEntity(@Valid CommandeDTO commande);
     Collection<Commande> dtoToEntity(Iterable<CommandeDTO> commandes);
 }
