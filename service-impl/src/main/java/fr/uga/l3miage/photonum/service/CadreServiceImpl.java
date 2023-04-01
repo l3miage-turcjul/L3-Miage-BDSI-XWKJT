@@ -23,11 +23,6 @@ public class CadreServiceImpl implements CadreService {
     }
 
     @Override
-    public Cadre save(Cadre cadre) {
-        return cadreRepository.save(cadre);
-    }
-
-    @Override
     public Cadre save(Long id, Cadre cadre) throws EntityNotFoundException {
         cadreRepository.save(cadre);
         bind(id, cadre);

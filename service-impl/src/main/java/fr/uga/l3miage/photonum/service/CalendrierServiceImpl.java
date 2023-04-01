@@ -24,11 +24,6 @@ public class CalendrierServiceImpl implements CalendrierService {
     }
 
     @Override
-    public Calendrier save(Calendrier calendrier) {
-        return calendrierRepository.save(calendrier);
-    }
-
-    @Override
     public Calendrier save(Long id, Calendrier calendrier) throws EntityNotFoundException {
         calendrierRepository.save(calendrier);
         bind(id, calendrier);

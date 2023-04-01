@@ -34,11 +34,6 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    public Commande save(Commande commande) {
-        return commandeRepository.save(commande);
-    }
-
-    @Override
     public Commande save(Long id, Commande commande) throws EntityNotFoundException {
         commandeRepository.save(commande);
         bind(id, commande);

@@ -22,11 +22,6 @@ public class AdressePostaleServiceImpl implements AdressePostaleService {
     }
 
     @Override
-    public AdressePostale save(AdressePostale adr) {
-        return adressePostaleRepository.save(adr);
-    }
-
-    @Override
     public AdressePostale save(Long clientId, AdressePostale adr) throws EntityNotFoundException {
         adressePostaleRepository.save(adr);
         bind(clientId, adr);

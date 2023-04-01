@@ -23,11 +23,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article save(Article article) {
-        return articleRepository.save(article);
-    }
-
-    @Override
     public Article save(Long id, Article article) throws EntityNotFoundException {
         articleRepository.save(article);
         bind(id, article);

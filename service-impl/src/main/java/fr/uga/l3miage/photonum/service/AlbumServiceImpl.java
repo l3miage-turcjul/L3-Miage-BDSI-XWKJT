@@ -30,11 +30,6 @@ public class AlbumServiceImpl implements AlbumService {
         this.articleService = articleService;
     }
 
-    @Override
-    public Album save(Album album) {
-        return albumRepository.save(album);
-    }
-
     public Album save(Long id, Album album) throws EntityNotFoundException {
         albumRepository.save(album);
         bind(id, album);

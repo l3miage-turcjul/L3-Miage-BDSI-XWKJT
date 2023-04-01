@@ -11,14 +11,6 @@ public interface CalendrierService extends BaseService<Calendrier, Long> {
     /**
      * Sauvegarde un objet calendrier
      *
-     * @param le calendrier à sauvegarder
-     * @return le calendrier avec un id
-     */
-    Calendrier save(Calendrier calendrier);
-
-    /**
-     * Sauvegarde un objet calendrier
-     *
      * @param id
      * @param le calendrier à sauvegarder
      * @return le calendrier avec un id

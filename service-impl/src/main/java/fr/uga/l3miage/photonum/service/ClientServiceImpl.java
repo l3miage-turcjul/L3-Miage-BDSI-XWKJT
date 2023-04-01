@@ -29,11 +29,6 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client save(Client cli) throws EntityNotFoundException {
-        return clientRepository.save(cli);
-    }
-
-    @Override
     public Client get(Long id) throws EntityNotFoundException {
         return clientRepository.get(id);
     }

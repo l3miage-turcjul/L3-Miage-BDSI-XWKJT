@@ -6,7 +6,6 @@ import fr.uga.l3miage.photonum.service.base.BaseService;
 import java.util.Collection;
 
 public interface CadreService extends BaseService<Cadre, Long> {
-    Cadre save(Cadre cadre);
 
     Cadre save(Long id, Cadre cadre) throws EntityNotFoundException;
 
