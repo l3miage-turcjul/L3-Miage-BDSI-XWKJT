@@ -10,6 +10,7 @@ info:
     * Lister des clients
     * Créer des adresses
     * Créer des adresses pour un client
+    * 
     
     * Rechercher 
       * Clients par id
@@ -17,10 +18,10 @@ info:
 servers:
   - url: "http://localhost:8080"
 paths:
-  /api/authors:
+  /api/Client:
     get:
-      summary: Find all authors, possibly filtered
-      operationId: find-authors
+      summary: Trouver tous les clients
+      #operationId: find-authors
       parameters:
         - name: q
           in: query
@@ -34,89 +35,87 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Author"
+                  $ref: "#/components/schemas/Client"
     post:
-      summary: Create a new author
-      operationId: new-author
+      summary: Creer un nouveau client
+      operationId: nouveau-client
       requestBody:
         content:
           'application/json':
             schema:
-              $ref: "#/components/schemas/BaseAuthor"
+              $ref: "#/components/schemas/Client"
       responses:
         201:
-          description: Created
+          description: Créé
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/Author"
+                $ref: "#/components/schemas/Client"
         400:
-          description: In case the author could not be validated
-  /api/authors/{id}:
+          description: Dans le cas où le client ne peut être validé
+  /api/CLient/{id}:
     parameters:
       - name: id
-        description: Author's id
+        description: id du client
         in: path
         required: true
         schema:
           type: number
           format: int64
     get:
-      summary: Get an author
-      operationId: get-author
+      summary: Trouver un client
+      operationId: trouver-client
       responses:
         200:
           description: OK
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/Author"
+                $ref: "#/components/schemas/Client"
 
         404:
-          description: The author was not found
+          description: Le client n'a pas été trouvé
     put:
-      summary: Update an author
-      description: Will update the author if found
-      operationId: put-author
+      summary: Mettre à jour les données d'un client
+      description: La mise à jour sera faite si le client est trouvé
+      operationId: put-client
       requestBody:
         content:
           'application/json':
             schema:
-              $ref: "#/components/schemas/Author"
+              $ref: "#/components/schemas/Client"
       responses:
         200:
-          description: Updated
+          description: Mis à jour
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/Author"
+                $ref: "#/components/schemas/Client"
         400:
-          description: In case the author could not be validated
+          description: Dans le cas où le client ne peut être validé
         404:
-          description: The author was not found
+          description: Le client n'a pas été trouvé
     delete:
-      summary: Delete an author (and all of its books)
-      description: This endpoint can only be called if the authors do not share authority with another author.
-      operationId: delete-author
+      summary: Supprimer un client (et toutes ses adresses)
+      operationId: delete-client
       responses:
         204:
-          description: Deleted
-        400:
-          description: If this author share authority on a book, then book should be removed first
+          description: Supprimé
         404:
-          description: The author was not found
-  /api/authors/{id}/books:
+          description: Le client n'a pas été trouvé
+          
+  /api/Client/{id}/AdressePostale:
     parameters:
       - name: id
-        description: Author's id
+        description: id du client
         in: path
         required: true
         schema:
-          type: number
-          format: int64
+         type: number
+         format: int64
     get:
-      summary: Find all books for a given author, possibly filtered by name
-      operationId: find-authors-books
+      summary: Trouver toutes les adresses postales d'un client donné
+      operationId: find-clients-adress
       parameters:
         - name: q
           in: query
@@ -130,49 +129,44 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Book"
+                  $ref: "#/components/schemas/AdressePostale"
         404:
-          description: The author was not found
+          description: Le client n'a pas été trouvé
     post:
-      summary: Create a new book for a given author
-      operationId: new-authors-book
+      summary: Creer une nouvelle adresse pour un client donné
+      operationId: new-clients-adress
       requestBody:
         content:
           'application/json':
             schema:
-              $ref: "#/components/schemas/NewBook"
+              $ref: "#/components/schemas/NewAdressePostale"
       responses:
         201:
-          description: Created
+          description: Créée
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/Book"
+                $ref: "#/components/schemas/AdressePostale"
         404:
-          description: The author was not found
-  /api/books:
-    get:
-      summary: Find all books, possibly filtered by name
-      operationId: get-books
-      responses:
-        200:
-          description: OK
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/Book"
-  /api/books/{id}:
+          description: Le client n'a pas été trouvé
+
+  /api/Client/{id}/Commande:
     parameters:
       - name: id
-        description: Book's id
+        description: id du client
         in: path
         required: true
         schema:
-          type: number
-          format: int64
+         type: number
+         format: int64
     get:
-      summary: Get a book
-      operationId: get-book
+      summary: Trouver toutes les commandes d'un client donné
+      operationId: find-clients-ordres
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
       responses:
         200:
           description: OK
@@ -181,118 +175,281 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Book"
+                  $ref: "#/components/schemas/Commande"
         404:
-          description: The book was not found
-    put:
-      summary: Update a book
-      operationId: update-book
+          description: Le client n'a pas été trouvé
+    post:
+      summary: Creer une nouvelle commande pour un client donné
+      operationId: new-client-order
       requestBody:
         content:
           'application/json':
             schema:
-              $ref: "#/components/schemas/Book"
+              $ref: "#/components/schemas/NewCommande"
+      responses:
+        201:
+          description: Créée
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Commande"
+        404:
+          description: Le client n'a pas été trouvé
+
+
+
+  /api/AdressePostale:
+    get:
+      summary: Trouver toutes les adresses postales
+      operationId: get-adress
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/AdressePostale"
+
+  /api/AdressePostale/{id}:
+    parameters:
+      - name: id
+        description: id de l'adresse postale
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver une adresse
+      operationId: get-adress
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AdressePostale"
+        404:
+          description: L'adresse n'a pas été toruvée
+    put:
+      summary: Mettre à jour une adresse
+      operationId: update-adress
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/AdressePostale"
       responses:
         404:
-          description: The book was not found
+          description: L'adresse n'a pas été trouvée
     delete:
-      summary: Delete a book
-      operationId: delete-book
+      summary: Supprimer une adresse
+      operationId: delete-adress
       responses:
         204:
-          description: Deleted
+          description: Supprimés
         404:
-          description: The book was not found
+          description: L'adresse postale n'a pas été trouvée
+
+
+#Commande
+
+  /api/Commande:
+    get:
+      summary: Trouver toutes les commandes
+      operationId: get-orders
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Commande"
+  /api/Commande/{id}:
+    parameters:
+      - name: id
+        description: id de commande
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver une commande
+      operationId: get-order
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                  $ref: "#/components/schemas/Commande"
+        404:
+          description: La commande n'a pas été trouvée
+    put:
+      summary: Mettre à jour une commande
+      operationId: update-order
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Commande"
+      responses:
+        404:
+          description: La commande n'a pas été trouvée
+    delete:
+      summary: Supprimer une commande
+      operationId: delete-order
+      responses:
+        204:
+          description: Suppriméee
+        404:
+          description: La commande n'a pas été trouvée
 
 components:
   schemas:
-    BaseAuthor:
-      description: An author, with no id (for creation)
+    BaseClient:
+      description: Un client, sans id (pour la creation)
       type: object
       properties:
-        fullName:
+        nom:
           type: string
+        prenoms :
+          type : array
+          #items : 
+        email:
+          type : string
+        motDePasse:
+          type : string
       required:
-        - fullName
+        - name
+        - email
+        - motDePasse
       example:
-        name: Victor Hugo
-    Author:
-      description: An author, for all usage except creation
+        name: Turc
+        prenoms : Julien
+        email : julien.turc@etu.univ-grenoble-alpes.fr
+        motDepasse : 1234
+    Client:
+      description: Un client, pour tout usage sauf la création
       allOf:
-        - $ref: "#/components/schemas/BaseAuthor"
+        - $ref: "#/components/schemas/BaseClient"
         - type: object
           properties:
             id:
               type: integer
               format: int64
-            fullName:
+            name :
               type: string
+            email : 
+              type : string
+            motDePasse :
+              type : string
           required:
             - id
           example:
             id: 1
-            name: Victor Hugo
-    NewBook:
-      description: A book, with no id (for creation)
+            name: Turc
+    NewAdressePostale:
+      description: Une adresse postale sans id (pour la creation)
       type: object
       properties:
-        title:
+        adresse:
           type: string
-        isbn:
-          description: isbn number from 10 to 13 digit as a number to simplify validation
+        codePostal:
+          description: code postal
           type: integer
           format: int64
-          minimum: 1000000000 # 10 digits
-          maximum: 9999999999999 # 13 digits
-        publisher:
+          minimum: 00001 # 5 digits
+          maximum: 99999 # 5 digits
+        ville:
           type: string
-        year:
-          description: publication year, from 10 000 BC excluded to way up in the future
-          type: integer
-          format: int32
-          minimum: -9999 # four digit negative
-          maximum: 9999 # four digit positive
-        language:
-          description: possible language of the book, two for now any can extend it. Default to "french" if none is provided.
+        pays:
           type: string
-          enum:
-            - french
-            - english
-          default: french
       required:
-        - title
-        - year
-        - language
+        - adresse
+        - codePostal
+        - ville
       example:
-        title: Les Misérables
-        isbn: 9782266199261
-        editor: Pocket
-        year: 2009
-        language: french
-    Book:
-      description: A book, with an id (for update) and authors (response only)
+        adresse: 60 rue de la chimie
+        codePostal: 38140
+        ville: Saint-Martin d'Hères
+        pays: France
+    AdressePostale:
+      description: Une adresse postale sans id (pour la mise à jour) et clients (juste la reponse)
       allOf:
-        - $ref: "#/components/schemas/NewBook"
+        - $ref: "#/components/schemas/NewAdressePostale"
         - type: object
           properties:
             id:
               type: integer
               format: int64
-            authors:
+            clients:
               type: array
               items:
-                $ref: "#/components/schemas/Author"
+                $ref: "#/components/schemas/Client"
               readOnly: true
           required:
             - id
       example:
         id: 1
-        title: Les Misérables
-        isbn: 9782266199261
-        editor: Pocket
-        year: 2009
-        language: FRENCH
+        adresse : 60 rue de la chimie
+        codePostal: 38140
+        ville: Saint-Martin d'Hères
+        pays: France
         authors:
           - id: 1
-            name: Victor Hugo
+            name: Turc
+          - id: 2
+            name : Jandot
+          - id: 3 
+            name : Kone
+
+
+    NewCommande:
+      description: Une commande sans id (pour la création)
+      type: object
+      properties:
+        dateCommande:
+          type: string
+        prixTotal:
+          description: prix total de la commande
+          type: integer
+          format: int64
+        adressePostale:
+          type: string
+      required:
+        - dateCommande
+        - adressePostale
+      example:
+        dateCommande: 01/04/2023
+        adressePostale: 60 Rue de la chimie
+
+    Commande:
+      description: Une commande sans id (pour la mise à jour) et son client (pour la réponse)
+      allOf:
+        - $ref: "#/components/schemas/NewCommande"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            client:
+              type: string
+              items:
+                $ref: "#/components/schemas/Commande"
+              readOnly: true
+          required:
+            - id
+      example:
+        id: 1
+        daeCommande: 12/02/2022
+        adressePostale: 2 Rue du Cotentin
+
+        client:
+          - id: 1
+            name: Wyss
+
 
