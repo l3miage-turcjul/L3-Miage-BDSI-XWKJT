@@ -53,7 +53,7 @@ paths:
                 $ref: "#/components/schemas/Client"
         400:
           description: Dans le cas où le client ne peut être validé
-  /api/CLient/{id}:
+  /api/Client/{id}:
     parameters:
       - name: id
         description: id du client
@@ -103,7 +103,7 @@ paths:
           description: Supprimé
         404:
           description: Le client n'a pas été trouvé
-          
+
   /api/Client/{id}/AdressePostale:
     parameters:
       - name: id
@@ -196,8 +196,232 @@ paths:
         404:
           description: Le client n'a pas été trouvé
 
+  /api/Client/{id}/Photo:
+    parameters:
+      - name: id
+        description: id du client
+        in: path
+        required: true
+        schema:
+         type: number
+         format: int64
+    get:
+      summary: Trouver toutes les photos d'un client donné
+      operationId: find-clients-photos
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Photo"
+        404:
+          description: Le client n'a pas été trouvé
+    post:
+      summary: Creer une nouvelle photo pour un client donné
+      operationId: new-client-photo
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/NewPhoto"
+      responses:
+        201:
+          description: Créée
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Photo"
+        404:
+          description: Le client n'a pas été trouvé
+
+##PHOTO
+  /api/Photo:
+    get:
+      summary: Trouver toutes les photos
+      #operationId: find-authors
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Photo"
+    post:
+      summary: Creer une nouvelle photo
+      operationId: nouvelle-photo
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Photo"
+      responses:
+        201:
+          description: Créé
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Photo"
+        400:
+          description: Dans le cas où la photo ne peut être validée
+  /api/Photo/{id}:
+    parameters:
+      - name: id
+        description: id de la photo
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver une photo
+      operationId: trouver-photo
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Photo"
+
+        404:
+          description: La photo n'a pas été trouvée 
+    put:
+      summary: Mettre à jour photo
+      description: La mise à jour sera faite si la photo est trouvée
+      operationId: put-photo
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Photo"
+      responses:
+        200:
+          description: Mis à jour
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Photo"
+        400:
+          description: Dans le cas où la photo ne peut être validée
+        404:
+          description: La photo n'a pas été trouvée
+    delete:
+      summary: Supprimer une photo (et toutes ses adresses)
+      operationId: delete-photo
+      responses:
+        204:
+          description: Supprimé
+        404:
+          description: Le photo n'a pas été trouvée
 
 
+###############################################################################################################
+
+##Album
+  /api/Album:
+    get:
+      summary: Trouver tous les albums
+      #operationId: find-authors
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Album"
+    post:
+      summary: Creer un nouvel album
+      operationId: nouvel-album
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Album"
+      responses:
+        201:
+          description: Créé
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Album"
+        400:
+          description: Dans le cas où l'album ne peut être validé
+
+  /api/Album/{id}:
+    parameters:
+      - name: id
+        description: id de l'album
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver un album
+      operationId: trouver-album
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Album"
+
+        404:
+          description: L'album n'a pas été trouvé 
+    put:
+      summary: Mettre à jour l'album
+      description: La mise à jour sera faite si l'album est trouvé
+      operationId: put-album
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Album"
+      responses:
+        200:
+          description: Mis à jour
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Album"
+        400:
+          description: Dans le cas où l'album ne peut être validé
+        404:
+          description: L'album n'a pas été trouvé
+    delete:
+      summary: Supprimer un album (et toutes ses pages)
+      operationId: delete-album
+      responses:
+        204:
+          description: Supprimé
+        404:
+          description: L'album n'a pas été trouvé
+
+
+################################################################################################################
   /api/AdressePostale:
     get:
       summary: Trouver toutes les adresses postales
@@ -349,6 +573,7 @@ components:
               type : string
           required:
             - id
+            - name
           example:
             id: 1
             name: Turc
@@ -419,7 +644,7 @@ components:
           type: integer
           format: int64
         adressePostale:
-          type: string
+          type: object
       required:
         - dateCommande
         - adressePostale
@@ -437,7 +662,7 @@ components:
               type: integer
               format: int64
             client:
-              type: string
+              type: object
               items:
                 $ref: "#/components/schemas/Commande"
               readOnly: true
@@ -451,5 +676,82 @@ components:
         client:
           - id: 1
             name: Wyss
+
+################################################################################################################
+
+    NewPhoto:
+      description: Une photo sans id (pour la création)
+      type: object
+      properties:
+        parametresRetouche:
+          type: string
+        description:
+          type: string
+        image:
+          type: object
+      required:
+        - description
+      example:
+        description: cette photo est composée de l'image "cochon.png" et "fleur.png"
+
+    Photo:
+      description: Une photo sans id (pour la mise à jour) et son client (pour la réponse)
+      allOf:
+        - $ref: "#/components/schemas/NewPhoto"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            client:
+              type: object
+              $ref: "#/components/schemas/Photo"
+              readOnly: true
+          required:
+            - id
+      example:
+        id: 1
+        description: cette photo est composée des images "soleil.png" et "fichier.png"
+
+        client:
+          - id: 1
+            name: Wyss
+############################################################################################################
+
+    NewAlbum:
+      description: Un album sans id (pour la création)
+      type: object
+      properties:
+        titre:
+          type: string
+        pagesAlbum:
+          description: les pages de l'album
+          type: array
+        photoDeCouverture:
+          type: object
+      required:
+        - titre
+      example:
+       titre : "L'album de Sicong"
+
+    Album:
+      description: Un album sans id (pour la mise à jour) et sa page (pour la réponse)
+      allOf:
+        - $ref: "#/components/schemas/NewAlbum"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            page:
+              type: object
+              items:
+                $ref: "#/components/schemas/Album"
+              readOnly: true
+          required:
+            - id
+      example:
+        id: 1
+
 
 
