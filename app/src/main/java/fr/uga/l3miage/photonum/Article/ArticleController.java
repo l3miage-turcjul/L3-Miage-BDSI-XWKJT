@@ -15,10 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import fr.uga.l3miage.photonum.Tirage.TirageDTO;
+
 import fr.uga.l3miage.photonum.data.domain.Article;
-import fr.uga.l3miage.photonum.data.domain.Impression;
-import fr.uga.l3miage.photonum.impression.ImpressionDTO;
+
 import fr.uga.l3miage.photonum.service.ArticleService;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import jakarta.validation.constraints.NotNull;

@@ -2,7 +2,6 @@ package fr.uga.l3miage.photonum.Album;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

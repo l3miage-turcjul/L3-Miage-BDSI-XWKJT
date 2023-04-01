@@ -3,7 +3,6 @@ package fr.uga.l3miage.photonum.data.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.lang.NonNull;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
