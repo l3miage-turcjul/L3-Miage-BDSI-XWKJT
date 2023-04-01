@@ -37,7 +37,7 @@ public class ClientController {
 
     @PostMapping("/Client")
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDTO newClient(@RequestBody ClientDTO client, @PathVariable("id") @NotNull Long clientId)
+    public ClientDTO newClient(@RequestBody ClientDTO client)
             throws EntityNotFoundException {
         try {
             Client entity = clientService.save(clientMapper.dtoToEntity(client));
