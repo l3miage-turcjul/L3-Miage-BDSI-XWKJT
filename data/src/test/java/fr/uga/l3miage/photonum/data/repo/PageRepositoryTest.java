@@ -9,8 +9,6 @@ import jakarta.persistence.EntityManager;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class PageRepositoryTest extends Base {
-    @Autowired
-    EntityManager entityManager;
 
     @Autowired
     PageRepository pageRepository;

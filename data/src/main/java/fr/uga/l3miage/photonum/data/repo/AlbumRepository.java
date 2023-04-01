@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class AlbumRepository implements CRUDRepository<Long,Album>{
+public class AlbumRepository implements CRUDRepository<Long, Album> {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -31,7 +31,6 @@ public class AlbumRepository implements CRUDRepository<Long,Album>{
         return entityManager.find(Album.class, id);
     }
 
-
     @Override
     public void delete(Album album) {
         entityManager.remove(album);
@@ -40,7 +39,11 @@ public class AlbumRepository implements CRUDRepository<Long,Album>{
     @Override
     public List<Album> all() {
         String query = "SELECT a FROM Album a";
-       return entityManager.createNamedQuery(query, Album.class).getResultList();
+        return entityManager.createNamedQuery(query, Album.class).getResultList();
     }
-    
+
+    public List<Album> findByContainingTitle(String title) {
+        return entityManager.createNamedQuery("find-adresse-by-country", Album.class)
+                .setParameter("Title", "%" + title + "%").getResultList();
+    }
 }

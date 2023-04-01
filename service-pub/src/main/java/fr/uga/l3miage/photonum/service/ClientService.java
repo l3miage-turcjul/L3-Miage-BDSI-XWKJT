@@ -7,6 +7,8 @@ import fr.uga.l3miage.photonum.service.base.BaseService;
 
 public interface ClientService extends BaseService<Client, Long> {
 
+    Client save(Client cli) throws EntityNotFoundException;
+
     Client get(Long id) throws EntityNotFoundException;
 
     Client update(Client cli) throws EntityNotFoundException;

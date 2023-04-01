@@ -19,4 +19,6 @@ public interface AlbumService extends BaseService<Album, Long> {
 
     public Collection<Album> list();
 
+    public Collection<Album> findBytitle(String title);
+
 }
