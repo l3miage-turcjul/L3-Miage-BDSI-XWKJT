@@ -1,7 +1,7 @@
 package fr.uga.l3miage.photonum.Client;
 
 import java.util.Collection;
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import fr.uga.l3miage.photonum.Page.PageMapper;
-import fr.uga.l3miage.photonum.Photo.PhotoDTO;
 import fr.uga.l3miage.photonum.data.domain.Client;
-import fr.uga.l3miage.photonum.service.CadreService;
-import fr.uga.l3miage.photonum.service.CalendrierService;
 import fr.uga.l3miage.photonum.service.ClientService;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -39,7 +35,7 @@ public class ClientController {
         this.clientMapper = clientMapper;
     }
 
-    @PostMapping("/Client/{id}")
+    @PostMapping("/Client")
     @ResponseStatus(HttpStatus.CREATED)
     public ClientDTO newClient(@RequestBody ClientDTO client, @PathVariable("id") @NotNull Long clientId)
             throws EntityNotFoundException {

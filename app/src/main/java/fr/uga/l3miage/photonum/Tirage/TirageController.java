@@ -46,7 +46,7 @@ public class TirageController {
 
     }
 
-    @PostMapping("/Impression/{id}/Tirage")
+    @PostMapping("/Article/{id}/Tirage")
     @ResponseStatus(HttpStatus.CREATED)
     public TirageDTO newTirage(@PathVariable("id") @NotNull Long ImpressionId,
             @RequestBody @Valid TirageDTO tirage) {

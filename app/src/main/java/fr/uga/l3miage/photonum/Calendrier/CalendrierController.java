@@ -24,6 +24,8 @@ import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
+@RestController
+@RequestMapping(value = "/api/v1", produces = "application/json")
 public class CalendrierController {
 
     private final CalendrierService calendrierService;
