@@ -478,7 +478,61 @@ paths:
           description: L'adresse postale n'a pas été trouvée
 
 
-#Commande
+#Article
+
+  /api/Article:
+    get:
+      summary: Trouver tous les articles
+      operationId: get-orders
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Article"
+  /api/Article/{id}:
+    parameters:
+      - name: id
+        description: id de l'article
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver un article
+      operationId: get-order
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                  $ref: "#/components/schemas/Article"
+        404:
+          description: L'article n'a pas été trouvée
+    put:
+      summary: Mettre à jour un article
+      operationId: update-order
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Article"
+      responses:
+        404:
+          description: L'article n'a pas été trouvée
+    delete:
+      summary: Supprimer un article
+      operationId: delete-order
+      responses:
+        204:
+          description: Suppriméee
+        404:
+          description: L'article n'a pas été trouvée
+
+  #Commande
 
   /api/Commande:
     get:
@@ -509,7 +563,7 @@ paths:
           content:
             'application/json':
               schema:
-                  $ref: "#/components/schemas/Commande"
+                $ref: "#/components/schemas/Commande"
         404:
           description: La commande n'a pas été trouvée
     put:
@@ -531,7 +585,34 @@ paths:
           description: Suppriméee
         404:
           description: La commande n'a pas été trouvée
+  /api/Commande/{id}/Article:
+    parameters:
+      - name: id
+        description: id de la commande
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    post:
+      summary: Creer un nouveau article pour une commande donnée
+      operationId: new-commande-article
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/NewArticle"
+      responses:
+        201:
+          description: Créée
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Article"
+        404:
+          description: La commande n'a pas été trouvée
 
+###############################################################################################################
 components:
   schemas:
     BaseClient:
@@ -677,6 +758,7 @@ components:
           - id: 1
             name: Wyss
 
+
 ################################################################################################################
 
     NewPhoto:
@@ -752,6 +834,48 @@ components:
             - id
       example:
         id: 1
+
+    NewArticle:
+      description: Un article sans id (pour la création)
+      type: object
+      properties:
+        format:
+            type: string
+        quantite:
+            type: integer
+            format: int64
+      required:
+          - format
+          - quantite
+      example:
+          format: 10X15MAT
+          quantite: 3
+
+    Article:
+        description: Un article avec id et prix
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+          prix:
+            type: integer
+            format: int64
+          format:
+            type: string
+          quantite:
+            type: integer
+            format: int64
+        required:
+          - id
+          - prix
+          - format
+          - quantite
+        example:
+          id: 1
+          prix: 10.5
+          format: 10X15MAT
+          quantite: 3
 
 
 
