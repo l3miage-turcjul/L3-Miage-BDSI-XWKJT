@@ -6,11 +6,9 @@ import jakarta.persistence.*;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
-@NamedQuery(
-    name = "toutes-les-adresses",
-    query = "SELECT ad FROM AdressePostale ad"
-    )
-    
+
+@NamedQuery(name = "toutes-les-adresses", query = "SELECT ad FROM AdressePostale ad")
+@NamedQuery(name = "find-adresse-by-country", query = "SELECT ad from AdressePostale ad where ad.pays = :Pays")
 @Entity
 public class AdressePostale {
 
@@ -31,7 +29,7 @@ public class AdressePostale {
     private String pays;
 
     @Nullable
-    @ManyToMany(mappedBy="adresses")
+    @ManyToMany(mappedBy = "adresses")
     private SortedSet<Client> clients;
 
     public AdressePostale(String adresse, String codePostal, String ville, String pays) {

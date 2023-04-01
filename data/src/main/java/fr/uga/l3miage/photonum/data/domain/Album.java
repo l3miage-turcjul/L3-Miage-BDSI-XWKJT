@@ -7,6 +7,7 @@ import java.util.*;
 
 @Entity
 @DiscriminatorValue("Album")
+@NamedQuery(name = "find-adresse-by-title", query = "SELECT al from Album al where al.title = :Title")
 public class Album extends Impression {
 
 	@Column(nullable = false)

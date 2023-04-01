@@ -77,4 +77,9 @@ public class AlbumServiceImpl implements AlbumService {
         Article article = articleService.get(id);
         article.setImpression(album);
     }
+
+    @Override
+    public Collection<Album> findBytitle(String title) {
+        return albumRepository.findByContainingTitle(title);
+    }
 }
