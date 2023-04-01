@@ -18,7 +18,7 @@ info:
 servers:
   - url: "http://localhost:8080"
 paths:
-  /api/Client:
+  /api/v1/Client:
     get:
       summary: Trouver tous les clients
       #operationId: find-authors
@@ -53,7 +53,7 @@ paths:
                 $ref: "#/components/schemas/Client"
         400:
           description: Dans le cas où le client ne peut être validé
-  /api/Client/{id}:
+  /api/v1/Client/{id}:
     parameters:
       - name: id
         description: id du client
@@ -104,7 +104,7 @@ paths:
         404:
           description: Le client n'a pas été trouvé
 
-  /api/Client/{id}/AdressePostale:
+  /api/v1/Client/{id}/AdressePostale:
     parameters:
       - name: id
         description: id du client
@@ -150,7 +150,7 @@ paths:
         404:
           description: Le client n'a pas été trouvé
 
-  /api/Client/{id}/Commande:
+  /api/v1/Client/{id}/Commande:
     parameters:
       - name: id
         description: id du client
@@ -196,7 +196,7 @@ paths:
         404:
           description: Le client n'a pas été trouvé
 
-  /api/Client/{id}/Photo:
+  /api/v1/Client/{id}/Photo:
     parameters:
       - name: id
         description: id du client
@@ -242,8 +242,39 @@ paths:
         404:
           description: Le client n'a pas été trouvé
 
+
+  /api/v1/Client/{id}/Image:
+    parameters:
+      - name: id
+        description: id du client
+        in: path
+        required: true
+        schema:
+         type: number
+         format: int64
+    get:
+      summary: Trouver toutes les images d'un client donné
+      operationId: find-all-images-of-client
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Image"
+        404:
+          description: L'image n'a pas été trouvée 
+        
+###############################################################################################################
 ##PHOTO
-  /api/Photo:
+  /api/v1/Photo:
     get:
       summary: Trouver toutes les photos
       #operationId: find-authors
@@ -278,7 +309,7 @@ paths:
                 $ref: "#/components/schemas/Photo"
         400:
           description: Dans le cas où la photo ne peut être validée
-  /api/Photo/{id}:
+  /api/v1/Photo/{id}:
     parameters:
       - name: id
         description: id de la photo
@@ -331,9 +362,124 @@ paths:
 
 
 ###############################################################################################################
+  /api/v1/Calendrier:
+    get:
+      summary: Trouver tous les calendriers
+      #operationId: find-authors
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Calendrier"
+    post:
+      summary: Creer un nouveau calendrier
+      operationId: nouveau-calendrier
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Calendrier"
+      responses:
+        201:
+          description: Créé
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Calendrier"
+        400:
+          description: Dans le cas où le calendrier ne peut être validé
 
+  /api/v1/Calendrier/{id}:
+    parameters:
+      - name: id
+        description: id du calendrier
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver un calendrier
+      operationId: trouver-calendrier
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Calendrier"
+
+        404:
+          description: Le calendrier n'a pas été trouvé
+    put:
+      summary: Mettre à jour le calendrier
+      description: La mise à jour sera faite si le calendrier est trouvé
+      operationId: update-calendrier
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Calendrier"
+      responses:
+        200:
+          description: Mis à jour
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Calendrier"
+        400:
+          description: Dans le cas où le calendrier ne peut être validé
+        404:
+          description: Le calendrier n'a pas été trouvé
+    delete:
+      summary: Supprimer un caleendrier (avec toutes ses pages)
+      operationId: delete-calendrier
+      responses:
+        204:
+          description: Supprimé
+        404:
+          description: Le calendrier n'a pas été trouvé
+
+  /api/v1/Calendrier/{id}/Page:
+    parameters:
+      - name: id
+        description: id du calendrier
+        in: path
+        required: true
+        schema:
+         type: number
+         format: int64
+    get:
+      summary: Trouver toutes les pages d'un calendrier d'id id
+      operationId: find-all-pages-of-calendar
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Page"
+        404:
+          description: Le calendrier n'a pas été trouvé
+##############################################################################################################
 ##Album
-  /api/Album:
+  /api/v1/Album:
     get:
       summary: Trouver tous les albums
       #operationId: find-authors
@@ -369,7 +515,7 @@ paths:
         400:
           description: Dans le cas où l'album ne peut être validé
 
-  /api/Album/{id}:
+  /api/v1/Album/{id}:
     parameters:
       - name: id
         description: id de l'album
@@ -420,9 +566,36 @@ paths:
         404:
           description: L'album n'a pas été trouvé
 
-
+  /api/v1/Album/{id}/Page:
+    parameters:
+      - name: id
+        description: id de l'album
+        in: path
+        required: true
+        schema:
+         type: number
+         format: int64
+    get:
+      summary: Trouver toutes les pages de l'album d'id id
+      operationId: find-all-pages-of-album
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Page"
+        404:
+          description: L'album n'a pas été trouvé n'a pas été trouvé
 ################################################################################################################
-  /api/AdressePostale:
+  /api/v1/AdressePostale:
     get:
       summary: Trouver toutes les adresses postales
       operationId: get-adress
@@ -434,7 +607,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/AdressePostale"
 
-  /api/AdressePostale/{id}:
+  /api/v1/AdressePostale/{id}:
     parameters:
       - name: id
         description: id de l'adresse postale
@@ -480,7 +653,7 @@ paths:
 
 #Article
 
-  /api/Article:
+  /api/v1/Article:
     get:
       summary: Trouver tous les articles
       operationId: get-orders
@@ -491,7 +664,7 @@ paths:
             'application/json':
               schema:
                 $ref: "#/components/schemas/Article"
-  /api/Article/{id}:
+  /api/v1/Article/{id}:
     parameters:
       - name: id
         description: id de l'article
@@ -511,7 +684,7 @@ paths:
               schema:
                   $ref: "#/components/schemas/Article"
         404:
-          description: L'article n'a pas été trouvée
+          description: L'article n'a pas été trouvé
     put:
       summary: Mettre à jour un article
       operationId: update-order
@@ -532,9 +705,148 @@ paths:
         404:
           description: L'article n'a pas été trouvée
 
+  /api/v1/Article/{id}/Tirage:
+    parameters:
+      - name: id
+        description: id de l'article
+        in: path
+        required: true
+        schema:
+         type: number
+         format: int64
+    get:
+      summary: Trouver tous les tirages d'un article
+      operationId: find-all-tirages-of-article
+      parameters:
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tirage"
+        404:
+          description: Le tirage n'a pas été trouvé n'a pas été trouvé
+##############################################################################################################
+  /api/v1/Tirage:
+    get:
+      summary: Trouver tous les tirages
+      operationId: get-tirages
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Tirage"
+
+  /api/v1/Tirage/{id}:
+    parameters:
+      - name: id
+        description: id du tirage
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver un tirage
+      operationId: get-tirage
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                  $ref: "#/components/schemas/Tirage"
+        404:
+          description: Le tirage n'a pas été trouvé
+    put:
+      summary: Mettre à jour un tirage
+      operationId: update-tirage
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Tirage"
+      responses:
+        404:
+          description: Le tirage n'a pas été trouvée
+    delete:
+      summary: Supprimer un tirage
+      operationId: delete-tirage
+      responses:
+        204:
+          description: Suppriméee
+        404:
+          description: Le tirage n'a pas été trouvé
+
+
+#############################################################################################################
+
+  /api/v1/Image:
+    get:
+      summary: Trouver toutes les images
+      operationId: get-images
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Image"
+
+  /api/v1/Image/{id}:
+    parameters:
+      - name: id
+        description: id de l'image
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver une image
+      operationId: get-image
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                  $ref: "#/components/schemas/Image"
+        404:
+          description: Le tirage n'a pas été trouvé
+    put:
+      summary: Mettre à jour une image
+      operationId: update-image
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Image"
+      responses:
+        404:
+          description: L'image n'a pas été trouvée
+    delete:
+      summary: Supprimer une image
+      operationId: delete-image
+      responses:
+        204:
+          description: Supprimée
+        404:
+          description: L'image n'a pas été trouvée
+#############################################################################################################
+
   #Commande
 
-  /api/Commande:
+  /api/v1/Commande:
     get:
       summary: Trouver toutes les commandes
       operationId: get-orders
@@ -545,7 +857,7 @@ paths:
             'application/json':
               schema:
                 $ref: "#/components/schemas/Commande"
-  /api/Commande/{id}:
+  /api/v1/Commande/{id}:
     parameters:
       - name: id
         description: id de commande
@@ -585,7 +897,7 @@ paths:
           description: Suppriméee
         404:
           description: La commande n'a pas été trouvée
-  /api/Commande/{id}/Article:
+  /api/v1/Commande/{id}/Article:
     parameters:
       - name: id
         description: id de la commande
@@ -612,6 +924,84 @@ paths:
         404:
           description: La commande n'a pas été trouvée
 
+
+  #Cadre
+
+  /api/v1/Cadre:
+    get:
+      summary: Trouver tous les cadres
+      operationId: get-cadres
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/NewCadre"
+                
+  /api/v1/Cadre/{id}:
+    parameters:
+      - name: id
+        description: id du cadre
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver un cadre
+      operationId: get-cadre
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Cadre"
+        404:
+          description: Le cadre n'a pas été trouvé
+    put:
+      summary: Mettre à jour un cadre
+      operationId: update-cadre
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Cadre"
+      responses:
+        404:
+          description: Le cadre n'a pas été trouvé
+    delete:
+      summary: Supprimer un cadre
+      operationId: delete-cadre
+      responses:
+        204:
+          description: Supprimé
+        404:
+          description: Le cadre n'a pas été trouvé
+  
+  /Cadre/{id}/Photos:
+    parameters:
+      - name: id
+        description: id du cadre
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver les photos d'un cadre
+      operationId: get-cadre-photos
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Photo"
+        404:
+          description: Le cadre n'a pas été trouvé
+        
 ###############################################################################################################
 components:
   schemas:
@@ -684,7 +1074,7 @@ components:
         ville: Saint-Martin d'Hères
         pays: France
     AdressePostale:
-      description: Une adresse postale sans id (pour la mise à jour) et clients (juste la reponse)
+      description: Une adresse postale avec id (pour la mise à jour) et clients (juste la reponse)
       allOf:
         - $ref: "#/components/schemas/NewAdressePostale"
         - type: object
@@ -734,7 +1124,7 @@ components:
         adressePostale: 60 Rue de la chimie
 
     Commande:
-      description: Une commande sans id (pour la mise à jour) et son client (pour la réponse)
+      description: Une commande avec id (pour la mise à jour) et son client (pour la réponse)
       allOf:
         - $ref: "#/components/schemas/NewCommande"
         - type: object
@@ -745,7 +1135,7 @@ components:
             client:
               type: object
               items:
-                $ref: "#/components/schemas/Commande"
+                $ref: "#/components/schemas/Client"
               readOnly: true
           required:
             - id
@@ -777,7 +1167,7 @@ components:
         description: cette photo est composée de l'image "cochon.png" et "fleur.png"
 
     Photo:
-      description: Une photo sans id (pour la mise à jour) et son client (pour la réponse)
+      description: Une photo avec id (pour la mise à jour) et son client (pour la réponse)
       allOf:
         - $ref: "#/components/schemas/NewPhoto"
         - type: object
@@ -787,7 +1177,7 @@ components:
               format: int64
             client:
               type: object
-              $ref: "#/components/schemas/Photo"
+              $ref: "#/components/schemas/Client"
               readOnly: true
           required:
             - id
@@ -817,7 +1207,7 @@ components:
        titre : "L'album de Sicong"
 
     Album:
-      description: Un album sans id (pour la mise à jour) et sa page (pour la réponse)
+      description: Un album avec id (pour la mise à jour) et sa page (pour la réponse)
       allOf:
         - $ref: "#/components/schemas/NewAlbum"
         - type: object
@@ -828,13 +1218,13 @@ components:
             page:
               type: object
               items:
-                $ref: "#/components/schemas/Album"
+                $ref: "#/components/schemas/Page"
               readOnly: true
           required:
             - id
       example:
         id: 1
-
+####################################################################
     NewArticle:
       description: Un article sans id (pour la création)
       type: object
@@ -877,5 +1267,163 @@ components:
           format: 10X15MAT
           quantite: 3
 
+#################################################################################################################
 
+    NewCalendrier:
+      description: Un calendrier sans id (pour la création)
+      type: object
+      properties:
+        pages:
+          type: object
+          $ref: "#/components/schemas/Page"
+      required:
+        - pages
+        
+      example:
+        description: ce calendrier est composée de 12 pages
 
+    Calendrier:
+      description: Un calendrier avec id (pour la mise à jour)
+      allOf:
+        - $ref: "#/components/schemas/NewCalendrier"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+          required:
+            - id
+      example:
+        id: 1
+        pages:
+          - id: 1
+            name: Wyss
+################################################################################################################
+    NewPage:
+      description: Une page sans id (pour la création)
+      type: object
+      properties:
+        miseEnPage:
+          type: string
+        numeroPage:
+          type: string
+      example:
+
+    Page:
+      description: Une page avec id (pour la mise à jour)
+      allOf:
+        - $ref: "#/components/schemas/NewPage"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            photos:
+              type: array
+              $ref: "#/components/schemas/Photo"
+              readOnly: true
+          required:
+            - id
+      example:
+        id: 1
+        photos:
+          - id: 1
+            description: cette photo est composée de l'image "bob.png"
+
+###############################################################
+    NewCadre:
+      description: Un cadre sans id (pour la création)
+      type: object
+      properties:
+        miseEnPage:
+          type: string
+        photos:
+          type: array
+          $ref: "#/components/schemas/Photo"
+      required:
+        - photos
+      example:
+        miseEnPage: zoom*2
+        photos:
+          - id: 1
+            description: cette photo est composée de l'image "bob.png"
+
+    Cadre:
+      description: Un cadre avec id (pour la mise à jour)
+      allOf:
+        - $ref: "#/components/schemas/NewCadre"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+          required:
+            - id
+################################################################################
+
+    NewTirage:
+      description: Un tirage sans id (pour la création)
+      type: object
+      properties:
+        photos:
+          type: object
+          $ref: "#/components/schemas/Photo"
+      required:
+        - photos
+      example:
+        photos:
+          - id: 1
+            description: cette photo est composée de l'image "bob.png"
+
+    Tirage:
+      description: Un tirage avec id (pour la mise à jour)
+      allOf:
+        - $ref: "#/components/schemas/NewTirage"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+          required:
+            - id
+      example:
+        id: 1
+        photos:
+          - id: 1
+            description: cette photo est composée de l'image "bob.png" 
+            
+##########################################################################################
+
+    NewImage:
+      description: Une image sans id (pour la création)
+      type: object
+      properties:
+        cheminAcces:
+          type: string
+        InfoPDV:
+          type: string
+        proprietaire:
+          type: object
+          $ref: "#/components/schemas/Client"
+      required:
+        - cheminAcces
+
+    Image:
+      description: Une image avec id (pour la mise à jour)
+      allOf:
+        - $ref: "#/components/schemas/NewImage"
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+          required:
+            - id
+      example:
+        id: 1
+        cheminAcces: 'C:\Users\Public\Pictures\Sample Pictures\Koala.jpg'
+        InfoPDV: 'Device : Huawei Ane-LX1, OS : Android 9, App : PhotoApp'
+        proprietaire:
+          - id: 1
+            name: Wyss
+      

@@ -3,14 +3,10 @@ package fr.uga.l3miage.photonum.Cadre;
 import java.util.Collection;
 import java.util.List;
 
+import fr.uga.l3miage.photonum.data.domain.Cadre;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import fr.uga.l3miage.photonum.Photo.PhotoDTO;
@@ -49,42 +45,40 @@ public class CadreController {
         }
     }
 
-    /*
-     * @PostMapping("/Article/{id}/Cadre")
-     * 
-     * @ResponseStatus(HttpStatus.CREATED)
-     * public CadreDTO newCadre(@PathVariable("id") Long articleId, @RequestBody
-     * CadreDTO cadre) {
-     * try {
-     * Cadre cadreEntity = cadreService.save(articleId,
-     * cadreMapper.dtoToEntity(cadre));
-     * return cadreMapper.entityToDTO(cadreEntity);
-     * } catch (EntityNotFoundException e) {
-     * throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
-     * } catch (IllegalArgumentException e) {
-     * throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
-     * }
-     * }
-     */
 
-    /*
-     * @PutMapping("/Cadre/{id}")
-     * public CadreDTO updateCadre(@RequestBody CadreDTO
-     * cadreDTO, @PathVariable("id") Long id){
-     * try {
-     * if (cadreDTO.id().equals(id)) {
-     * Cadre cadreEntity = cadreMapper.dtoToEntity(cadreDTO);
-     * cadreEntity.setAuthors(storedAuthors);
-     * var updated = bookService.update(bookEntity);
-     * return booksMapper.entityToDTO(updated);
-     * }
-     * throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-     * } catch (EntityNotFoundException e) {
-     * throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
-     * } catch (IllegalArgumentException e) {
-     * throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
-     * }
-     */
+      @PostMapping("/Article/{id}/Cadre")
+      @ResponseStatus(HttpStatus.CREATED)
+      public CadreDTO newCadre(@PathVariable("id") Long articleId, @RequestBody
+      CadreDTO cadre) {
+      try {
+      Cadre cadreEntity = cadreService.save(articleId,
+      cadreMapper.dtoToEntity(cadre));
+      return cadreMapper.entityToDTO(cadreEntity);
+      } catch (EntityNotFoundException e) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+      } catch (IllegalArgumentException e) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
+      }
+      }
+
+
+
+      /*@PutMapping("/Cadre/{id}")
+      public CadreDTO updateCadre(@RequestBody CadreDTO
+      cadreDTO, @PathVariable("id") Long id){
+      try {
+      if (cadreDTO.id().equals(id)) {
+      Cadre cadreEntity = cadreMapper.dtoToEntity(cadreDTO);
+      cadreEntity.setAuthors(storedAuthors);
+      var updated = bookService.update(bookEntity);
+      return booksMapper.entityToDTO(updated);
+      }
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+      } catch (EntityNotFoundException e) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+      } catch (IllegalArgumentException e) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
+      }*/
 
     @DeleteMapping("/Cadre/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -96,7 +90,7 @@ public class CadreController {
         }
     }
 
-    @GetMapping("/Cadre/{id}/Photo")
+    @GetMapping("/Cadre/{id}/Photos")
     public Collection<PhotoDTO> photos(@PathVariable("id") @NotNull Long id) {
         try {
             var cadre = cadreService.get(id);
