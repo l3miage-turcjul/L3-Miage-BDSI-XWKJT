@@ -6,7 +6,6 @@ import fr.uga.l3miage.photonum.service.base.BaseService;
 import java.util.Collection;
 
 public interface TirageService extends BaseService<Tirage, Long> {
-    Tirage save(Tirage tirage);
 
     Tirage save(Long id, Tirage tirage) throws EntityNotFoundException;
 

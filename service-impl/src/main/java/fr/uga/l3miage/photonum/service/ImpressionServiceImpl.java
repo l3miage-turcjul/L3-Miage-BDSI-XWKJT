@@ -19,12 +19,6 @@ public class ImpressionServiceImpl implements ImpressionService {
         this.impressionRepository = impressionRepository;
     }
 
-
-    @Override
-    public Impression save(Impression impression) {
-        return impressionRepository.save(impression);
-    }
-
     @Override
     public Impression get(Long id) throws EntityNotFoundException {
         return impressionRepository.get(id);
@@ -41,11 +35,11 @@ public class ImpressionServiceImpl implements ImpressionService {
     }
 
     @Override
-    public void delete(Long id) throws EntityNotFoundException{
+    public void delete(Long id) throws EntityNotFoundException {
         Impression impression = get(id);
-        if(impression == null){
+        if (impression == null) {
             throw new EntityNotFoundException("impression with id=%d not found".formatted(id));
         }
         impressionRepository.delete(impression);
-    }    
+    }
 }

@@ -24,11 +24,6 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Image save(Image im) throws EntityNotFoundException {
-        return imageRepository.save(im);
-    }
-
-    @Override
     public Image save(Long id, Image im) throws EntityNotFoundException {
         imageRepository.save(im);
         bind(id, im);

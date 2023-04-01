@@ -33,11 +33,6 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public Page save(Page page) {
-        return pageRepository.save(page);
-    }
-
-    @Override
     public Page save(Long id, Page page) throws EntityNotFoundException {
         pageRepository.save(page);
         bind(id, page);

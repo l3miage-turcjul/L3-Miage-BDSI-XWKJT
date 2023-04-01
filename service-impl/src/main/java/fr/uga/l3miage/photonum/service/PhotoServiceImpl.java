@@ -22,14 +22,9 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public Photo save(Photo cli) throws EntityNotFoundException {
-        return photoRepository.save(cli);
-    }
-
-    @Override
     public Photo save(Long id, Photo cli) throws EntityNotFoundException {
         photoRepository.save(cli);
-        bind(id,cli);
+        bind(id, cli);
         return cli;
     }
 
@@ -57,7 +52,7 @@ public class PhotoServiceImpl implements PhotoService {
         return photoRepository.all();
     }
 
-    public void bind(Long id, Photo photo) throws EntityNotFoundException{
+    public void bind(Long id, Photo photo) throws EntityNotFoundException {
         Image image = imageService.get(id);
         image.addPhoto(photo);
     }

@@ -21,11 +21,6 @@ public class TirageServiceImpl implements TirageService {
     }
 
     @Override
-    public Tirage save(Tirage tirage) {
-        return tirageRepository.save(tirage);
-    }
-
-    @Override
     public Tirage save(Long id, Tirage tirage) throws EntityNotFoundException {
         tirageRepository.save(tirage);
         bind(id, tirage);
