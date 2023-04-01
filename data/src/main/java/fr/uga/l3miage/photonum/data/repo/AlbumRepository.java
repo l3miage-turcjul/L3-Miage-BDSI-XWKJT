@@ -43,7 +43,9 @@ public class AlbumRepository implements CRUDRepository<Long, Album> {
     }
 
     public List<Album> findByContainingTitle(String title) {
-        return entityManager.createNamedQuery("find-adresse-by-country", Album.class)
+        String query = "SELECT al from Album al where al.title = :Title";
+        return entityManager.createNamedQuery(query, Album.class)
                 .setParameter("Title", "%" + title + "%").getResultList();
     }
+
 }

@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 @RestController
+@Transactional
 @RequestMapping(value = "/api/v1", produces = "application/json")
 public class ClientController {
 
@@ -35,10 +38,9 @@ public class ClientController {
         this.clientMapper = clientMapper;
     }
 
-    @PostMapping("/Client")
+    @PostMapping(value = "/Client", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ClientDTO newClient(@RequestBody ClientDTO client)
-            throws EntityNotFoundException {
+    public ClientDTO newClient(@RequestBody @Valid ClientDTO client) throws EntityNotFoundException {
         try {
             Client entity = clientService.save(clientMapper.dtoToEntity(client));
             return clientMapper.entityToDTO(entity);
