@@ -7,6 +7,7 @@ import fr.uga.l3miage.photonum.data.repo.PhotoRepository;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,7 @@ public class PhotoServiceImpl implements PhotoService {
     private final ImageService imageService;
 
     @Autowired
-    public PhotoServiceImpl(PhotoRepository photoRepository, ImageService imageService) {
+    public PhotoServiceImpl(@Lazy PhotoRepository photoRepository, @Lazy ImageService imageService) {
         this.photoRepository = photoRepository;
         this.imageService = imageService;
     }

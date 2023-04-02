@@ -18,7 +18,7 @@ public record ClientDTO (
     @NotBlank
     String nom,
 
-    Collection<String> prenoms,
+    String prenoms,
 
     @NotBlank
     String motDePasse,

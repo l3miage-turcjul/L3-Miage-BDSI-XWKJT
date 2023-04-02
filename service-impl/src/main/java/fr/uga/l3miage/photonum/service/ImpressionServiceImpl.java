@@ -4,6 +4,7 @@ import fr.uga.l3miage.photonum.data.domain.Impression;
 import fr.uga.l3miage.photonum.data.repo.ImpressionRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -15,7 +16,7 @@ public class ImpressionServiceImpl implements ImpressionService {
     private final ImpressionRepository impressionRepository;
 
     @Autowired
-    public ImpressionServiceImpl(ImpressionRepository impressionRepository) {
+    public ImpressionServiceImpl(@Lazy ImpressionRepository impressionRepository) {
         this.impressionRepository = impressionRepository;
     }
 

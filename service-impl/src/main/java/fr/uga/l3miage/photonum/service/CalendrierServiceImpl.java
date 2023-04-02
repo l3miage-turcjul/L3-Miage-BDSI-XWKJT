@@ -6,6 +6,7 @@ import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.data.repo.CalendrierRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,7 +19,7 @@ public class CalendrierServiceImpl implements CalendrierService {
     private final ArticleService articleService;
 
     @Autowired
-    public CalendrierServiceImpl(CalendrierRepository calendrierRepository, ArticleService articleService) {
+    public CalendrierServiceImpl(@Lazy CalendrierRepository calendrierRepository, @Lazy ArticleService articleService) {
         this.calendrierRepository = calendrierRepository;
         this.articleService = articleService;
     }

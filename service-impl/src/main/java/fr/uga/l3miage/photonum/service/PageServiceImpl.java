@@ -8,6 +8,8 @@ import fr.uga.l3miage.photonum.data.domain.Calendrier;
 import fr.uga.l3miage.photonum.data.domain.Page;
 import fr.uga.l3miage.photonum.data.domain.Photo;
 import fr.uga.l3miage.photonum.data.repo.PageRepository;
+
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,8 +20,8 @@ public class PageServiceImpl implements PageService {
     private final AlbumService albumService;
     private final CalendrierService calendrierService;
 
-    public PageServiceImpl(PageRepository pageRepository, PhotoService photoService,
-            CalendrierService calendrierService, AlbumService albumService) {
+    public PageServiceImpl(@Lazy PageRepository pageRepository, @Lazy PhotoService photoService,
+    @Lazy CalendrierService calendrierService, @Lazy AlbumService albumService) {
         this.pageRepository = pageRepository;
         this.photoService = photoService;
         this.calendrierService = calendrierService;

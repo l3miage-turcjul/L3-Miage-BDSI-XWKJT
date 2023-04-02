@@ -7,6 +7,7 @@ import fr.uga.l3miage.photonum.data.repo.AdressePostaleRepository;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,16 +17,16 @@ public class AdressePostaleServiceImpl implements AdressePostaleService {
     private final ClientService clientService;
 
     @Autowired
-    public AdressePostaleServiceImpl(AdressePostaleRepository adressePostaleRepository, ClientService clientService) {
+    public AdressePostaleServiceImpl(@Lazy AdressePostaleRepository adressePostaleRepository, @Lazy ClientService clientService) {
         this.adressePostaleRepository = adressePostaleRepository;
         this.clientService = clientService;
     }
 
     @Override
-    public AdressePostale save(Long clientId, AdressePostale adr) throws EntityNotFoundException {
-        adressePostaleRepository.save(adr);
-        bind(clientId, adr);
-        return adr;
+    public AdressePostale save(Long clientId, AdressePostale adressePostale) throws EntityNotFoundException {
+        adressePostaleRepository.save(adressePostale);
+        bind(clientId, adressePostale);
+        return adressePostale;
     }
 
     @Override

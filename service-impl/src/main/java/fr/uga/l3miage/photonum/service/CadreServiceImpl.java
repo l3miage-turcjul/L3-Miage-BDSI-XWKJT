@@ -5,6 +5,7 @@ import fr.uga.l3miage.photonum.data.domain.Cadre;
 import fr.uga.l3miage.photonum.data.repo.CadreRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -17,7 +18,7 @@ public class CadreServiceImpl implements CadreService {
     private final ArticleService articleService;
 
     @Autowired
-    public CadreServiceImpl(CadreRepository cadreRepository, ArticleService articleService) {
+    public CadreServiceImpl(@Lazy CadreRepository cadreRepository, @Lazy ArticleService articleService) {
         this.cadreRepository = cadreRepository;
         this.articleService = articleService;
     }

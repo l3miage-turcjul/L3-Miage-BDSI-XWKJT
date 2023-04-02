@@ -10,7 +10,7 @@ import java.util.TreeSet;
 @NamedQuery(name = "toutes-les-adresses", query = "SELECT ad FROM AdressePostale ad")
 @NamedQuery(name = "find-adresse-by-country", query = "SELECT ad from AdressePostale ad where ad.pays = :Pays")
 @Entity
-public class AdressePostale {
+public class AdressePostale implements Comparable<AdressePostale>{
 
     @Id
     @GeneratedValue
@@ -49,7 +49,7 @@ public class AdressePostale {
         return adresse;
     }
 
-    public String getCodePostale() {
+    public String getCodePostal() {
         return codePostal;
     }
 
@@ -70,11 +70,15 @@ public class AdressePostale {
     }
 
     // SETTERS
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
 
-    public void setCodePostale(String codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 
@@ -86,9 +90,6 @@ public class AdressePostale {
         this.pays = pays;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -104,5 +105,13 @@ public class AdressePostale {
     @Override
     public int hashCode() {
         return Objects.hash(adresse, codePostal, ville, pays);
+    }
+
+    @Override
+    public int compareTo(AdressePostale adresse) {
+        if (getCodePostal() == null || adresse.getCodePostal() == null) {
+            return 0; 
+        }
+        return getCodePostal().compareTo(adresse.getCodePostal());
     }
 }

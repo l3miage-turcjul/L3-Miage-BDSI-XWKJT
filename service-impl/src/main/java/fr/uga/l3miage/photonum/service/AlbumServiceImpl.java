@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import java.util.Collection;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +23,7 @@ public class AlbumServiceImpl implements AlbumService {
     private final ArticleService articleService;
 
     @Autowired
-    public AlbumServiceImpl(AlbumRepository albumRepository, PageService pageService, PhotoService photoService,
+    public AlbumServiceImpl(@Lazy AlbumRepository albumRepository, @Lazy PageService pageService, @Lazy PhotoService photoService,
             ArticleService articleService) {
         this.albumRepository = albumRepository;
         this.pageService = pageService;

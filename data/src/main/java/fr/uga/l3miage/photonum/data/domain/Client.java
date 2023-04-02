@@ -17,8 +17,8 @@ public class Client {
     @Column(nullable = false)
     private String nom;
 
-    @ElementCollection
-    private LinkedHashSet<String> prenoms;
+    @Column
+    private String prenom;
 
     @Column(nullable = false)
     private String motDePasse;
@@ -39,7 +39,7 @@ public class Client {
     @OneToMany
     private SortedSet<Commande> commandes;
 
-    public Client(String nom, String prenom[], AdressePostale adresse, String email, String motDePasse) {
+    public Client(String nom, String prenom, AdressePostale adresse, String email, String motDePasse) {
         setNom(nom);
         setPrenom(prenom);
         addAdresse(adresse);
@@ -60,10 +60,6 @@ public class Client {
         this.nom = nom;
     }
 
-    public void setPrenom(String prenom[]) {
-        this.prenoms = new LinkedHashSet<String>();
-        this.prenoms.addAll(prenoms);
-    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -99,28 +95,6 @@ public class Client {
         return this.nom;
     }
 
-    public String getFirstPrenom() {
-        return this.prenoms.iterator().next();
-    }
-
-    // TODO : refaire cette fonction de manière plus propre
-    public String getPrenom(int num) {
-        Iterator<String> iterator = prenoms.iterator();
-
-        // Parcourir le LinkedHashSet jusqu'à la position num
-        int position = 0;
-        while (iterator.hasNext() && position < num) {
-            iterator.next();
-            position++;
-        }
-
-        // Retourne le prénom à la position nombre s'il existe, sinon retourne null
-        if (position == num && iterator.hasNext()) {
-            return iterator.next();
-        } else {
-            return null;
-        }
-    }
 
     public AdressePostale getLastAdresse() {
         return this.adresses.iterator().next();
@@ -180,14 +154,6 @@ public class Client {
         this.id = id;
     }
 
-    public LinkedHashSet<String> getPrenoms() {
-        return prenoms;
-    }
-
-    public void setPrenoms(LinkedHashSet<String> prenoms) {
-        this.prenoms = prenoms;
-    }
-
     public SortedSet<AdressePostale> getAdresses() {
         return adresses;
     }
@@ -214,6 +180,14 @@ public class Client {
 
     public void addCommande(Commande commande) {
         this.commandes.add(commande);
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
 }

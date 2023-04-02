@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,7 @@ public class ImageServiceImpl implements ImageService {
     private final ClientService clientService;
 
     @Autowired
-    public ImageServiceImpl(ImageRepository imageRepository, ClientService clientService) {
+    public ImageServiceImpl(@Lazy ImageRepository imageRepository, @Lazy ClientService clientService) {
         this.imageRepository = imageRepository;
         this.clientService = clientService;
     }

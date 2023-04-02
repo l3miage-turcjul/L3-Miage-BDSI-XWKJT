@@ -3,6 +3,7 @@ package fr.uga.l3miage.photonum.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 
 import fr.uga.l3miage.photonum.data.domain.Article;
 import fr.uga.l3miage.photonum.data.domain.Commande;
@@ -16,7 +17,7 @@ public class ArticleServiceImpl implements ArticleService {
     private final CommandeService commandeService;
 
     @Autowired
-    public ArticleServiceImpl(ArticleRepository articleRepository, CommandeService commandeService)
+    public ArticleServiceImpl(@Lazy ArticleRepository articleRepository, @Lazy CommandeService commandeService)
             throws EntityNotFoundException {
         this.articleRepository = articleRepository;
         this.commandeService = commandeService;

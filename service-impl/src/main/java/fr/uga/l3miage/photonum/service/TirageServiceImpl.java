@@ -5,6 +5,7 @@ import fr.uga.l3miage.photonum.data.domain.Tirage;
 import fr.uga.l3miage.photonum.data.repo.TirageRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import java.util.*;
 
@@ -15,7 +16,7 @@ public class TirageServiceImpl implements TirageService {
     private final ArticleService articleService;
 
     @Autowired
-    public TirageServiceImpl(TirageRepository tirageRepository, ArticleService articleService) {
+    public TirageServiceImpl(@Lazy TirageRepository tirageRepository, @Lazy ArticleService articleService) {
         this.tirageRepository = tirageRepository;
         this.articleService = articleService;
     }

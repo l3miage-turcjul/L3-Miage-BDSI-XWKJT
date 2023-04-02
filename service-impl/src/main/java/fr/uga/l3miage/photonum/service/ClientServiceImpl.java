@@ -9,6 +9,7 @@ import fr.uga.l3miage.photonum.data.domain.Impression;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,8 +21,8 @@ public class ClientServiceImpl implements ClientService {
     private final CommandeService commandeService;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository, ImageService imageService,
-            ImpressionService impressionService, CommandeService commandeService) {
+    public ClientServiceImpl(@Lazy ClientRepository clientRepository, @Lazy ImageService imageService,
+    @Lazy ImpressionService impressionService, @Lazy CommandeService commandeService) {
         this.clientRepository = clientRepository;
         this.imageService = imageService;
         this.impressionService = impressionService;
