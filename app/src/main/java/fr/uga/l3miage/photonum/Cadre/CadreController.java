@@ -45,40 +45,35 @@ public class CadreController {
         }
     }
 
+    @PostMapping("/Article/{id}/Cadre")
+    @ResponseStatus(HttpStatus.CREATED)
+    public CadreDTO newCadre(@PathVariable("id") Long articleId, @RequestBody CadreDTO cadre) {
+        try {
+            Cadre cadreEntity = cadreService.save(articleId,
+                    cadreMapper.dtoToEntity(cadre));
+            return cadreMapper.entityToDTO(cadreEntity);
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
+        }
+    }
 
-      @PostMapping("/Article/{id}/Cadre")
-      @ResponseStatus(HttpStatus.CREATED)
-      public CadreDTO newCadre(@PathVariable("id") Long articleId, @RequestBody
-      CadreDTO cadre) {
-      try {
-      Cadre cadreEntity = cadreService.save(articleId,
-      cadreMapper.dtoToEntity(cadre));
-      return cadreMapper.entityToDTO(cadreEntity);
-      } catch (EntityNotFoundException e) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
-      } catch (IllegalArgumentException e) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
-      }
-      }
-
-
-
-      /*@PutMapping("/Cadre/{id}")
-      public CadreDTO updateCadre(@RequestBody CadreDTO
-      cadreDTO, @PathVariable("id") Long id){
-      try {
-      if (cadreDTO.id().equals(id)) {
-      Cadre cadreEntity = cadreMapper.dtoToEntity(cadreDTO);
-      cadreEntity.setAuthors(storedAuthors);
-      var updated = bookService.update(bookEntity);
-      return booksMapper.entityToDTO(updated);
-      }
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-      } catch (EntityNotFoundException e) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
-      } catch (IllegalArgumentException e) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
-      }*/
+    @PutMapping("/Cadre/{id}")
+    public CadreDTO updateCadre(@RequestBody CadreDTO cadreDTO, @PathVariable("id") Long id) {
+        try {
+            if (cadreDTO.id().equals(id)) {
+                Cadre cadreEntity = cadreMapper.dtoToEntity(cadreDTO);
+                var updated = cadreService.update(cadreEntity);
+                return cadreMapper.entityToDTO(updated);
+            }
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
+        }
+    }
 
     @DeleteMapping("/Cadre/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
