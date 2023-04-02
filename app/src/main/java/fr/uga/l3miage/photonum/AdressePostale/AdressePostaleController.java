@@ -67,7 +67,8 @@ public class AdressePostaleController {
     public AdressePostaleDTO newAdressePostale(@PathVariable("id") @NotNull Long clientId,
             @RequestBody @Valid AdressePostaleDTO adressePostale) {
         try {
-            final var entity = adressePostaleService.save(clientId, adressePostaleMapper.dtoToEntity(adressePostale));
+            AdressePostale entity = adressePostaleService.save(clientId,
+                    adressePostaleMapper.dtoToEntity(adressePostale));
             return adressePostaleMapper.entityToDTO(entity);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);

@@ -8,7 +8,7 @@ import fr.uga.l3miage.photonum.data.domain.AdressePostale;
 
 @Mapper(componentModel = "spring")
 public interface AdressePostaleMapper {
-    AdressePostaleDTO entityToDTO(Object entity);
+    AdressePostaleDTO entityToDTO(AdressePostale adressePostale);
 
     Collection<AdressePostaleDTO> entityToDTO(Iterable<AdressePostale> adressePostale);
 
