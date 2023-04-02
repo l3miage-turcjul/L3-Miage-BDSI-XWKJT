@@ -1,0 +1,1923 @@
+{
+	"info": {
+		"_postman_id": "e0aa9d7e-18e6-49c5-8515-4cd69166e7d3",
+		"name": "photonum endpoint tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25946669"
+	},
+	"item": [
+		{
+			"name": "new Client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"georges@gmail.com\",\r\n  \"nom\": \"Georges\",\r\n  \"motDePasse\":\"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a Client",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/602",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"602"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new AdressePostale",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer une nouvelle adresse pour un client donné\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.authors).exist;\r",
+							"    pm.expect(jsonData.authors).instanceOf(Array);\r",
+							"    pm.expect(jsonData.authors).length.gte(0);\r",
+							"});\r",
+							"pm.globals.set(\"emiAdresse\",{\r",
+							"    \"adresse\":\"rue\",\r",
+							"    \"codePostal\":\"38400\",\r",
+							"    \"ville\":\"SMH\",\r",
+							"    \"pays\":\"France\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"adresse\":\"rue\",\r\n    \"codePostal\":\"38400\",\r\n    \"ville\":\"SMH\",\r\n    \"pays\":\"France\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/602/AdressePostale",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"602",
+						"AdressePostale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Client 'Emi'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un client\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.prenoms).exist;\r",
+							"    pm.expect(jsonData.prenoms).instanceOf(LinkedHashSet);\r",
+							"    pm.expect(jsonData.prenoms).length.gte(0);\r",
+							"});\r",
+							"pm.globals.set(\"Emi\", {\r",
+							"    \"prenoms\" : [\"Emi\", \"Bianca\"],\r",
+							"    \"motDePasse\" : \"1234\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prenoms\" : [\"Emi\", \"Bianca\"],\r\n    \"motDePasse\" : \"1234\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Image'CochonDinde.png'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un image\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.globals.set(\"Emi\", jsonData);\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.cheminAcces).exist;\r",
+							"    pm.expect(jsonData.InfoPDV).exist;\r",
+							"    pm.expect(jsonData.resolution).exist;\r",
+							"    pm.expect(jsonData.partage).exist;\r",
+							"});\r",
+							"var Emi = pm.globals.get(\"Emi\");\r",
+							"var rats = pm.globals.get(\"rats\");\r",
+							"var hamsters = pm.globals.get(\"hamsters\");\r",
+							"    pm.globals.set(\"CochonDinde.png\", {\r",
+							"    \"cheminAcces\": \"C:/Users/Pictures/CochonDinde.png\",\r",
+							"    \"InfoPDV\": \"Device : IPhone\",\r",
+							"    \"resolution\" : 1400000,\r",
+							"    \"partage\" : true,\r",
+							"    \"proprietaire\" : Emi,\r",
+							"    \"photos\" : [rats, hamsters]\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cheminAcces\": \"C:/Users/Pictures/CochonDinde.png\",\r\n    \"InfoPDV\": \"Device : IPhone\",\r\n    \"resolution\" : 1400000,\r\n    \"partage\" : true,\r\n    \"proprietaire\" : {{Emi}},\r\n    \"photos\" : [{{rats}}, {{hamsters}}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/{{id}}/Image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"{{id}}",
+						"Image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Photo'Rats'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un Photo\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.globals.set(\"CochonDinde.png\", jsonData);\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.description).exist;\r",
+							"    pm.expect(jsonData.image).exist;\r",
+							"    pm.expect(jsonData.parametresRetouche).exist;\r",
+							"});\r",
+							"var CochonDinde = pm.globals.get(\"CochonDinde.png\")\r",
+							"pm.globals.set(\"rats\", {\r",
+							"    \"description\" : \"rats\",\r",
+							"    \"image\" : CochonDinde,\r",
+							"    \"parametresRetouche\" : \"zoomée x2\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\" : \"rats\",\r\n    \"image\" : {{CochonDinde}},\r\n    \"parametresRetouche\" : \"zoomée x2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/{{id}}/Photo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"{{id}}",
+						"Photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Photo'hamsters'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un Photo\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.globals.set(\"CochonDinde.png\", jsonData);\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.description).exist;\r",
+							"    pm.expect(jsonData.image).exist;\r",
+							"    pm.expect(jsonData.parametresRetouche).exist;\r",
+							"});\r",
+							"var CochonDinde = pm.globals.get(\"CochonDinde.png\")\r",
+							"pm.globals.set(\"hamsters\", {\r",
+							"    \"description\" : \"hamsters\",\r",
+							"    \"image\" : CochonDinde,\r",
+							"    \"parametresRetouche\" : \"rongnée\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\" : \"hamsters\",\r\n    \"image\" : {{CochonDinde}},\r\n    \"parametresRetouche\" : \"rognée\"    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/{{id}}/Photo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"{{id}}",
+						"Photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Tirage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un tirage\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.globals.set(\"Emi\", jsonData);\r",
+							"    pm.globals.set(\"rats\", jsonData);\r",
+							"    pm.globals.set(\"hamsters\", jsonData);\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.photosDeTirage).exist;\r",
+							"    pm.expect(jsonData.photosDeTirage).instanceOf(Array);\r",
+							"});\r",
+							"var rats = pm.globals.get(\"rats\");\r",
+							"var hamsters = pm.globals.get(\"hamsters\");\r",
+							"pm.globals.set(\"emiTirage\", {\r",
+							"    \"id\" : 11111,\r",
+							"    \"photosDeTirage\" : [rats, hamsters]\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\" : 11111,\r\n    \"photosDeTirage\" : [{{rats}}, {{hamsters}}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Article/{{id}}/Tirage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Article",
+						"{{id}}",
+						"Tirage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Article'emiTirage'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un article\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.globals.set(\"emiTirage\", jsonData);\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.prix).to.equal(11.5);\r",
+							"    pm.expect(jsonData.format).exist;\r",
+							"    pm.expect(jsonData.quantite).exist;\r",
+							"    pm.expect(jsonData.impression).exist;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prix\" : 11.5,\r\n    \"format\" : \"10x15MAT\",\r\n    \"quantite\" : 1,\r\n    \"impression\" : {{emiTirage}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Commande/{{id}}/Article",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Commande",
+						"{{id}}",
+						"Article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new CommandeEmi",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un commande\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.globals.set(\"emiTirage\", jsonData);\r",
+							"    pm.globals.set(\"emiAdresse\", jsonData);\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.adressePostale).exist;\r",
+							"    pm.expect(jsonData.articles).exist;\r",
+							"    pm.expect(jsonData.articles).instanceOf(Treeset);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dateCommande\" : \"20/03/2023\",\r\n    \"adressePostale\" : {{emiAdresse}},\r\n    \"articles\" : {{emiTirage}}\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "/api/v1/Client/{{id}}/Commande",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"{{id}}",
+						"Commande"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all AdressePostale",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/602/AdressePostale",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"602",
+						"AdressePostale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Commande",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/602/Commande",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"602",
+						"Commande"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/602/Image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"602",
+						"Image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Photo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get an Photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Photo/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Photo",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Calendrier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Calendrier/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Calendrier",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Page of a Calendrier",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Clendrier/{{id}}/Page",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Clendrier",
+						"{{id}}",
+						"Page"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Client'Georges'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un client\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.prenoms).exist;\r",
+							"    pm.expect(jsonData.prenoms).instanceOf(LinkedHashSet);\r",
+							"    pm.expect(jsonData.prenoms).length.gte(0);\r",
+							"});\r",
+							"pm.globals.set(\"Georeges\", {\r",
+							"  \"email\": \"georgesXU@gmail.com\",\r",
+							"  \"nom\": \"Xu\",\r",
+							"  \"prenoms\" : [\"Georeges\"],\r",
+							"  \"motDePasse\":\"5678\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"georgesXU@gmail.com\",\r\n  \"nom\": \"Xu\",\r\n  \"prenoms\" : [\"Georeges\"],\r\n  \"motDePasse\":\"5678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new AdressePostale'G'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer une nouvelle adresse pour un client donné\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.adresse).exist;\r",
+							"    pm.expect(jsonData.codePostal).exist;\r",
+							"    pm.expect(jsonData.Grenoble).exist;\r",
+							"    pm.expect(jsonData.France).exist;\r",
+							"});\r",
+							"pm.globals.set(\"geoAdresse\", {\r",
+							"    \"adresse\":\"Clôt Bey\",\r",
+							"    \"codePostal\":\"38000\",\r",
+							"    \"ville\":\"Grenoble\",\r",
+							"    \"pays\":\"France\"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"adresse\":\"Clôt Bey\",\r\n    \"codePostal\":\"38000\",\r\n    \"ville\":\"Grenoble\",\r\n    \"pays\":\"France\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/{{id}}/AdressePostale",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"{{id}}",
+						"AdressePostale"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Image'Georges.jpg'",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Creer un image\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.globals.set(\"Georges\", jsonData);\r",
+							"    pm.expect(jsonData.id).exist;\r",
+							"    pm.expect(jsonData.cheminAcces).exist;\r",
+							"    pm.expect(jsonData.InfoPDV).exist;\r",
+							"    pm.expect(jsonData.resolution).exist;\r",
+							"    pm.expect(jsonData.partage).exist;\r",
+							"});\r",
+							"var Georges = pm.globals.get(\"Georges\");\r",
+							"var chat = pm.globals.get(\"chat\");\r",
+							"var geoPhoto = pm.globals.get(\"geoPhoto\");\r",
+							"pm.globals.set(\"geoImage\", {\r",
+							"    \"cheminAcces\": \"C:/Users/Pictures/Georges.jpg\",\r",
+							"    \"InfoPDV\": \"Device : PC, OS : Windows 10\",\r",
+							"    \"resolution\" : 1000000,\r",
+							"    \"partage\" : false,\r",
+							"    \"proprietaire\" : Georges,\r",
+							"    \"photos\" : [chat, geoPhoto]\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cheminAcces\": \"C:/Users/Pictures/Georges.jpg\",\r\n    \"InfoPDV\": \"Device : PC, OS : Windows 10\",\r\n    \"resolution\" : 1000000,\r\n    \"partage\" : false,\r\n    \"proprietaire\" : {{Georges}},\r\n    \"photos\" : [{{chat}}, {{geoPhoto}}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/{{id}}/Image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"{{id}}",
+						"Image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Album",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Album",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Album"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Album",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Album/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Album",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an AdressePostale",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/602/AdressePostale/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"602",
+						"AdressePostale",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Article",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Article",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Article",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Article/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Article",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an client\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a photo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an photo\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Photo/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Photo",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a calendrier",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an calendrier\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Calendrier/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Calendrier",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Tirage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Tirage",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Tirage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Tirage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Tirage/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Tirage",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gat all Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a album",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an album\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Album/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Album",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Image/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Image",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a adresse postale",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an adresse\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/AdressePostale/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"AdressePostale",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Commande",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Commande",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Commande"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an article\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Article/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Article",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Commande",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Commande/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Commande",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a tirage",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an tirage\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Tirage/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Tirage",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Cadre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Cadre",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Cadre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Cadre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Cadre/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Cadre",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete an image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an image\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Image/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Image",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a commande",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an commande\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Commande/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Commande",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Photo from an Cadre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Cadre/{{id}}/Photo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Cadre",
+						"{{id}}",
+						"Photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a cadre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an cadre\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Cadre/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Cadre",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Page",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Page"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Delete an page\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Page/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Page",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get an Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Page/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Page",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Client",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Client/602",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Client",
+						"602"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Photo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Photo/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Photo",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Calendrier",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Calendrier/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Calendrier",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Album",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Album/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Album",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update AdressePostale",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/AdressePostale/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"AdressePostale",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Article",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Article/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Article",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Tirage",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Tirage/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Tirage",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Image",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Image/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Image",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Commande",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Commande/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Commande",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Cadre",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Cadre/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Cadre",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new Calendrier",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Article/{{id}}/Calendrier",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Article",
+						"{{id}}",
+						"Calendrier"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Page",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Page/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Page",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Album",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Article/{{id}}/Album",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Article",
+						"{{id}}",
+						"Album"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Cadre",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Article/{{id}}/Cadre",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Article",
+						"{{id}}",
+						"Cadre"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Photo in Cadre",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/Cadre/{{id}}/Photo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"Cadre",
+						"{{id}}",
+						"Photo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
