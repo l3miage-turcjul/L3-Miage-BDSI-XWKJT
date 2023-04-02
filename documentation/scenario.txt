@@ -5,6 +5,8 @@ SCENARIO 1 : TIRAGE
     - Elle met en ligne une image "CochonDinde.png" avec son superbe iphone. Cette image est faite de 1,4 M de pixels. Elle souhaite pouvoir la partager.
 
     -  Elle souhaite en faire un tirage. Elle prend son image et en fait 2 photos à partir : une photo retouchée "zoomée x2", et l'autre "rognée". La première description est "rats", l'autre est "hamsters"
+    
+    - Elle décide par la suite de supprimer la photo retouchée "zoomée x2" car ça ne lui convenait plus. 
 
     - Elle valide son tirage. Elle souhaite n'en avoir qu'un seul exemplaire. Elle choisit un format et une qualité "10X15MAT" dans le catalogue.
 
