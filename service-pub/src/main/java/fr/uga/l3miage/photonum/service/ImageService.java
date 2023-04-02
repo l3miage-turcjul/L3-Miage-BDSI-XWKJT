@@ -15,6 +15,9 @@ public interface ImageService extends BaseService<Image, Long> {
 
     void delete(Long id) throws EntityNotFoundException, Exception;
 
+    void bind(Long id, Image im) throws EntityNotFoundException;
+
     public Collection<Image> list();
 
+    public Collection<Image> listByClient(Long id) throws EntityNotFoundException;
 }

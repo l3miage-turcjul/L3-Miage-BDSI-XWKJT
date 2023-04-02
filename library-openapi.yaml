@@ -4,16 +4,6 @@ info:
   description: |
     Cette api permet la gestion de la base de donnée d'une société de tirage de photo numérique.
     Elle permet de gérer les clients, les adresses, les commandes, les articles, les impressions, les tirages, les cadres, les calendriers, les albums, les pages, les images et les photos.
-    * Créer des clients
-    * Supprimer des clients
-    * Modifier des clients
-    * Lister des clients
-    * Créer des adresses
-    * Créer des adresses pour un client
-    * 
-    
-    * Rechercher 
-      * Clients par id
   version: 1.0.0
 servers:
   - url: "http://localhost:8080"
@@ -21,12 +11,7 @@ paths:
   /api/v1/Client:
     get:
       summary: Trouver tous les clients
-      #operationId: find-authors
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
+      operationId: find-clients
       responses:
         200:
           description: OK
@@ -38,12 +23,12 @@ paths:
                   $ref: "#/components/schemas/Client"
     post:
       summary: Creer un nouveau client
-      operationId: nouveau-client
+      operationId: create-client
       requestBody:
         content:
           'application/json':
             schema:
-              $ref: "#/components/schemas/Client"
+              $ref: "#/components/schemas/BaseClient"
       responses:
         201:
           description: Créé
@@ -64,7 +49,7 @@ paths:
           format: int64
     get:
       summary: Trouver un client
-      operationId: trouver-client
+      operationId: find-client
       responses:
         200:
           description: OK
@@ -78,7 +63,7 @@ paths:
     put:
       summary: Mettre à jour les données d'un client
       description: La mise à jour sera faite si le client est trouvé
-      operationId: put-client
+      operationId: update-client
       requestBody:
         content:
           'application/json':
@@ -162,11 +147,6 @@ paths:
     get:
       summary: Trouver toutes les commandes d'un client donné
       operationId: find-clients-ordres
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
       responses:
         200:
           description: OK
@@ -205,25 +185,6 @@ paths:
         schema:
          type: number
          format: int64
-    get:
-      summary: Trouver toutes les photos d'un client donné
-      operationId: find-clients-photos
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
-      responses:
-        200:
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Photo"
-        404:
-          description: Le client n'a pas été trouvé
     post:
       summary: Creer une nouvelle photo pour un client donné
       operationId: new-client-photo

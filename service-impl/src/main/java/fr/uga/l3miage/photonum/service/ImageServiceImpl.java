@@ -59,9 +59,15 @@ public class ImageServiceImpl implements ImageService {
         return imageRepository.all();
     }
 
-    private void bind(Long id, Image image) throws EntityNotFoundException {
+    @Override
+    public void bind(Long id, Image image) throws EntityNotFoundException {
         Client client = clientService.get(id);
         client.addImage(image);
     }
 
+    @Override
+    public Collection<Image> listByClient(Long id) throws EntityNotFoundException {
+        Client client = clientService.get(id);
+        return client.getImages();
+    }
 }

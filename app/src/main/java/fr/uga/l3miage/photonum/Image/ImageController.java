@@ -8,7 +8,6 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.Collection;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-
 @RestController
 @Transactional
 @RequestMapping(value = "/api/v1", produces = "application/json")
@@ -34,11 +32,10 @@ public class ImageController {
     private final ImageMapper imageMapper;
 
     @Autowired
-    public ImageController(ImageService imageService, ImageMapper imageMapper){
+    public ImageController(ImageService imageService, ImageMapper imageMapper) {
         this.imageService = imageService;
         this.imageMapper = imageMapper;
     }
-
 
     @GetMapping("/Image/{id}")
     public ImageDTO image(@PathVariable("id") @NotNull Long id) {
@@ -69,6 +66,15 @@ public class ImageController {
         }
     }
 
+    @GetMapping("/Client/{id}/Image")
+    public Collection<ImageDTO> imagesByClient(@PathVariable("id") @NotNull Long clientId) {
+        try {
+            return imageMapper.entityToDTO(imageService.listByClient(clientId));
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+        }
+    }
+
     @PutMapping("/Image/{id}")
     public ImageDTO updateImage(@PathVariable("id") @NotNull Long id,
             @RequestBody @Valid ImageDTO image) {
@@ -96,6 +102,4 @@ public class ImageController {
         }
     }
 
-
-    
 }
