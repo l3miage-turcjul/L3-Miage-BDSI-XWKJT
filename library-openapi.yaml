@@ -98,28 +98,9 @@ paths:
         schema:
          type: number
          format: int64
-    get:
-      summary: Trouver toutes les adresses postales d'un client donné
-      operationId: find-clients-adress
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
-      responses:
-        200:
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/AdressePostale"
-        404:
-          description: Le client n'a pas été trouvé
     post:
       summary: Creer une nouvelle adresse pour un client donné
-      operationId: new-clients-adress
+      operationId: create-clients-adress
       requestBody:
         content:
           'application/json':
@@ -216,11 +197,6 @@ paths:
     get:
       summary: Trouver toutes les images d'un client donné
       operationId: find-all-images-of-client
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
       responses:
         200:
           description: OK
@@ -231,19 +207,31 @@ paths:
                 items:
                   $ref: "#/components/schemas/Image"
         404:
-          description: L'image n'a pas été trouvée 
+          description: L'image n'a pas été trouvée
+    post:
+      summary: Creer une nouvelle image pour un client donné
+      operationId: new-client-image
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/NewImage"
+      responses:
+        201:
+          description: Créée
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Image"
+        404:
+          description: Le client n'a pas été trouvé 
         
 ###############################################################################################################
 ##PHOTO
   /api/v1/Photo:
     get:
       summary: Trouver toutes les photos
-      #operationId: find-authors
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
+      operationId: find-photos
       responses:
         200:
           description: OK
@@ -253,23 +241,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Photo"
-    post:
-      summary: Creer une nouvelle photo
-      operationId: nouvelle-photo
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              $ref: "#/components/schemas/Photo"
-      responses:
-        201:
-          description: Créé
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/Photo"
-        400:
-          description: Dans le cas où la photo ne peut être validée
   /api/v1/Photo/{id}:
     parameters:
       - name: id
@@ -281,7 +252,7 @@ paths:
           format: int64
     get:
       summary: Trouver une photo
-      operationId: trouver-photo
+      operationId: find-photo
       responses:
         200:
           description: OK
@@ -295,7 +266,7 @@ paths:
     put:
       summary: Mettre à jour photo
       description: La mise à jour sera faite si la photo est trouvée
-      operationId: put-photo
+      operationId: update-photo
       requestBody:
         content:
           'application/json':
@@ -326,12 +297,7 @@ paths:
   /api/v1/Calendrier:
     get:
       summary: Trouver tous les calendriers
-      #operationId: find-authors
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
+      operationId: find-calandriers
       responses:
         200:
           description: OK
@@ -341,24 +307,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Calendrier"
-    post:
-      summary: Creer un nouveau calendrier
-      operationId: nouveau-calendrier
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              $ref: "#/components/schemas/Calendrier"
-      responses:
-        201:
-          description: Créé
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/Calendrier"
-        400:
-          description: Dans le cas où le calendrier ne peut être validé
-
+   
   /api/v1/Calendrier/{id}:
     parameters:
       - name: id
@@ -370,7 +319,7 @@ paths:
           format: int64
     get:
       summary: Trouver un calendrier
-      operationId: trouver-calendrier
+      operationId: find-calendrier
       responses:
         200:
           description: OK
@@ -422,11 +371,6 @@ paths:
     get:
       summary: Trouver toutes les pages d'un calendrier d'id id
       operationId: find-all-pages-of-calendar
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
       responses:
         200:
           description: OK
@@ -443,12 +387,7 @@ paths:
   /api/v1/Album:
     get:
       summary: Trouver tous les albums
-      #operationId: find-authors
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
+      operationId: find-ablums
       responses:
         200:
           description: OK
@@ -458,24 +397,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Album"
-    post:
-      summary: Creer un nouvel album
-      operationId: nouvel-album
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              $ref: "#/components/schemas/Album"
-      responses:
-        201:
-          description: Créé
-          content:
-            'application/json':
-              schema:
-                $ref: "#/components/schemas/Album"
-        400:
-          description: Dans le cas où l'album ne peut être validé
-
+  
   /api/v1/Album/{id}:
     parameters:
       - name: id
@@ -487,7 +409,7 @@ paths:
           format: int64
     get:
       summary: Trouver un album
-      operationId: trouver-album
+      operationId: find-album
       responses:
         200:
           description: OK
@@ -495,13 +417,12 @@ paths:
             'application/json':
               schema:
                 $ref: "#/components/schemas/Album"
-
         404:
           description: L'album n'a pas été trouvé 
     put:
       summary: Mettre à jour l'album
       description: La mise à jour sera faite si l'album est trouvé
-      operationId: put-album
+      operationId: update-album
       requestBody:
         content:
           'application/json':
@@ -539,11 +460,6 @@ paths:
     get:
       summary: Trouver toutes les pages de l'album d'id id
       operationId: find-all-pages-of-album
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
       responses:
         200:
           description: OK
@@ -590,7 +506,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/AdressePostale"
         404:
-          description: L'adresse n'a pas été toruvée
+          description: L'adresse n'a pas été trouvée
     put:
       summary: Mettre à jour une adresse
       operationId: update-adress
@@ -611,6 +527,27 @@ paths:
         404:
           description: L'adresse postale n'a pas été trouvée
 
+  /AdressePostale/{id}/Client:
+    parameters:
+      - name: id
+        description: id de l'adresse postale
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver le client associé à l'adresse
+      operationId: get-adress-client
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Client"
+        404:
+          description: L'adresse n'a pas été trouvée
 
 #Article
 
@@ -665,7 +602,36 @@ paths:
           description: Suppriméee
         404:
           description: L'article n'a pas été trouvée
-
+  
+  /Article/{id}/Album:
+    parameters:
+      - name: id
+        description: id de l'article
+        in: path
+        required: true
+        schema:
+         type: number
+         format: int64
+    post:
+      summary: Créer un album pour l'article d'id id
+      operationId: create-article-album
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/NewAlbum"
+      responses:
+        201:
+          description: Créé
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Album"
+        400:
+          description: Dans le cas où l'album ne peut être validé
+        404:
+          description: L'article n'a pas été trouvé
+    
   /api/v1/Article/{id}/Tirage:
     parameters:
       - name: id
@@ -675,25 +641,84 @@ paths:
         schema:
          type: number
          format: int64
-    get:
-      summary: Trouver tous les tirages d'un article
-      operationId: find-all-tirages-of-article
-      parameters:
-        - name: q
-          in: query
-          schema:
-            type: string
+    post:
+      summary: Créer un tirage pour l'article d'id id
+      operationId: create-article-tirage
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/NewTirage"
       responses:
-        200:
-          description: OK
+        201:
+          description: Créé
           content:
             'application/json':
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Tirage"
+                $ref: "#/components/schemas/Tirage"
+        400:
+          description: Dans le cas où le tirage ne peut être validé
         404:
-          description: Le tirage n'a pas été trouvé n'a pas été trouvé
+          description: L'article n'a pas été trouvé
+
+  /api/v1/Article/{id}/Calendrier:
+      parameters:
+        - name: id
+          description: id de l'article
+          in: path
+          required: true
+          schema:
+            type: number
+            format: int64
+      post:
+        summary: Creer un nouveau calendrier
+        operationId: create-article-calendrier
+        requestBody:
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/NewCalendrier"
+        responses:
+          201:
+            description: Créé
+            content:
+              'application/json':
+                schema:
+                  $ref: "#/components/schemas/Calendrier"
+          400:
+            description: Dans le cas où le calendrier ne peut être validé
+          404:
+            description: L'article n'a pas été trouvé
+    
+  /api/v1/Article/{id}/Cadre:
+      parameters:
+        - name: id
+          description: id de l'article
+          in: path
+          required: true
+          schema:
+            type: number
+            format: int64
+      post:
+        summary: Créer un nouveau cadre
+        operationId: create-article-cadre
+        requestBody:
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/NewCadre"
+        responses:
+          201:
+            description: Créé
+            content:
+              'application/json':
+                schema:
+                  $ref: "#/components/schemas/Cadre"
+          400:
+            description: Dans le cas où le cadre ne peut être validé
+          404:
+            description: L'article n'a pas été trouvé
+
 ##############################################################################################################
   /api/v1/Tirage:
     get:
@@ -869,7 +894,7 @@ paths:
           format: int64
     post:
       summary: Creer un nouveau article pour une commande donnée
-      operationId: new-commande-article
+      operationId: create-commande-article
       requestBody:
         content:
           'application/json':
@@ -884,6 +909,8 @@ paths:
                 $ref: "#/components/schemas/Article"
         404:
           description: La commande n'a pas été trouvée
+        400:
+          description: Dans le cas où l'article ne peut être validé
 
 
   #Cadre

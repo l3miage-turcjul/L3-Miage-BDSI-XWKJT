@@ -2,7 +2,6 @@ package fr.uga.l3miage.photonum.Photo;
 
 import java.util.Collection;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,7 +39,7 @@ public class PhotoController {
 
     @GetMapping("/Photo")
     public Collection<PhotoDTO> Photos() {
-            return photoMapper.entityToDTO(photoService.list()); 
+        return photoMapper.entityToDTO(photoService.list());
     }
 
     @GetMapping("/Photo/{id}")
@@ -68,7 +67,7 @@ public class PhotoController {
 
     @PutMapping("/Photo/{id}")
     public PhotoDTO updatePhoto(@PathVariable("id") @NotNull Long id,
-                                                  @RequestBody @Valid PhotoDTO photo) {
+            @RequestBody @Valid PhotoDTO photo) {
         try {
             if (photo.id().equals(id)) {
                 Photo photoEntity = photoMapper.dtoToEntity(photo);

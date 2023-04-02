@@ -52,7 +52,7 @@ public class ArticleController {
         }
     }
 
-    @PostMapping("Commande/{id}/Article/")
+    @PostMapping("Commande/{id}/Article")
     @ResponseStatus(HttpStatus.CREATED)
     public ArticleDTO newArticle(@PathVariable("id") Long commandeId, @RequestBody ArticleDTO article) {
         try {
