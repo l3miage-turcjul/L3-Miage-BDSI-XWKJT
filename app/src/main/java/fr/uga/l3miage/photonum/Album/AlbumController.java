@@ -34,16 +34,10 @@ public class AlbumController {
         this.pageMapper = pageMapper;
     }
 
-    /*
-     * @GetMapping("/Album")
-     * public Collection<AlbumDTO> albums(@RequestParam(value = "t", required =
-     * false) String titre) {
-     * if (Strings.isBlank(titre)) {
-     * return albumMapper.entityToDTO(albumService.list());
-     * }
-     * return albumMapper.entityToDTO(albumService.findByTitle(titre));
-     * }
-     */
+    @GetMapping("/Album")
+    public Collection<AlbumDTO> albums() {
+        return albumMapper.entityToDTO(albumService.list());
+    }
 
     @GetMapping("/Album/{id}")
     public AlbumDTO album(@PathVariable("id") @NotNull Long id) {

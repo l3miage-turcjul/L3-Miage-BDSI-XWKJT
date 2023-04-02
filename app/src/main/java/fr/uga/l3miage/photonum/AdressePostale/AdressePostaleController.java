@@ -1,6 +1,7 @@
 package fr.uga.l3miage.photonum.AdressePostale;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import fr.uga.l3miage.photonum.Client.ClientDTO;
+import fr.uga.l3miage.photonum.Client.ClientMapper;
 import fr.uga.l3miage.photonum.data.domain.AdressePostale;
+import fr.uga.l3miage.photonum.data.domain.Client;
 import fr.uga.l3miage.photonum.service.AdressePostaleService;
 import fr.uga.l3miage.photonum.service.EntityNotFoundException;
 import jakarta.validation.Valid;
@@ -31,12 +35,14 @@ public class AdressePostaleController {
 
     private final AdressePostaleService adressePostaleService;
     private final AdressePostaleMapper adressePostaleMapper;
+    private final ClientMapper clientMapper;
 
     @Autowired
     public AdressePostaleController(AdressePostaleService adressePostaleService,
-            AdressePostaleMapper adressePostaleMapper) {
+            AdressePostaleMapper adressePostaleMapper, ClientMapper clientMapper) {
         this.adressePostaleService = adressePostaleService;
         this.adressePostaleMapper = adressePostaleMapper;
+        this.clientMapper = clientMapper;
     }
 
     @GetMapping("/AdressePostale")
@@ -95,6 +101,18 @@ public class AdressePostaleController {
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
         }
+    }
+
+    @GetMapping("/AdressePostale/{id}/Client")
+    public Collection<ClientDTO> clients(@PathVariable("id") @NotNull Long adressePostaleId) {
+        try {
+            AdressePostale adressePostale = adressePostaleService.get(adressePostaleId);
+            Set<Client> clients = adressePostale.getClients();
+            return clientMapper.entityToDTO(clients);
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+        }
+
     }
 
 }

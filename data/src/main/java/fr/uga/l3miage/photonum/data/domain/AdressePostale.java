@@ -65,6 +65,10 @@ public class AdressePostale {
         return id;
     }
 
+    public SortedSet<Client> getClients() {
+        return this.clients;
+    }
+
     // SETTERS
     public void setAdresse(String adresse) {
         this.adresse = adresse;
