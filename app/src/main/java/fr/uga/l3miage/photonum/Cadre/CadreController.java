@@ -96,4 +96,20 @@ public class CadreController {
         }
     }
 
+    @PostMapping("/Cadre/{id}/Photos")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PhotoDTO newPhoto(@PathVariable("id") Long cadreId, @RequestBody PhotoDTO photo) {
+        try {
+            Photo photoEntity = photoMapper.dtoToEntity(photo);
+            var cadre = cadreService.get(cadreId);
+            cadre.addPhoto(photoEntity);
+            cadreService.update(cadre);
+            return photoMapper.entityToDTO(photoEntity);
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, null, e);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, null, e);
+        }
+    }
+
 }

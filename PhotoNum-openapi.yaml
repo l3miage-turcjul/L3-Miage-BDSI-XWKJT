@@ -125,20 +125,6 @@ paths:
         schema:
          type: number
          format: int64
-    get:
-      summary: Trouver toutes les commandes d'un client donné
-      operationId: find-clients-ordres
-      responses:
-        200:
-          description: OK
-          content:
-            'application/json':
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Commande"
-        404:
-          description: Le client n'a pas été trouvé
     post:
       summary: Creer une nouvelle commande pour un client donné
       operationId: new-client-order
@@ -351,7 +337,7 @@ paths:
         404:
           description: Le calendrier n'a pas été trouvé
     delete:
-      summary: Supprimer un caleendrier (avec toutes ses pages)
+      summary: Supprimer un calendrier (avec toutes ses pages)
       operationId: delete-calendrier
       responses:
         204:
@@ -808,7 +794,7 @@ paths:
               schema:
                   $ref: "#/components/schemas/Image"
         404:
-          description: Le tirage n'a pas été trouvé
+          description: L'image n'a pas été trouvé
     put:
       summary: Mettre à jour une image
       operationId: update-image
@@ -989,7 +975,79 @@ paths:
                 $ref: "#/components/schemas/Photo"
         404:
           description: Le cadre n'a pas été trouvé
+    post:
+      summary: Ajouter une photo à un cadre
+      operationId: add-cadre-photo
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/NewPhoto"
+      responses:
+        201:
+          description: Créée
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Photo"
+        404:
+          description: Le cadre n'a pas été trouvé
+        400:
+          description: La photo ne peut être validée
         
+  /api/v1/Page:
+    get:
+      summary: Trouver toutes les pages
+      operationId: get-pages
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Page"
+
+  /api/v1/Page/{id}:
+    parameters:
+      - name: id
+        description: id de la page
+        in: path
+        required: true
+        schema:
+          type: number
+          format: int64
+    get:
+      summary: Trouver une page
+      operationId: get-page
+      responses:
+        200:
+          description: OK
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/Page"
+        404:
+          description: La page n'a pas été trouvée
+    put:
+      summary: Mettre à jour une page
+      operationId: update-page
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Page"
+      responses:
+        404:
+          description: La page n'a pas été trouvée
+    delete:
+      summary: Supprimer une page
+      operationId: delete-page
+      responses:
+        204:
+          description: Supprimée
+        404:
+          description: La page n'a pas été trouvée
+
 ###############################################################################################################
 components:
   schemas:
@@ -1001,7 +1059,8 @@ components:
           type: string
         prenoms :
           type : array
-          #items : 
+          items :
+            type : string
         email:
           type : string
         motDePasse:
@@ -1012,7 +1071,7 @@ components:
         - motDePasse
       example:
         name: Turc
-        prenoms : Julien
+        prenoms : [Julien, Regis]
         email : julien.turc@etu.univ-grenoble-alpes.fr
         motDepasse : 1234
     Client:
@@ -1036,6 +1095,9 @@ components:
           example:
             id: 1
             name: Turc
+            prenoms : [Julien, Regis]
+            email :  julien.turc@etu.univ-grenoble-alpes.fr
+            motDePasse : 1234
     NewAdressePostale:
       description: Une adresse postale sans id (pour la creation)
       type: object
@@ -1056,6 +1118,7 @@ components:
         - adresse
         - codePostal
         - ville
+        - pays
       example:
         adresse: 60 rue de la chimie
         codePostal: 38140
@@ -1086,10 +1149,14 @@ components:
         authors:
           - id: 1
             name: Turc
+            prenoms : [Julien, Regis]
+            email : julien.turc@etu.univ-grenoble-alpes.fr
+            motDePasse : 1234
           - id: 2
-            name : Jandot
-          - id: 3 
-            name : Kone
+            name: Dupont
+            prenoms : [Jean, Paul]
+            email : jean.dupon@etu.univ-grenoble-alpes.fr
+            motDePasse : 1234
 
 
     NewCommande:
@@ -1104,12 +1171,19 @@ components:
           format: int64
         adressePostale:
           type: object
+          items:
+            $ref: "#/components/schemas/AdressePostale"
       required:
         - dateCommande
         - adressePostale
       example:
         dateCommande: 01/04/2023
-        adressePostale: 60 Rue de la chimie
+        adressePostale :
+          - id: 1
+            adresse: 60 rue de la chimie
+            codePostal: 38140
+            ville: Saint-Martin d'Hères
+            pays: France
 
     Commande:
       description: Une commande avec id (pour la mise à jour) et son client (pour la réponse)
@@ -1129,12 +1203,19 @@ components:
             - id
       example:
         id: 1
-        daeCommande: 12/02/2022
-        adressePostale: 2 Rue du Cotentin
-
+        dateCommande: 12/02/2022
+        AdressePostale:
+          - id: 1
+            adresse: 60 rue de la chimie
+            codePostal: 38140
+            ville: Saint-Martin d'Hères
+            pays: France
         client:
           - id: 1
-            name: Wyss
+            name: Turc
+            prenoms : [Julien, Regis]
+            email : julien.turc@etu.univ-grenoble-alpes.fr
+            motDePasse : 1234
 
 
 ################################################################################################################
@@ -1149,13 +1230,23 @@ components:
           type: string
         image:
           type: object
+          items:
+            $ref: "#/components/schemas/Image"
       required:
         - description
+        - image
       example:
-        description: cette photo est composée de l'image "cochon.png" et "fleur.png"
+        description: cette photo est fait référence à l'image "cochon.png"
+        parametresRetouche: saturation à 20%
+        image:
+          - id: 1
+            cheminAcces: /images/cochon.png
+            InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+            resolution: 20
+            partage: false
 
     Photo:
-      description: Une photo avec id (pour la mise à jour) et son client (pour la réponse)
+      description: Une photo avec id (pour la mise à jour)
       allOf:
         - $ref: "#/components/schemas/NewPhoto"
         - type: object
@@ -1163,19 +1254,19 @@ components:
             id:
               type: integer
               format: int64
-            client:
-              type: object
-              $ref: "#/components/schemas/Client"
-              readOnly: true
           required:
             - id
       example:
         id: 1
-        description: cette photo est composée des images "soleil.png" et "fichier.png"
-
-        client:
+        parametresRetouche: saturation à 20%
+        image:
           - id: 1
-            name: Wyss
+            cheminAcces: /images/cochon.png
+            InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+            resolution: 20
+            partage: false
+
+
 ############################################################################################################
 
     NewAlbum:
@@ -1184,15 +1275,42 @@ components:
       properties:
         titre:
           type: string
-        pagesAlbum:
+        pages:
           description: les pages de l'album
           type: array
+          items:
+            $ref: "#/components/schemas/Page"
         photoDeCouverture:
           type: object
+          items:
+            $ref: "#/components/schemas/Photo"
       required:
         - titre
       example:
        titre : "L'album de Sicong"
+       pages:
+          - id: 1
+            numeroPage: 1
+            photo:
+              - id: 1
+                parametersRetouche: saturation à 20%
+                image:
+                  - id: 1
+                    cheminAcces: /images/cochon.png
+                    InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                    resolution: 20
+                    partage: false
+          - id: 2
+            numeroPage: 2
+            photo:
+              - id: 2
+                parametersRetouche: saturation à 20%
+                image:
+                  - id: 2
+                    cheminAcces: /images/cochon.png
+                    InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                    resolution: 20
+                    partage: false
 
     Album:
       description: Un album avec id (pour la mise à jour) et sa page (pour la réponse)
@@ -1203,15 +1321,43 @@ components:
             id:
               type: integer
               format: int64
-            page:
-              type: object
-              items:
-                $ref: "#/components/schemas/Page"
-              readOnly: true
           required:
             - id
       example:
         id: 1
+        titre : "L'album de Sicong"
+        photoDeCouverture:
+          - id: 1
+            parametersRetouche: saturation à 20%
+            image:
+              - id: 1
+                cheminAcces: /images/cochon.png
+                InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                resolution: 20
+                partage: false
+        pages:
+          - id: 1
+            numeroPage: 1
+            photo:
+              - id: 1
+                parametersRetouche: saturation à 20%
+                image:
+                  - id: 1
+                    cheminAcces: /images/cochon.png
+                    InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                    resolution: 20
+                    partage: false
+          - id: 2
+            numeroPage: 2
+            photo:
+              - id: 2
+                parametersRetouche: saturation à 40%
+                image:
+                  - id: 1
+                    cheminAcces: /images/cochon.png
+                    InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                    resolution: 20
+                    partage: false
 ####################################################################
     NewArticle:
       description: Un article sans id (pour la création)
@@ -1231,7 +1377,8 @@ components:
 
     Article:
         description: Un article avec id et prix
-        type: object
+        allOf:
+          - $ref: "#/components/schemas/NewArticle"
         properties:
           id:
             type: integer
@@ -1239,16 +1386,9 @@ components:
           prix:
             type: integer
             format: int64
-          format:
-            type: string
-          quantite:
-            type: integer
-            format: int64
         required:
           - id
           - prix
-          - format
-          - quantite
         example:
           id: 1
           prix: 10.5
@@ -1262,13 +1402,39 @@ components:
       type: object
       properties:
         pages:
-          type: object
+          type: array
           $ref: "#/components/schemas/Page"
+          minItems: 12
+          maxItems: 12
       required:
-        - pages
-        
+        - pages 
       example:
-        description: ce calendrier est composée de 12 pages
+        pages:
+          - id: 1
+            numeroPage: 1
+          - id: 2
+            numeroPage: 2
+          - id: 3
+            numeroPage: 3
+          - id: 4
+            numeroPage: 4
+          - id: 5
+            numeroPage: 5
+          - id: 6
+            numeroPage: 6
+          - id: 7
+            numeroPage: 7
+          - id: 8
+            numeroPage: 8
+          - id: 9
+            numeroPage: 9
+          - id: 10
+            numeroPage: 10
+          - id: 11
+            numeroPage: 11
+          - id: 12
+            numeroPage: 12
+            
 
     Calendrier:
       description: Un calendrier avec id (pour la mise à jour)
@@ -1285,7 +1451,30 @@ components:
         id: 1
         pages:
           - id: 1
-            name: Wyss
+            numeroPage: 1
+          - id: 2
+            numeroPage: 2
+          - id: 3
+            numeroPage: 3
+          - id: 4
+            numeroPage: 4
+          - id: 5
+            numeroPage: 5
+          - id: 6
+            numeroPage: 6
+          - id: 7
+            numeroPage: 7
+          - id: 8
+            numeroPage: 8
+          - id: 9
+            numeroPage: 9
+          - id: 10
+            numeroPage: 10
+          - id: 11
+            numeroPage: 11
+          - id: 12
+            numeroPage: 12
+
 ################################################################################################################
     NewPage:
       description: Une page sans id (pour la création)
@@ -1295,6 +1484,8 @@ components:
           type: string
         numeroPage:
           type: string
+      required:
+        - numeroPage
       example:
 
     Page:
@@ -1309,14 +1500,20 @@ components:
             photos:
               type: array
               $ref: "#/components/schemas/Photo"
-              readOnly: true
           required:
             - id
       example:
         id: 1
         photos:
           - id: 1
-            description: cette photo est composée de l'image "bob.png"
+            parametresRetouche: noir et blanc
+            image:
+              - id: 1
+                cheminAcces: /images/cochon.png
+                InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                resolution: 20
+                partage: false
+            
 
 ###############################################################
     NewCadre:
@@ -1329,13 +1526,18 @@ components:
           type: array
           $ref: "#/components/schemas/Photo"
       required:
-        - photos
+        - miseEnPage
       example:
         miseEnPage: zoom*2
         photos:
           - id: 1
-            description: cette photo est composée de l'image "bob.png"
-
+            parametresRetouche: noir et blanc
+            image:
+              - id: 1
+                cheminAcces: /images/cochon.png
+                InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                resolution: 20
+                partage: false
     Cadre:
       description: Un cadre avec id (pour la mise à jour)
       allOf:
@@ -1347,6 +1549,18 @@ components:
               format: int64
           required:
             - id
+      example:
+        id: 1
+        miseEnPage: zoom*2
+        photos:
+          - id: 1
+            parametresRetouche: noir et blanc
+            image:
+              - id: 1
+                cheminAcces: /images/cochon.png
+                InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                resolution: 20
+                partage: false
 ################################################################################
 
     NewTirage:
@@ -1354,15 +1568,20 @@ components:
       type: object
       properties:
         photos:
-          type: object
+          type: array
           $ref: "#/components/schemas/Photo"
       required:
         - photos
       example:
         photos:
           - id: 1
-            description: cette photo est composée de l'image "bob.png"
-
+            parametresRetouche: noir et blanc
+            image:
+              - id: 1
+                cheminAcces: /images/cochon.png
+                InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                resolution: 20
+                partage: false
     Tirage:
       description: Un tirage avec id (pour la mise à jour)
       allOf:
@@ -1378,7 +1597,13 @@ components:
         id: 1
         photos:
           - id: 1
-            description: cette photo est composée de l'image "bob.png" 
+            parametresRetouche: noir et blanc
+            image:
+              - id: 1
+                cheminAcces: /images/cochon.png
+                InfoPDV: 'Device : Canon EOS 5D Mark IV, Focal length : 50mm, Aperture : f/1.4, Exposure time : 1/1000, ISO : 100, Date : 2019:05:01 12:00:00'
+                resolution: 20
+                partage: false
             
 ##########################################################################################
 
@@ -1393,6 +1618,11 @@ components:
         proprietaire:
           type: object
           $ref: "#/components/schemas/Client"
+        resolution:
+          type: number
+          format: float
+        partage:
+          type: boolean
       required:
         - cheminAcces
 
@@ -1411,7 +1641,12 @@ components:
         id: 1
         cheminAcces: 'C:\Users\Public\Pictures\Sample Pictures\Koala.jpg'
         InfoPDV: 'Device : Huawei Ane-LX1, OS : Android 9, App : PhotoApp'
+        resolution: 10.5
+        partage: true
         proprietaire:
           - id: 1
-            name: Wyss
+            nom: Xu
+            prenom: [Sicong]
+            email: sicon.xu@etu.univ-grenoble-alpes.fr
+            motDePasse: 123456
       
